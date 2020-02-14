@@ -11,5 +11,11 @@
         <div>
         </div>
     </form>
+    <p>
+        &nbsp;</p>
+    <p>
+        <input id="Button1" type="button" value="button" /></p>
+    <p>
+        &nbsp;</p>
 </body>
 </html>
