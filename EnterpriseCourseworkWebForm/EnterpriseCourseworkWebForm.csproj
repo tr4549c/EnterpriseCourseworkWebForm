@@ -211,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="BizLogic\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="DatabaseLayer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
