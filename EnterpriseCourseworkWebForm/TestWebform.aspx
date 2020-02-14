@@ -14,8 +14,10 @@
     <p>
         &nbsp;</p>
     <p>
-        <input id="Button1" type="button" value="button" /></p>
+        &nbsp;</p>
     <p>
         &nbsp;</p>
+    <p>
+        <input id="Button1" type="button" value="button" /></p>
 </body>
 </html>
