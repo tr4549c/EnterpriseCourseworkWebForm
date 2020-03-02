@@ -12,7 +12,7 @@ ul.topnav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #060360;
 }
 
 ul.topnav li {float: left;}
@@ -25,12 +25,12 @@ ul.topnav li a {
   text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #111;}
+ul.topnav li a:hover:not(.active) {background-color: #606EB2;}
 
 
 
 ul.topnav li.right {float: right;
-background-color: #ff0000;
+background-color: #060360;
 }
 
 @media screen and (max-width: 600px) {
@@ -45,7 +45,7 @@ background-color: #ff0000;
   <li><a href="#home">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
-  <li class="right"><a class="active" href="#about">About</a></li>
+  <li class="right"><a href="#logIn">Login</a></li>
 </ul>
 
 <div style="padding:0 16px;">
