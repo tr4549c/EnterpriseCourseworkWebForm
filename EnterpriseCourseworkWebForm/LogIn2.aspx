@@ -94,8 +94,10 @@ input[type=text]:focus, input[type=password]:focus {
     <%--<input type="password" placeholder="Enter Password" name="psw" required/>--%>
       <asp:TextBox ID="TextBox2" placeholder="Enter password..." TextMode="Password" runat="server"></asp:TextBox>
 
-    <button type="submit" class="btn">Log In</button>
-      <a href="https://www.w3schools.com" class="resetPasswordClass">Reset Password ?</a>
+      <asp:Button ID="loginB" runat="server" CssClass="btn" OnClick="loginB_Click" Text="Login" />
+      
+    <//butto< type="submit" class="btn">Log In</button>
+      <a href="https://www.w3schools.com" class="resetPasswordClass" ">Reset Password ?</a>
     </div>
   
 </div>
