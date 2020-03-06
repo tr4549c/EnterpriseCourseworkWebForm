@@ -22,68 +22,87 @@ namespace EnterpriseCourseworkWebForm
         static public int LoginAllStaff(string username, string password)
         {
             DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
-            var id = (from staff in db.AllStaffs where staff.Username == username && staff.Password == password select staff.AllStaffID).FirstOrDefault();
-
-            //check whatever the default return is for int (0?). If return > 0, login suceesful
-
-            return id;
+            return (from staff in db.AllStaffs where staff.Username == username && staff.Password == password select staff.AllStaffID).FirstOrDefault();
         }
 
         static public int LoginRegisteredStaff(string username, string password)
         {
             DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
-            var id = (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
-
-            return id;
+            return (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
         }
         #endregion
 
         #region Register
 
         /// <summary>
-        /// Register new employee in AllStaff
+        /// Register new employee in AllStaff. Returns true if successful (non duplicate).
         /// </summary>
         /// <param name="employeeID"></param>
         /// <param name="name"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        static public void RegisterAllStaff(int employeeID, string name, string username, string password)
+        static public bool RegisterAllStaff(int employeeID, string name, string username, string password)
         {
             DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
 
-            AllStaff newStaff = new AllStaff();
-            newStaff.EmployeeID = employeeID;
-            newStaff.Name = name;
-            newStaff.Username = username;
-            newStaff.Password = password;
+            //check if username already exists
+            var query = from staff in db.AllStaffs where staff.Username == username select staff;
 
-            db.AllStaffs.InsertOnSubmit(newStaff);
-            db.SubmitChanges();
+            if (query.Any())
+            {
+                //if username exists, exit
+                return false;
+            }
+            else
+            {
+                //if username not taken, create account
+                AllStaff newStaff = new AllStaff();
+                newStaff.EmployeeID = employeeID;
+                newStaff.Name = name;
+                newStaff.Username = username;
+                newStaff.Password = password;
 
+                db.AllStaffs.InsertOnSubmit(newStaff);
+                db.SubmitChanges();
+
+                return true;
+            }
         }
 
         /// <summary>
-        /// Register new employee in RegisteredStaff
+        /// Register new employee in RegisteredStaff. Returns true if successful (non duplicate).
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="roleID"></param>
         /// <param name="departmentID"></param>
         /// <param name="allStaffID"></param>
-        static public void RegisterRStaff(string username, string password, int roleID, int departmentID, int allStaffID)
+        static public bool RegisterRStaff(string username, string password, int roleID, int departmentID, int allStaffID)
         {
             DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
 
-            RegisteredStaff newStaff = new RegisteredStaff();
-            newStaff.RUsername = username;
-            newStaff.RPassword = password;
-            newStaff.RoleID = roleID;
-            newStaff.DepartmentID = departmentID;
-            newStaff.AllStaffID = allStaffID;
+            //check if username already exists
+            var query = from staff in db.RegisteredStaffs where staff.RUsername == username select staff;
 
-            db.RegisteredStaffs.InsertOnSubmit(newStaff);
-            db.SubmitChanges();
+            if (query.Any())
+            {
+                //if username exists, exit
+                return false;
+            }
+            else
+            {
+                //if username not taken, create account
+                RegisteredStaff newStaff = new RegisteredStaff();
+                newStaff.RUsername = username;
+                newStaff.RPassword = password;
+                newStaff.RoleID = roleID;
+                newStaff.DepartmentID = departmentID;
+                newStaff.AllStaffID = allStaffID;
 
+                db.RegisteredStaffs.InsertOnSubmit(newStaff);
+                db.SubmitChanges();
+                return true;
+            }
         }
 
         /// <summary>
