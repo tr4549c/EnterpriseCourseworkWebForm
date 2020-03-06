@@ -2,8 +2,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link href="FontAwsm/css/all.css" rel="stylesheet" />
     <!--Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r  //copy to package manager-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NOT NEEDED ANYMORE I THINK-->
+
 <style>
 body {margin: 0;}
 html {
@@ -13,6 +15,8 @@ ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin-right: 18%;
+  margin-left: 18%;
   overflow: hidden;
   background-color: #060360;
 }
@@ -29,8 +33,6 @@ ul.topnav li a {
 
 ul.topnav li a:hover:not(.active) {background-color: #606EB2;}
 
-
-
 ul.topnav li.right {float: right;
 background-color: #060360;
 }
@@ -46,16 +48,20 @@ background-color: #060360;
   color: #ffffff;
   text-align: center;
   font-size: 14px;
-  width: 80%;
+  width: 64%;
   box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  margin-left: 10%;
-  margin-right:10%
+  /*margin-left: 10%;
+  margin-right:10%*/
+  margin-right: 18%;
+  margin-left: 18%;
 }
 
 
 .footer {
-  background-color: #060360;
+  background-color: #2E2E2E;
   color: #ffffff;
+  margin-right: 18%;
+  margin-left: 18%;
   text-align: center;
   font-size: 12px;
   padding: 15px;
@@ -74,6 +80,7 @@ background-color: #060360;
 
 * {
   box-sizing: border-box;
+
 }
 
 form.example input[type=text] {
@@ -106,6 +113,7 @@ form.example::after {
   clear: both;
   display: table;
 }
+
     /* Create three equal columns that floats next to each other */
     .column {
         float: left;
@@ -113,6 +121,35 @@ form.example::after {
         padding: 10px;
         height: 200px;
     }
+.uniLogoBanner{
+  margin-right: 18%;
+  margin-left: 18%;
+}
+.fab fa-facebook-square{
+    color:aqua;
+    font-size:20px;
+
+}
+.search-container {
+    display: block;
+    float: none;
+    min-width: 30%;
+    height: 46px;
+    font-size: 15px;
+    margin-top: 8px;
+    margin-right:5%;
+    margin-left:0%;
+    width: 95%;
+}
+
+.search-button {
+    background-color: #606EB2;
+    float: right;
+    width: 55px;
+    height: 46px;
+    border: none;
+    margin-top: -46px;
+}
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column {
@@ -138,16 +175,23 @@ form.example::after {
 
  
 
-<div style="padding:0 16px;">
-  <h4>Resize the browser window to see the effect.</h4>
+<div class="uniLogoBanner" style="padding:0 16px;">
+  <%--<h4>Resize the browser window to see the effect.</h4>--%>
+      <section>
+            <img src="Images/u18.png" />
+        </section>
 </div>
+
  <div class="col-3 col-s-12">
     <div class="aside">
 
-        <form class="example" action="/action_page.php">
+        <%--<form class="example" action="/action_page.php">
   <input type="text" placeholder="Search.." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+  <button type="submit"><i class="fa fa-search"></i></button> OLD code--%>
+
+        <input class="search-container" type="text" placeholder="Search" name="search" />
+        <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
+<%--</form>--%>
       <h2>What?</h2>
       <p>Chania is a city on the island of Crete.</p>
       <h2>Where?</h2>
@@ -162,8 +206,10 @@ form.example::after {
  
 
     <div class="row">
+        <!--<i class="fab fa-facebook-square"></i>  FB FONTAWESOME CODE-->
   <div class="column">
     <h2>Column 1</h2>
+
     <p>Some text..</p>
   </div>
   <div class="column">
