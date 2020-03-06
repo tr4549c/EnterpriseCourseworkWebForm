@@ -5,7 +5,8 @@
     <link href="FontAwsm/css/all.css" rel="stylesheet" />
     <!--Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r  //copy to package manager-->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NOT NEEDED ANYMORE I THINK-->
-
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
 <style>
 body {margin: 0;}
 html {
@@ -125,9 +126,9 @@ form.example::after {
   margin-right: 18%;
   margin-left: 18%;
 }
-.fab fa-facebook-square{
-    color:aqua;
-    font-size:20px;
+.fab fa-university{
+    color:white;
+    font-size:50px;
 
 }
 .search-container {
@@ -206,11 +207,11 @@ form.example::after {
  
 
     <div class="row">
-        <!--<i class="fab fa-facebook-square"></i>  FB FONTAWESOME CODE-->
+        
   <div class="column">
-    <h2>Column 1</h2>
+    <!--<h2>Column 1</h2>-->
 
-    <p>Some text..</p>
+    <i class="fa fa-university"></i>
   </div>
   <div class="column">
     <h2>Column 2</h2>
