@@ -38,9 +38,9 @@ ul.topnav li.right {float: right;
 background-color: #060360;
 }
 
-    .content-padding {
+    /*.content-padding {
         width:5%;
-    }
+    }*/
 
 
 .aside {
@@ -151,6 +151,26 @@ form.example::after {
     border: none;
     margin-top: -46px;
 }
+.columnleft {
+    float: left;
+    width: 50%;
+    height: 170px;
+    border: none;
+    position: initial;
+}
+
+
+.columnright {
+    float: right;
+    width: 50%;
+    height: 170px;
+    border: none;
+    position: initial;
+}
+
+.row {
+    margin: auto auto auto auto;
+}
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column {
@@ -195,12 +215,21 @@ form.example::after {
 <%--</form>--%>
       <h2>What?</h2>
       <p>Chania is a city on the island of Crete.</p>
-      <h2>Where?</h2>
-      <p>Crete is a Greek island in the Mediterranean Sea.</p>
-      <h2>How?</h2>
-      <p>You can reach Chania airport from all over Europe.</p>
-    </div>
+     
+     
+            <div class="row">
+                <div class="columnleft" style="background-color: aquamarine;"></div>
 
+                <div class="columnright" style="background-color: #606EB2;"></div>
+
+                <div class="row">
+                <div class="columnleft" style="background-color: #00C499;"></div>
+
+                <div class="columnright" style="background-color: #060360;"></div>
+            </div>
+            </div>
+
+    </div>
   </div>
 
 <div class="footer">
