@@ -16,10 +16,10 @@ ul.topnav {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-right: 18%;
-  margin-left: 18%;
+  margin-right: 0;
+  margin-left: 0;
   overflow: hidden;
-  background-color: #060360;
+  background-color: #2E2E2E;
 }
 
 ul.topnav li {float: left;}
@@ -32,10 +32,10 @@ ul.topnav li a {
   text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #606EB2;}
+ul.topnav li a:hover:not(.active) {background-color: #2E2E2E;}
 
 ul.topnav li.right {float: right;
-background-color: #060360;
+background-color: #2E2E2E;
 }
 
     /*.content-padding {
@@ -61,8 +61,8 @@ background-color: #060360;
 .footer {
   background-color: #2E2E2E;
   color: #ffffff;
-  margin-right: 18%;
-  margin-left: 18%;
+  margin-right: 0;
+  margin-left: 0;
   text-align: center;
   font-size: 12px;
   padding: 15px;
@@ -123,8 +123,8 @@ form.example::after {
         height: 200px;
     }
 .uniLogoBanner{
-  margin-right: 18%;
-  margin-left: 18%;
+  margin-right: 0;
+  margin-left: 0;
 }
 .fab fa-university{
     color:white;
@@ -171,6 +171,74 @@ form.example::after {
 .row {
     margin: auto auto auto auto;
 }
+
+.div2 {
+    background-color: #606EB2;
+    height: 400px;
+    max-width: 100%;
+    float: none;
+    margin: auto auto auto auto;
+    position: center;
+    padding-right: 10px;
+}
+
+
+.more {
+    display: block;
+    float: left;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color: #060360;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+h3 {
+    font-family: 'Work Sans', sans-serif;
+    /*font-size: 25px;*/
+    color: white;
+    float: left;
+        width: 463px;
+    }
+
+.idea {
+    display: block;
+    float: none;
+    min-width: 100%;
+    height:auto;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 7px;
+    height: 60px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+}
+.IdeaContainer{
+    background-color: #ffffff;
+    margin-top: 13px;
+    margin-left: 10px;
+    Height: 95px;
+    
+}
+.IdeaTextLable{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+    text-align: left;
+}
+
+/*.ThumbsUpLable{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    color:#060360;
+    padding-right: 30px;
+    margin-bottom: 5%;
+    text-align: left;
+}*/
+
+
+
+
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .column {
@@ -226,7 +294,49 @@ form.example::after {
                 <div class="columnleft" style="background-color: #00C499;"></div>
 
                 <div class="columnright" style="background-color: #060360;"></div>
-            </div>
+                 </div>
+
+                 <div class="div2">
+                    <h3><b>Most Recent Ideas:</b> </h3>
+                    
+                    <br />
+                    <br />
+                     <%--<div>
+                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
+                        <input type="text" class="idea" placeholder="Lorem blah blahfhre vchghvhghg eirhg eurhgerhgh uehg eghehg;eerug  ug egoeug ueg efugeg uetg " readonly />
+                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
+                        <input type="text" class="idea" placeholder="Lorem blah blah uhu ghiuehouwhiwheouhehfh    eurgeugogouegfuhg  oergueghowfh eruhgeogoeufg" readonly />
+                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
+                        <p><b><a href="more" class="more">More..</a></b></p>
+          
+                    </div>--%>
+
+
+
+                     
+                     <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
+                        <%--<asp:Label ID="Label1" CssClass="IdeaTextLable" runat="server" Text="Label"></asp:Label>--%>
+                         <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+                     </asp:Panel>
+                     <asp:Panel ID="Panel2" CssClass="IdeaContainer" runat="server" >
+                         <%--<asp:Label ID="Label2" CssClass="IdeaTextLable"  runat="server" Text="Label"></asp:Label>--%>
+                         <%--<asp:Label ID="Label6" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label7" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+                         <asp:Table ID="Table1" runat="server" Height="62px" Width="915px">
+                         </asp:Table>
+                     </asp:Panel>
+                     <asp:Panel ID="Panel3" CssClass="IdeaContainer" runat="server" >
+                         <%--<asp:Label ID="Label3" CssClass="IdeaTextLable" runat="server" Text="Label"></asp:Label>--%>
+                         <%--<asp:Label ID="Label8" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label9" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+                     </asp:Panel>
+                     <p><b><a href="more" class="more">More..</a></b></p>
+                     
+
+
+                   </div>
+
             </div>
 
     </div>
