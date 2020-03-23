@@ -218,8 +218,16 @@ h3 {
     margin-top: 13px;
     margin-left: 10px;
     Height: 95px;
-    
+    text-align:left;
+    padding-top:5px;
+    padding-left:5px;
+    padding-bottom:5px;
 }
+
+    .TextArea {
+        width:90%;
+        height:90%;
+    }
 .IdeaTextLable{
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
@@ -252,8 +260,10 @@ h3 {
     #TextArea1 {
         margin-bottom: 0px;
     }
-    .ThumbsUpBtn {
+    .ThumbsBtn {
         padding-right:2%;
+        height: 55px;
+        width: 55px;
     }
 
     .ThumbsDwnBtn {}
@@ -325,12 +335,11 @@ h3 {
                      
                      
            <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
-                        <asp:label id="label1" cssclass="ideatextlable" runat="server" text="label"></asp:label>
                          <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
-                         <textarea id="TextAreaIdea"  cols="20" rows="2"></textarea>
-                         <asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsUpBtn" runat="server" Height="40px" Width="40px" Style="margin-right:5%" ImageUrl="~/Images/thumbs up.png" />
-                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsDwnBtn" runat="server" Height="40px" Width="40px" Style="margin-right:5%" ImageUrl="~/Images/thumbs down.png" />
+                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
+&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style="margin-right:5%; vertical-align:top" ImageUrl="~/Images/thumbs up.png" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style="margin-right:5%; vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
                      </asp:Panel>         
                      
                      <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
