@@ -249,6 +249,15 @@ h3 {
   ul.topnav li.right, 
   ul.topnav li {float: none;}
 }
+    #TextArea1 {
+        margin-bottom: 0px;
+    }
+    .ThumbsUpBtn {
+        padding-right:2%;
+    }
+
+    .ThumbsDwnBtn {}
+
 </style>
 </head>
 <body>
@@ -281,8 +290,8 @@ h3 {
         <input class="search-container" type="text" placeholder="Search" name="search" />
         <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
 <%--</form>--%>
-      <h2>What?</h2>
-      <p>Chania is a city on the island of Crete.</p>
+      <h2></h2>
+      <%--<p>Chania is a city on the island of Crete.</p>--%>
      
      
             <div class="row">
@@ -319,7 +328,12 @@ h3 {
                         <asp:label id="label1" cssclass="ideatextlable" runat="server" text="label"></asp:label>
                          <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
-                     </asp:Panel>          <asp:Panel ID="Panel2" CssClass="IdeaContainer" runat="server" >
+                         <textarea id="TextAreaIdea"  cols="20" rows="2"></textarea>
+                         <asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsUpBtn" runat="server" Height="40px" Width="40px" Style="margin-right:5%" ImageUrl="~/Images/thumbs up.png" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsDwnBtn" runat="server" Height="40px" Width="40px" Style="margin-right:5%" ImageUrl="~/Images/thumbs down.png" />
+                     </asp:Panel>         
+                     
+                     <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
                          <%--<asp:Label ID="Label2" CssClass="IdeaTextLable"  runat="server" Text="Label"></asp:Label>--%>
                          <%--<asp:Label ID="Label6" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label7" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
@@ -331,8 +345,8 @@ h3 {
                          <%--<asp:Label ID="Label8" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label9" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
                      </asp:Panel>
-                     <p><b><a href="more" class="more">More..</a></b></p>
-                     
+                     <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
+                     <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
 
 
                    </div>

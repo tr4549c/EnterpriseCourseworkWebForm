@@ -13,10 +13,10 @@
     text-align: left;
 }
 .IdeaContainer{
-    background-color: #ffffff;
+     background-color: #ffffff;
     margin-top: 13px;
     margin-left: 10px;
-    Height: 400px;
+    Height: 95px;
     
 }
 .ThumbsUpBtn{
@@ -26,11 +26,22 @@ float:left;
 float:right;
 }
 .PanelTuTdButtons{
-    Height:316px;
-    Width:311px;
+    Height:55px;
+    Width:20%;
 }
 .row {
     margin: auto auto auto auto;
+}
+.LblTumbUpNumber{
+font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+}
+
+.LblTumbDwnNumber{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
 }
     </style>
 </head>
@@ -39,15 +50,20 @@ float:right;
         <br />
         <div>
                          <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
-                        <textarea id="TextAreaIdeaDispl" rows="2" style="font-family: 'Work Sans'; font-size: small; text-align: left; word-spacing: normal; letter-spacing: normal; width: 1002px; height: 150px"></textarea>
+                        
+
                         
                              <asp:Label ID="label1" runat="server" cssclass="ideatextlable" text="label"></asp:Label>
-                     <asp:Panel ID="Panel2" runat="server" Height="215px" style="margin-left: 2359px">
+                     <asp:Panel ID="Panel2" runat="server" Height="80px" Width="80px" style="margin-left: 339px">
                          <div class="row">
-            <asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsUpBtn" runat="server" Height="116px" Width="111px" ImageUrl="~/Images/thumbs up.png" />
-            <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsDwnBtn" runat="server" Height="116px" Width="111px" ImageUrl="~/Images/thumbs down.png" /> </div>
-            <asp:Label ID="LblTumbUpNumber" CssClass="ThumbsUpBtn" runat="server" Text="Label"></asp:Label>
-            <asp:Label ID="LblTumbDwnNumber" CssClass="ThumbsDwnBtn" runat="server" Text="Label"></asp:Label>
+            <asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsUpBtn" runat="server" Height="40px" Width="40px" ImageUrl="~/Images/thumbs up.png" />
+            <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsDwnBtn" runat="server" Height="40px" Width="40px" ImageUrl="~/Images/thumbs down.png" /> </div>
+                         <div class="row">
+                            <asp:Label ID="LblTumbUpNumber" CssClass="LblTumbUpNumber" runat="server" Text="Labl"></asp:Label>
+                            <asp:Label ID="LblTumbDwnNumber" CssClass="LblTumbDwnNumber" runat="server" Text="Labl"></asp:Label>
+                         </div>
+            <%--<asp:Label ID="LblTumbUpNumber" CssClass="ThumbsUpBtn" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="LblTumbDwnNumber" CssClass="ThumbsDwnBtn" runat="server" Text="Label"></asp:Label>--%>
         </asp:Panel>
                         </asp:Panel>
 
