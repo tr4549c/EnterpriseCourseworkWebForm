@@ -153,6 +153,9 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="HomePage.aspx" />
     <Content Include="HomePage2.aspx" />
+    <Content Include="ideaBox.aspx" />
+    <Content Include="Images\thumbs down.png" />
+    <Content Include="Images\thumbs up.png" />
     <Content Include="Images\u18.png" />
     <Content Include="LogIn.aspx" />
     <Content Include="LogIn2.aspx" />
@@ -238,6 +241,13 @@
     </Compile>
     <Compile Include="HomePage2.aspx.designer.cs">
       <DependentUpon>HomePage2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ideaBox.aspx.cs">
+      <DependentUpon>ideaBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ideaBox.aspx.designer.cs">
+      <DependentUpon>ideaBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>

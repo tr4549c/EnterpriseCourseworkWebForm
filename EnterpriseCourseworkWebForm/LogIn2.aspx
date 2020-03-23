@@ -96,8 +96,8 @@ input[type=text]:focus, input[type=password]:focus {
 
       <asp:Button ID="loginB" runat="server" CssClass="btn" OnClick="loginB_Click" Text="Login" />
       
-    <//butto< type="submit" class="btn">Log In</button>
-      <a href="https://www.w3schools.com" class="resetPasswordClass" ">Reset Password ?</a>
+    <%--<button< type="submit" class="btn">Log In</button>--%>
+      <a href=".." class="resetPasswordClass" ">Reset Password ?</a>
     </div>
   
 </div>

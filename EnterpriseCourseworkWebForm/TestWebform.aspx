@@ -198,7 +198,7 @@ h3 {
     /*font-size: 25px;*/
     color: white;
     float: left;
-        width: 463px;
+        width: 427px;
     }
 
 .idea {
@@ -314,12 +314,12 @@ h3 {
 
 
                      
-                     <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
-                        <%--<asp:Label ID="Label1" CssClass="IdeaTextLable" runat="server" Text="Label"></asp:Label>--%>
+                     
+           <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
+                        <asp:label id="label1" cssclass="ideatextlable" runat="server" text="label"></asp:label>
                          <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
-                     </asp:Panel>
-                     <asp:Panel ID="Panel2" CssClass="IdeaContainer" runat="server" >
+                     </asp:Panel>          <asp:Panel ID="Panel2" CssClass="IdeaContainer" runat="server" >
                          <%--<asp:Label ID="Label2" CssClass="IdeaTextLable"  runat="server" Text="Label"></asp:Label>--%>
                          <%--<asp:Label ID="Label6" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label7" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
