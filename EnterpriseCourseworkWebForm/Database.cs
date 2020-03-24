@@ -8,7 +8,7 @@ namespace EnterpriseCourseworkWebForm
 {
     //Useful LinQ : https://www.tutorialspoint.com/linq/linq_sql.htm
 
-    public class Database
+    static public class Database
     {
         #region Login
         /// <summary>
@@ -19,15 +19,22 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
+        /// 
+
+        static private DataClassesUniversityDataContext Connection()
+        {
+            return new DataClassesUniversityDataContext();
+        }
+
         static public int LoginAllStaff(string username, string password)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from staff in db.AllStaffs where staff.Username == username && staff.Password == password select staff.AllStaffID).FirstOrDefault();
         }
 
         static public int LoginRegisteredStaff(string username, string password)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
         }
         #endregion
@@ -43,7 +50,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="password"></param>
         static public bool RegisterAllStaff(int employeeID, string name, string username, string password)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             //check if username already exists
             var query = from staff in db.AllStaffs where staff.Username == username select staff;
@@ -79,7 +86,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="allStaffID"></param>
         static public bool RegisterRStaff(string username, string password, int roleID, int departmentID, int allStaffID)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             //check if username already exists
             var query = from staff in db.RegisteredStaffs where staff.RUsername == username select staff;
@@ -92,12 +99,14 @@ namespace EnterpriseCourseworkWebForm
             else
             {
                 //if username not taken, create account
-                RegisteredStaff newStaff = new RegisteredStaff();
-                newStaff.RUsername = username;
-                newStaff.RPassword = password;
-                newStaff.RoleID = roleID;
-                newStaff.DepartmentID = departmentID;
-                newStaff.AllStaffID = allStaffID;
+                RegisteredStaff newStaff = new RegisteredStaff
+                {
+                    RUsername = username,
+                    RPassword = password,
+                    RoleID = roleID,
+                    DepartmentID = departmentID,
+                    AllStaffID = allStaffID
+                };
 
                 db.RegisteredStaffs.InsertOnSubmit(newStaff);
                 db.SubmitChanges();
@@ -113,7 +122,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="password"></param>
         static public void UpdateRStaffUsernamePassword(int id, string username, string password)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(id));
             rs.RUsername = username;
@@ -131,7 +140,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetAllRoles()
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from r in db.Roles select r.RoleName).ToArray();
         }
         #endregion
@@ -143,7 +152,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetAllDepartments()
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from dep in db.Departments select dep.DepartementName).ToArray();
         }
         #endregion
@@ -155,13 +164,29 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetAllCategories()
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from cat in db.Categories select cat.CategoryName).ToArray();
         }
         #endregion
 
         #region DepartmentCategory
         //Not sure what I'm meant to put in here
+
+        static public void InsertDepartmentCategory(int depID, int catID)
+        {
+            var db = Connection();
+
+            DepartmentCategory dc = new DepartmentCategory
+            {
+                DepartmentID = depID,
+                CategoryID = catID
+            };
+
+            db.DepartmentCategories.InsertOnSubmit(dc);
+            db.SubmitChanges();
+        }
+
+
         #endregion
 
         #region Idea
@@ -175,14 +200,16 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="IsAnnonymous"></param>
         static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
-            Idea newIdea = new Idea();
-            newIdea.CategoryID = categoryID;
-            newIdea.Title = title;
-            newIdea.Description = description;
-            newIdea.StaffID = staffID;
-            newIdea.IsAnnonymous = IsAnnonymous;
+            Idea newIdea = new Idea
+            {
+                CategoryID = categoryID,
+                Title = title,
+                Description = description,
+                StaffID = staffID,
+                IsAnnonymous = IsAnnonymous
+            };
 
             db.Ideas.InsertOnSubmit(newIdea);
             db.SubmitChanges();
@@ -195,8 +222,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[][] SelectIdeas(int categoryID)
         {
-            //var db = Connection();
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.StaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
             //return all doc now?
         }
@@ -210,12 +236,14 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="docPath"></param>
         static public void InsertDoc(int ideaID, string docPath)      //docpah will be changed to image?
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             //foreach (string doc in docPath) {                     //ideaID would stay constant, so just loop through docs list
-            Document newDoc = new Document();
-            newDoc.IdeaID = ideaID;
-            newDoc.DocPath = docPath;
+            Document newDoc = new Document
+            {
+                IdeaID = ideaID,
+                DocPath = docPath
+            };
 
             db.Documents.InsertOnSubmit(newDoc);
             //}
@@ -230,7 +258,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetDocs(int ideaID)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from doc in db.Documents select doc.DocPath).ToArray();
         }
         #endregion
@@ -245,13 +273,15 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="IsAnnonymous"></param>
         static public void InsertComment(string comment, int ideaID, int staffID, bool IsAnnonymous)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
-            Comment newComment = new Comment();
-            newComment.Comment1 = comment;
-            newComment.IdeaID = ideaID;
-            newComment.StaffID = staffID;
-            newComment.IsAnnonymous = IsAnnonymous;
+            Comment newComment = new Comment
+            {
+                Comment1 = comment,
+                IdeaID = ideaID,
+                StaffID = staffID,
+                IsAnnonymous = IsAnnonymous
+            };
 
             db.Comments.InsertOnSubmit(newComment);
             db.SubmitChanges();
@@ -265,7 +295,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public object[] SelectComment(int ideaID)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from c in db.Comments where c.IdeaID == ideaID select new { c.Comment1, c.StaffID, c.IsAnnonymous }).ToArray();
         }
         #endregion
@@ -279,7 +309,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static private bool RatingExists(int ideaID, int staffID)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             var query = (from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select r).FirstOrDefault();
 
@@ -301,7 +331,7 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static private bool RatingValue(int ideaID, int staffID)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             return bool.Parse((from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select r.Vote).FirstOrDefault().ToString());
 
@@ -315,7 +345,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="voteValue"></param>
         static public void UpdateRating(int ideaID, int staffID, bool voteValue)
         {
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
 
             if (RatingExists(ideaID, staffID))
             {
@@ -340,10 +370,12 @@ namespace EnterpriseCourseworkWebForm
             else
             {
                 //No current rating so create new record
-                Rating newRating = new Rating();
-                newRating.IdeaID = ideaID;
-                newRating.StaffID = staffID;
-                newRating.Vote = voteValue;
+                Rating newRating = new Rating
+                {
+                    IdeaID = ideaID,
+                    StaffID = staffID,
+                    Vote = voteValue
+                };
 
                 db.Ratings.InsertOnSubmit(newRating);
             }
@@ -359,7 +391,7 @@ namespace EnterpriseCourseworkWebForm
         static public bool[] GetVotesForIdea(int ideaID, int staffID)
         {
             //1 for upvote, 0 for downvote
-            DataClassesUniversityDataContext db = new DataClassesUniversityDataContext();
+            var db = Connection();
             return (from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select (bool)r.Vote).ToArray();
 
             //loop through list here and return tupe of upvote/downvote?

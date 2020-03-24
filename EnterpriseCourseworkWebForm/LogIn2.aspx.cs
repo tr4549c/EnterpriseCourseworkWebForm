@@ -35,8 +35,9 @@ namespace EnterpriseCourseworkWebForm
                 //Cookie.Value = staffID.ToString();
                 //Cookie.Expires = DateTime.Now.AddDays(1);
                 //Response.Cookies.Add(Cookie);
-
-                Application["RStaffID"] = staffID.ToString();
+                Session["RStaffID"] = staffID;
+                
+                Application["RStaffID"] = staffID;
 
                 //foreach (var query1 in query.ToList())
                 //{
