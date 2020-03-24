@@ -13,5 +13,26 @@ namespace EnterpriseCourseworkWebForm
         {
 
         }
+
+        /// <summary>
+        /// Temp while no event created
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoginPressed(object sender, EventArgs e)
+        {
+            //int staffID = Database.LoginRegisteredStaff(TXT_Username.Text, TXT_Password.Text);
+            int staffID = 1;
+            if (staffID > 0)
+            {
+                Session["StaffID"] = staffID;
+
+                Response.Redirect("HomePage.aspx");
+            }
+            else
+            {
+                //display error
+            }
+        }
     }
 }
