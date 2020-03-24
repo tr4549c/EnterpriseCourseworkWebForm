@@ -48,7 +48,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="name"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        static public bool RegisterAllStaff(int employeeID, string name, string username, string password)
+        static public bool RegisterAllStaff(int employeeID, string name, string username, string password, string job, string department)
         {
             var db = Connection();
 
@@ -63,11 +63,16 @@ namespace EnterpriseCourseworkWebForm
             else
             {
                 //if username not taken, create account
-                AllStaff newStaff = new AllStaff();
-                newStaff.EmployeeID = employeeID;
-                newStaff.Name = name;
-                newStaff.Username = username;
-                newStaff.Password = password;
+                AllStaff newStaff = new AllStaff
+                {
+                    EmployeeID = employeeID,
+                    Name = name,
+                    Username = username,
+                    Password = password,
+                    Job = job,
+                    Department = department
+
+                };
 
                 db.AllStaffs.InsertOnSubmit(newStaff);
                 db.SubmitChanges();
@@ -105,7 +110,9 @@ namespace EnterpriseCourseworkWebForm
                     RPassword = password,
                     RoleID = roleID,
                     DepartmentID = departmentID,
-                    AllStaffID = allStaffID
+                    AllStaffID = allStaffID,
+                    IsActive = true,
+                    IsEnabled = true
                 };
 
                 db.RegisteredStaffs.InsertOnSubmit(newStaff);
@@ -141,7 +148,7 @@ namespace EnterpriseCourseworkWebForm
         static public string[] GetAllRoles()
         {
             var db = Connection();
-            return (from r in db.Roles select r.RoleName).ToArray();
+            return (from r in db.Role1s select r.RoleName).ToArray();
         }
         #endregion
 
@@ -207,7 +214,7 @@ namespace EnterpriseCourseworkWebForm
                 CategoryID = categoryID,
                 Title = title,
                 Description = description,
-                StaffID = staffID,
+                RegisteredStaffID = staffID,
                 IsAnnonymous = IsAnnonymous
             };
 
@@ -223,7 +230,7 @@ namespace EnterpriseCourseworkWebForm
         static public string[][] SelectIdeas(int categoryID)
         {
             var db = Connection();
-            return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.StaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
+            return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
             //return all doc now?
         }
         #endregion
@@ -279,7 +286,7 @@ namespace EnterpriseCourseworkWebForm
             {
                 Comment1 = comment,
                 IdeaID = ideaID,
-                StaffID = staffID,
+                RegisteredStaffID = staffID,
                 IsAnnonymous = IsAnnonymous
             };
 
@@ -296,7 +303,7 @@ namespace EnterpriseCourseworkWebForm
         static public object[] SelectComment(int ideaID)
         {
             var db = Connection();
-            return (from c in db.Comments where c.IdeaID == ideaID select new { c.Comment1, c.StaffID, c.IsAnnonymous }).ToArray();
+            return (from c in db.Comments where c.IdeaID == ideaID select new { c.Comment1, c.RegisteredStaffID, c.IsAnnonymous }).ToArray();
         }
         #endregion
 
@@ -311,7 +318,7 @@ namespace EnterpriseCourseworkWebForm
         {
             var db = Connection();
 
-            var query = (from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select r).FirstOrDefault();
+            var query = (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r).FirstOrDefault();
 
             if (query != null)
             {
@@ -333,7 +340,7 @@ namespace EnterpriseCourseworkWebForm
         {
             var db = Connection();
 
-            return bool.Parse((from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select r.Vote).FirstOrDefault().ToString());
+            return bool.Parse((from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r.Vote).FirstOrDefault().ToString());
 
         }
 
@@ -350,7 +357,7 @@ namespace EnterpriseCourseworkWebForm
             if (RatingExists(ideaID, staffID))
             {
                 //if rating exists, find stored user rating
-                Rating findRating = db.Ratings.FirstOrDefault(r => r.IdeaID.Equals(ideaID) && r.StaffID.Equals(staffID));
+                Rating findRating = db.Ratings.FirstOrDefault(r => r.IdeaID.Equals(ideaID) && r.RegisteredStaffID.Equals(staffID));
 
                 //Get current value of rating
                 bool currentValue = RatingValue(ideaID, staffID);
@@ -373,7 +380,7 @@ namespace EnterpriseCourseworkWebForm
                 Rating newRating = new Rating
                 {
                     IdeaID = ideaID,
-                    StaffID = staffID,
+                    RegisteredStaffID = staffID,
                     Vote = voteValue
                 };
 
@@ -392,7 +399,7 @@ namespace EnterpriseCourseworkWebForm
         {
             //1 for upvote, 0 for downvote
             var db = Connection();
-            return (from r in db.Ratings where r.IdeaID == ideaID && r.StaffID == staffID select (bool)r.Vote).ToArray();
+            return (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select (bool)r.Vote).ToArray();
 
             //loop through list here and return tupe of upvote/downvote?
         }

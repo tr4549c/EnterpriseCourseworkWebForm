@@ -37,7 +37,7 @@ namespace EnterpriseCourseworkWebForm
                 //Response.Cookies.Add(Cookie);
                 Session["RStaffID"] = staffID;
                 
-                Application["RStaffID"] = staffID;
+                //Application["RStaffID"] = staffID;
 
                 //foreach (var query1 in query.ToList())
                 //{

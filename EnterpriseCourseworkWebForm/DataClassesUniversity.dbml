@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="as6501h" Class="DataClassesUniversityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=sql-server;Initial Catalog=as6501h;User ID=as6501h" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="as6501hConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admins" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="AdminID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UsernameA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PasswordA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.AllStaff" Member="AllStaffs">
     <Type Name="AllStaff">
       <Column Name="AllStaffID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -7,22 +14,25 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Job" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="AllStaff_RegisteredStaff" Member="RegisteredStaffs" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="RegisteredStaff" />
     </Type>
   </Table>
-  <Table Name="dbo.Role" Member="Roles">
-    <Type Name="Role">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="RoleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Role_RegisteredStaff" Member="RegisteredStaffs" ThisKey="RoleID" OtherKey="RoleID" Type="RegisteredStaff" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Department" Member="Departments">
-    <Type Name="Department">
-      <Column Name="DepartmentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="DepartementName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Department_RegisteredStaff" Member="RegisteredStaffs" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="RegisteredStaff" />
-      <Association Name="Department_DepartmentCategory" Member="DepartmentCategories" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="DepartmentCategory" />
+  <Table Name="dbo.ArchiveEmployees" Member="ArchiveEmployees">
+    <Type Name="ArchiveEmployee">
+      <Column Name="ArchiveEmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DoB" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepartmentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Category" Member="Categories">
@@ -33,32 +43,23 @@
       <Association Name="Category_Idea" Member="Ideas" ThisKey="CategoryID" OtherKey="CategoryID" Type="Idea" />
     </Type>
   </Table>
-  <Table Name="dbo.RegisteredStaff" Member="RegisteredStaffs">
-    <Type Name="RegisteredStaff">
-      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="RUsername" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="RPassword" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DepartmentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AllStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="RegisteredStaff_Comment" Member="Comments" ThisKey="RegisteredStaffID" OtherKey="StaffID" Type="Comment" />
-      <Association Name="RegisteredStaff_Idea" Member="Ideas" ThisKey="RegisteredStaffID" OtherKey="StaffID" Type="Idea" />
-      <Association Name="RegisteredStaff_Rating" Member="Ratings" ThisKey="RegisteredStaffID" OtherKey="StaffID" Type="Rating" />
-      <Association Name="AllStaff_RegisteredStaff" Member="AllStaff" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="AllStaff" IsForeignKey="true" />
-      <Association Name="Department_RegisteredStaff" Member="Department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="Department" IsForeignKey="true" />
-      <Association Name="Role_RegisteredStaff" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Comment" Member="Comments">
     <Type Name="Comment">
       <Column Name="CommentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Comment" Member="Comment1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="StaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="RegisteredStaff_Comment" Member="RegisteredStaff" ThisKey="StaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
       <Association Name="Idea_Comment" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
+      <Association Name="RegisteredStaff_Comment" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Department" Member="Departments">
+    <Type Name="Department">
+      <Column Name="DepartmentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DepartementName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Department_DepartmentCategory" Member="DepartmentCategories" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="DepartmentCategory" />
+      <Association Name="Department_RegisteredStaff" Member="RegisteredStaffs" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="RegisteredStaff" />
     </Type>
   </Table>
   <Table Name="dbo.DepartmentCategory" Member="DepartmentCategories">
@@ -84,23 +85,71 @@
       <Column Name="CategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="StaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsHidden" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Idea_Comment" Member="Comments" ThisKey="IdeaID" OtherKey="IdeaID" Type="Comment" />
       <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
       <Association Name="Idea_Rating" Member="Ratings" ThisKey="IdeaID" OtherKey="IdeaID" Type="Rating" />
+      <Association Name="Idea_Report" Member="Reports" ThisKey="IdeaID" OtherKey="IdeaID" Type="Report" />
       <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
-      <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="StaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+      <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoginSession" Member="LoginSessions">
+    <Type Name="LoginSession">
+      <Column Name="LoginSessionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Browser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="RegisteredStaff_LoginSession" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Rating" Member="Ratings">
     <Type Name="Rating">
       <Column Name="RatingID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="StaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Vote" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Idea_Rating" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
-      <Association Name="RegisteredStaff_Rating" Member="RegisteredStaff" ThisKey="StaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+      <Association Name="RegisteredStaff_Rating" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RegisteredStaff" Member="RegisteredStaffs">
+    <Type Name="RegisteredStaff">
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RUsername" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RPassword" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepartmentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AllStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="RegisteredStaff_Comment" Member="Comments" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Comment" />
+      <Association Name="RegisteredStaff_Idea" Member="Ideas" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Idea" />
+      <Association Name="RegisteredStaff_LoginSession" Member="LoginSessions" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="LoginSession" />
+      <Association Name="RegisteredStaff_Rating" Member="Ratings" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Rating" />
+      <Association Name="RegisteredStaff_Report" Member="Reports" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Report" />
+      <Association Name="AllStaff_RegisteredStaff" Member="AllStaff" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="AllStaff" IsForeignKey="true" />
+      <Association Name="Department_RegisteredStaff" Member="Department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="Department" IsForeignKey="true" />
+      <Association Name="Role1_RegisteredStaff" Member="Role1" ThisKey="RoleID" OtherKey="RoleID" Type="Role1" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report" Member="Reports">
+    <Type Name="Report">
+      <Column Name="ReportID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Idea_Report" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
+      <Association Name="RegisteredStaff_Report" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Role1s">
+    <Type Name="Role1">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Role1_RegisteredStaff" Member="RegisteredStaffs" ThisKey="RoleID" OtherKey="RoleID" Type="RegisteredStaff" />
     </Type>
   </Table>
 </Database>
