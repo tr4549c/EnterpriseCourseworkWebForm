@@ -174,7 +174,7 @@ form.example::after {
 
 .div2 {
     background-color: #606EB2;
-    height: 400px;
+    height: 500px;
     max-width: 100%;
     float: none;
     margin: auto auto auto auto;
@@ -198,7 +198,14 @@ h3 {
     /*font-size: 25px;*/
     color: white;
     float: left;
-        width: 427px;
+    width: 427px;
+    }
+.h2 {
+    font-family: 'Work Sans', sans-serif;
+    /*font-size: 25px;*/
+    color: #060360;
+    float: left;
+    width: 427px;
     }
 
 .idea {
@@ -217,22 +224,37 @@ h3 {
     background-color: #ffffff;
     margin-top: 13px;
     margin-left: 10px;
-    Height: 95px;
+    Height: 130px;
     text-align:left;
     padding-top:5px;
     padding-left:5px;
     padding-bottom:5px;
 }
 
-    .TextArea {
-        width:90%;
-        height:90%;
+.TextArea {
+        width:87%;
+        height:78%;
     }
 .IdeaTextLable{
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     color:#060360;
     text-align: left;
+}
+.bottomDivIdeaLeft{
+     Height:15%;
+     width:99%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+}
+
+.bottomDivIdeaRight{
+     Height:15%;
+     width:12%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
 }
 
 /*.ThumbsUpLable{
@@ -261,11 +283,20 @@ h3 {
         margin-bottom: 0px;
     }
     .ThumbsBtn {
-        padding-right:2%;
-        height: 55px;
-        width: 55px;
+        /*padding-right:1%;*/
+        height: 48px;
+        width: 48px;
     }
-
+.containerFooter{
+    display:block;
+    font-family: 'Work Sans',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+        color: #fff;
+}
+.connect-with-us{
+    color:white;
+}
     .ThumbsDwnBtn {}
 
 </style>
@@ -300,7 +331,7 @@ h3 {
         <input class="search-container" type="text" placeholder="Search" name="search" />
         <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
 <%--</form>--%>
-      <h2></h2>
+      <h2 style="color: #060360; padding-left:0.5%">HOME</h2>
       <%--<p>Chania is a city on the island of Crete.</p>--%>
      
      
@@ -320,15 +351,7 @@ h3 {
                     
                     <br />
                     <br />
-                     <%--<div>
-                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
-                        <input type="text" class="idea" placeholder="Lorem blah blahfhre vchghvhghg eirhg eurhgerhgh uehg eghehg;eerug  ug egoeug ueg efugeg uetg " readonly />
-                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
-                        <input type="text" class="idea" placeholder="Lorem blah blah uhu ghiuehouwhiwheouhehfh    eurgeugogouegfuhg  oergueghowfh eruhgeogoeufg" readonly />
-                        <input type="text" class="idea" placeholder="Lorem blah blah" readonly />
-                        <p><b><a href="more" class="more">More..</a></b></p>
-          
-                    </div>--%>
+                     
 
 
 
@@ -337,22 +360,55 @@ h3 {
            <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
                          <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
                          <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+               <div> 
+               </div>
                          <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
-&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style="margin-right:5%; vertical-align:top" ImageUrl="~/Images/thumbs up.png" />
-                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style="margin-right:5%; vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
+
+                          <div class="bottomDivIdeaLeft"> 
+                              <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
+                              <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>
+                         </div>
                      </asp:Panel>         
                      
                      <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
-                         <%--<asp:Label ID="Label2" CssClass="IdeaTextLable"  runat="server" Text="Label"></asp:Label>--%>
-                         <%--<asp:Label ID="Label6" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
-                         <asp:Label ID="Label7" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
-                         <asp:Table ID="Table1" runat="server" Height="62px" Width="915px">
-                         </asp:Table>
+                          
+                                <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton1" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton1" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink1" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton5" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label1" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label2" runat="server" Text="No"></asp:Label>
+                         </div>
+                         
                      </asp:Panel>
                      <asp:Panel ID="Panel3" CssClass="IdeaContainer" runat="server" >
-                         <%--<asp:Label ID="Label3" CssClass="IdeaTextLable" runat="server" Text="Label"></asp:Label>--%>
-                         <%--<asp:Label ID="Label8" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
-                         <asp:Label ID="Label9" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+                        
+
+                         <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton3" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton3" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink3" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton6" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label3" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label4" runat="server" Text="No"></asp:Label>
+                         </div>
+                         
+
+
+
                      </asp:Panel>
                      <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
                      <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
@@ -366,9 +422,57 @@ h3 {
   </div>
 
 <div class="footer">
- 
+  
+    <div class="containerFooter">
+ <div id="useful-links"> 
+ <h3>Useful links</h3> 
+<div class="list-wrapper">
+ <ul> 
+     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
+     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
+     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
+     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
 
-    <div class="row">
+ </ul> 
+</div> </div>
+    <div id="connect-with-us"> 
+        <h3>Connect with us</h3> 
+        <div class="gre-social-main"> 
+            <div class="gre-social-button"> 
+                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
+                    <i class="fa fa-facebook-official"></i>
+                    <span class="sr-only">Facebook page</span></a> </div> 
+            <div class="gre-social-button"> 
+                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
+                    <i class="fa fa-twitter"></i>
+                    <span class="sr-only">Twitter feed</span></a> </div> 
+            <div class="gre-social-button"> 
+                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
+                    <i class="fa fa-youtube-play"></i>
+                    <span class="sr-only">YouTube channel</span></a> </div> 
+            <div class="gre-social-button"> 
+                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
+                    <i class="fa fa-instagram"></i>
+                    <span class="sr-only">Instagram page</span></a> 
+
+            </div> <div class="gre-social-button"> 
+                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                    <span class="sr-only">LinkedIn page</span></a> </div> 
+            <div class="gre-social-button"> 
+                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
+                    <i class="fa fa-snapchat-ghost"></i>
+                    <span class="sr-only">Snapchat page</span></a> 
+
+            </div> 
+
+        </div> 
+
+    </div>
+    </div>
+<%--<%--    <div class="row">
         
   <div class="column">
     <!--<h2>Column 1</h2>-->
@@ -380,10 +484,10 @@ h3 {
     <p>Some text..</p>
   </div>
   <div class="column">
-    <h2>Column 3</h2>
+    <h2>Location</h2>
     <p>Some text..</p>
   </div>
-</div>
+</div>--%>
 
 
 </div>
