@@ -146,6 +146,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="SubmitPage.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="HomePage.aspx" />
     <Content Include="HomePage2.aspx" />
@@ -280,6 +281,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="SubmitPage.aspx.cs">
+      <DependentUpon>SubmitPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubmitPage.aspx.designer.cs">
+      <DependentUpon>SubmitPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
