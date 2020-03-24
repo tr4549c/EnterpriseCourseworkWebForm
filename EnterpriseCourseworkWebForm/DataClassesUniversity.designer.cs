@@ -36,9 +36,6 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertAllStaff(AllStaff instance);
     partial void UpdateAllStaff(AllStaff instance);
     partial void DeleteAllStaff(AllStaff instance);
-    partial void InsertArchiveEmployee(ArchiveEmployee instance);
-    partial void UpdateArchiveEmployee(ArchiveEmployee instance);
-    partial void DeleteArchiveEmployee(ArchiveEmployee instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -69,9 +66,9 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertReport(Report instance);
     partial void UpdateReport(Report instance);
     partial void DeleteReport(Report instance);
-    partial void InsertRole1(Role1 instance);
-    partial void UpdateRole1(Role1 instance);
-    partial void DeleteRole1(Role1 instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
     #endregion
 		
 		public DataClassesUniversityDataContext() : 
@@ -117,14 +114,6 @@ namespace EnterpriseCourseworkWebForm
 			get
 			{
 				return this.GetTable<AllStaff>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ArchiveEmployee> ArchiveEmployees
-		{
-			get
-			{
-				return this.GetTable<ArchiveEmployee>();
 			}
 		}
 		
@@ -208,11 +197,11 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		public System.Data.Linq.Table<Role1> Role1s
+		public System.Data.Linq.Table<Role> Roles
 		{
 			get
 			{
-				return this.GetTable<Role1>();
+				return this.GetTable<Role>();
 			}
 		}
 	}
@@ -335,7 +324,7 @@ namespace EnterpriseCourseworkWebForm
 		
 		private int _AllStaffID;
 		
-		private System.Nullable<int> _EmployeeID;
+		private int _EmployeeID;
 		
 		private string _Name;
 		
@@ -343,11 +332,15 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _Password;
 		
-		private string _Job;
+		private int _RoleID;
 		
-		private string _Department;
+		private int _DepartmentID;
 		
 		private EntitySet<RegisteredStaff> _RegisteredStaffs;
+		
+		private EntityRef<Department> _Department;
+		
+		private EntityRef<Role> _Role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -355,7 +348,7 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCreated();
     partial void OnAllStaffIDChanging(int value);
     partial void OnAllStaffIDChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeIDChanging(int value);
     partial void OnEmployeeIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
@@ -363,15 +356,17 @@ namespace EnterpriseCourseworkWebForm
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnJobChanging(string value);
-    partial void OnJobChanged();
-    partial void OnDepartmentChanging(string value);
-    partial void OnDepartmentChanged();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnDepartmentIDChanging(int value);
+    partial void OnDepartmentIDChanged();
     #endregion
 		
 		public AllStaff()
 		{
 			this._RegisteredStaffs = new EntitySet<RegisteredStaff>(new Action<RegisteredStaff>(this.attach_RegisteredStaffs), new Action<RegisteredStaff>(this.detach_RegisteredStaffs));
+			this._Department = default(EntityRef<Department>);
+			this._Role = default(EntityRef<Role>);
 			OnCreated();
 		}
 		
@@ -395,8 +390,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
-		public System.Nullable<int> EmployeeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int NOT NULL")]
+		public int EmployeeID
 		{
 			get
 			{
@@ -415,7 +410,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -435,7 +430,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Username
 		{
 			get
@@ -455,7 +450,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Password
 		{
 			get
@@ -475,42 +470,50 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Job", DbType="VarChar(MAX)")]
-		public string Job
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL")]
+		public int RoleID
 		{
 			get
 			{
-				return this._Job;
+				return this._RoleID;
 			}
 			set
 			{
-				if ((this._Job != value))
+				if ((this._RoleID != value))
 				{
-					this.OnJobChanging(value);
+					if (this._Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIDChanging(value);
 					this.SendPropertyChanging();
-					this._Job = value;
-					this.SendPropertyChanged("Job");
-					this.OnJobChanged();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Department", DbType="VarChar(MAX)")]
-		public string Department
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int NOT NULL")]
+		public int DepartmentID
 		{
 			get
 			{
-				return this._Department;
+				return this._DepartmentID;
 			}
 			set
 			{
-				if ((this._Department != value))
+				if ((this._DepartmentID != value))
 				{
-					this.OnDepartmentChanging(value);
+					if (this._Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDepartmentIDChanging(value);
 					this.SendPropertyChanging();
-					this._Department = value;
-					this.SendPropertyChanged("Department");
-					this.OnDepartmentChanged();
+					this._DepartmentID = value;
+					this.SendPropertyChanged("DepartmentID");
+					this.OnDepartmentIDChanged();
 				}
 			}
 		}
@@ -525,6 +528,74 @@ namespace EnterpriseCourseworkWebForm
 			set
 			{
 				this._RegisteredStaffs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_AllStaff", Storage="_Department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
+		public Department Department
+		{
+			get
+			{
+				return this._Department.Entity;
+			}
+			set
+			{
+				Department previousValue = this._Department.Entity;
+				if (((previousValue != value) 
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Department.Entity = null;
+						previousValue.AllStaffs.Remove(this);
+					}
+					this._Department.Entity = value;
+					if ((value != null))
+					{
+						value.AllStaffs.Add(this);
+						this._DepartmentID = value.DepartmentID;
+					}
+					else
+					{
+						this._DepartmentID = default(int);
+					}
+					this.SendPropertyChanged("Department");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role1_AllStaff", Storage="_Role", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Role Role
+		{
+			get
+			{
+				return this._Role.Entity;
+			}
+			set
+			{
+				Role previousValue = this._Role.Entity;
+				if (((previousValue != value) 
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Role.Entity = null;
+						previousValue.AllStaffs.Remove(this);
+					}
+					this._Role.Entity = value;
+					if ((value != null))
+					{
+						value.AllStaffs.Add(this);
+						this._RoleID = value.RoleID;
+					}
+					else
+					{
+						this._RoleID = default(int);
+					}
+					this.SendPropertyChanged("Role");
+				}
 			}
 		}
 		
@@ -558,332 +629,6 @@ namespace EnterpriseCourseworkWebForm
 		{
 			this.SendPropertyChanging();
 			entity.AllStaff = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ArchiveEmployees")]
-	public partial class ArchiveEmployee : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ArchiveEmployeeID;
-		
-		private System.Nullable<int> _EmployeeID;
-		
-		private string _Name;
-		
-		private string _Username;
-		
-		private string _Email;
-		
-		private string _DoB;
-		
-		private System.Nullable<int> _RoleID;
-		
-		private System.Nullable<int> _DepartmentID;
-		
-		private string _StartDate;
-		
-		private string _EndDate;
-		
-		private string _Notes;
-		
-		private string _Phone;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnArchiveEmployeeIDChanging(int value);
-    partial void OnArchiveEmployeeIDChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnDoBChanging(string value);
-    partial void OnDoBChanged();
-    partial void OnRoleIDChanging(System.Nullable<int> value);
-    partial void OnRoleIDChanged();
-    partial void OnDepartmentIDChanging(System.Nullable<int> value);
-    partial void OnDepartmentIDChanged();
-    partial void OnStartDateChanging(string value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(string value);
-    partial void OnEndDateChanged();
-    partial void OnNotesChanging(string value);
-    partial void OnNotesChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    #endregion
-		
-		public ArchiveEmployee()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArchiveEmployeeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ArchiveEmployeeID
-		{
-			get
-			{
-				return this._ArchiveEmployeeID;
-			}
-			set
-			{
-				if ((this._ArchiveEmployeeID != value))
-				{
-					this.OnArchiveEmployeeIDChanging(value);
-					this.SendPropertyChanging();
-					this._ArchiveEmployeeID = value;
-					this.SendPropertyChanged("ArchiveEmployeeID");
-					this.OnArchiveEmployeeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
-		public System.Nullable<int> EmployeeID
-		{
-			get
-			{
-				return this._EmployeeID;
-			}
-			set
-			{
-				if ((this._EmployeeID != value))
-				{
-					this.OnEmployeeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeID = value;
-					this.SendPropertyChanged("EmployeeID");
-					this.OnEmployeeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(MAX)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(MAX)")]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(MAX)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DoB", DbType="VarChar(MAX)")]
-		public string DoB
-		{
-			get
-			{
-				return this._DoB;
-			}
-			set
-			{
-				if ((this._DoB != value))
-				{
-					this.OnDoBChanging(value);
-					this.SendPropertyChanging();
-					this._DoB = value;
-					this.SendPropertyChanged("DoB");
-					this.OnDoBChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int")]
-		public System.Nullable<int> RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int")]
-		public System.Nullable<int> DepartmentID
-		{
-			get
-			{
-				return this._DepartmentID;
-			}
-			set
-			{
-				if ((this._DepartmentID != value))
-				{
-					this.OnDepartmentIDChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentID = value;
-					this.SendPropertyChanged("DepartmentID");
-					this.OnDepartmentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="NChar(10)")]
-		public string StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="VarChar(MAX)")]
-		public string EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(MAX)")]
-		public string Notes
-		{
-			get
-			{
-				return this._Notes;
-			}
-			set
-			{
-				if ((this._Notes != value))
-				{
-					this.OnNotesChanging(value);
-					this.SendPropertyChanging();
-					this._Notes = value;
-					this.SendPropertyChanged("Notes");
-					this.OnNotesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(MAX)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1039,11 +784,11 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _Comment1;
 		
-		private System.Nullable<int> _IdeaID;
+		private int _IdeaID;
 		
-		private System.Nullable<int> _RegisteredStaffID;
+		private int _RegisteredStaffID;
 		
-		private System.Nullable<bool> _IsAnnonymous;
+		private bool _IsAnnonymous;
 		
 		private EntityRef<Idea> _Idea;
 		
@@ -1057,11 +802,11 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCommentIDChanged();
     partial void OnComment1Changing(string value);
     partial void OnComment1Changed();
-    partial void OnIdeaIDChanging(System.Nullable<int> value);
+    partial void OnIdeaIDChanging(int value);
     partial void OnIdeaIDChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
+    partial void OnRegisteredStaffIDChanging(int value);
     partial void OnRegisteredStaffIDChanged();
-    partial void OnIsAnnonymousChanging(System.Nullable<bool> value);
+    partial void OnIsAnnonymousChanging(bool value);
     partial void OnIsAnnonymousChanged();
     #endregion
 		
@@ -1092,7 +837,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Comment", Storage="_Comment1", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Comment", Storage="_Comment1", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Comment1
 		{
 			get
@@ -1112,8 +857,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int")]
-		public System.Nullable<int> IdeaID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL")]
+		public int IdeaID
 		{
 			get
 			{
@@ -1136,8 +881,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
 		{
 			get
 			{
@@ -1160,8 +905,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit")]
-		public System.Nullable<bool> IsAnnonymous
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit NOT NULL")]
+		public bool IsAnnonymous
 		{
 			get
 			{
@@ -1207,7 +952,7 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._IdeaID = default(Nullable<int>);
+						this._IdeaID = default(int);
 					}
 					this.SendPropertyChanged("Idea");
 				}
@@ -1241,7 +986,7 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._RegisteredStaffID = default(Nullable<int>);
+						this._RegisteredStaffID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
 				}
@@ -1279,9 +1024,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _DepartementName;
 		
-		private EntitySet<DepartmentCategory> _DepartmentCategories;
+		private EntitySet<AllStaff> _AllStaffs;
 		
-		private EntitySet<RegisteredStaff> _RegisteredStaffs;
+		private EntitySet<DepartmentCategory> _DepartmentCategories;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1295,8 +1040,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		public Department()
 		{
+			this._AllStaffs = new EntitySet<AllStaff>(new Action<AllStaff>(this.attach_AllStaffs), new Action<AllStaff>(this.detach_AllStaffs));
 			this._DepartmentCategories = new EntitySet<DepartmentCategory>(new Action<DepartmentCategory>(this.attach_DepartmentCategories), new Action<DepartmentCategory>(this.detach_DepartmentCategories));
-			this._RegisteredStaffs = new EntitySet<RegisteredStaff>(new Action<RegisteredStaff>(this.attach_RegisteredStaffs), new Action<RegisteredStaff>(this.detach_RegisteredStaffs));
 			OnCreated();
 		}
 		
@@ -1340,6 +1085,19 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_AllStaff", Storage="_AllStaffs", ThisKey="DepartmentID", OtherKey="DepartmentID")]
+		public EntitySet<AllStaff> AllStaffs
+		{
+			get
+			{
+				return this._AllStaffs;
+			}
+			set
+			{
+				this._AllStaffs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_DepartmentCategory", Storage="_DepartmentCategories", ThisKey="DepartmentID", OtherKey="DepartmentID")]
 		public EntitySet<DepartmentCategory> DepartmentCategories
 		{
@@ -1350,19 +1108,6 @@ namespace EnterpriseCourseworkWebForm
 			set
 			{
 				this._DepartmentCategories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_RegisteredStaff", Storage="_RegisteredStaffs", ThisKey="DepartmentID", OtherKey="DepartmentID")]
-		public EntitySet<RegisteredStaff> RegisteredStaffs
-		{
-			get
-			{
-				return this._RegisteredStaffs;
-			}
-			set
-			{
-				this._RegisteredStaffs.Assign(value);
 			}
 		}
 		
@@ -1386,6 +1131,18 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		private void attach_AllStaffs(AllStaff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = this;
+		}
+		
+		private void detach_AllStaffs(AllStaff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = null;
+		}
+		
 		private void attach_DepartmentCategories(DepartmentCategory entity)
 		{
 			this.SendPropertyChanging();
@@ -1393,18 +1150,6 @@ namespace EnterpriseCourseworkWebForm
 		}
 		
 		private void detach_DepartmentCategories(DepartmentCategory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = null;
-		}
-		
-		private void attach_RegisteredStaffs(RegisteredStaff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = this;
-		}
-		
-		private void detach_RegisteredStaffs(RegisteredStaff entity)
 		{
 			this.SendPropertyChanging();
 			entity.Department = null;
@@ -1762,17 +1507,17 @@ namespace EnterpriseCourseworkWebForm
 		
 		private int _IdeaID;
 		
-		private System.Nullable<int> _CategoryID;
+		private int _CategoryID;
 		
 		private string _Title;
 		
 		private string _Description;
 		
-		private System.Nullable<int> _RegisteredStaffID;
+		private int _RegisteredStaffID;
 		
-		private System.Nullable<bool> _IsAnnonymous;
+		private bool _IsAnnonymous;
 		
-		private System.Nullable<bool> _IsHidden;
+		private bool _IsHidden;
 		
 		private EntitySet<Comment> _Comments;
 		
@@ -1792,17 +1537,17 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCreated();
     partial void OnIdeaIDChanging(int value);
     partial void OnIdeaIDChanged();
-    partial void OnCategoryIDChanging(System.Nullable<int> value);
+    partial void OnCategoryIDChanging(int value);
     partial void OnCategoryIDChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
+    partial void OnRegisteredStaffIDChanging(int value);
     partial void OnRegisteredStaffIDChanged();
-    partial void OnIsAnnonymousChanging(System.Nullable<bool> value);
+    partial void OnIsAnnonymousChanging(bool value);
     partial void OnIsAnnonymousChanged();
-    partial void OnIsHiddenChanging(System.Nullable<bool> value);
+    partial void OnIsHiddenChanging(bool value);
     partial void OnIsHiddenChanged();
     #endregion
 		
@@ -1837,8 +1582,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int")]
-		public System.Nullable<int> CategoryID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
 		{
 			get
 			{
@@ -1861,7 +1606,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Title
 		{
 			get
@@ -1881,7 +1626,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Description
 		{
 			get
@@ -1901,8 +1646,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
 		{
 			get
 			{
@@ -1925,8 +1670,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit")]
-		public System.Nullable<bool> IsAnnonymous
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit NOT NULL")]
+		public bool IsAnnonymous
 		{
 			get
 			{
@@ -1945,8 +1690,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsHidden", DbType="Bit")]
-		public System.Nullable<bool> IsHidden
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsHidden", DbType="Bit NOT NULL")]
+		public bool IsHidden
 		{
 			get
 			{
@@ -2044,7 +1789,7 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._CategoryID = default(Nullable<int>);
+						this._CategoryID = default(int);
 					}
 					this.SendPropertyChanged("Category");
 				}
@@ -2078,7 +1823,7 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._RegisteredStaffID = default(Nullable<int>);
+						this._RegisteredStaffID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
 				}
@@ -2168,8 +1913,6 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _Browser;
 		
-		private EntityRef<RegisteredStaff> _RegisteredStaff;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2186,7 +1929,6 @@ namespace EnterpriseCourseworkWebForm
 		
 		public LoginSession()
 		{
-			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
 			OnCreated();
 		}
 		
@@ -2221,10 +1963,6 @@ namespace EnterpriseCourseworkWebForm
 			{
 				if ((this._RegisteredStaffID != value))
 				{
-					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnRegisteredStaffIDChanging(value);
 					this.SendPropertyChanging();
 					this._RegisteredStaffID = value;
@@ -2274,40 +2012,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_LoginSession", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
-		public RegisteredStaff RegisteredStaff
-		{
-			get
-			{
-				return this._RegisteredStaff.Entity;
-			}
-			set
-			{
-				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._RegisteredStaff.Entity = null;
-						previousValue.LoginSessions.Remove(this);
-					}
-					this._RegisteredStaff.Entity = value;
-					if ((value != null))
-					{
-						value.LoginSessions.Add(this);
-						this._RegisteredStaffID = value.RegisteredStaffID;
-					}
-					else
-					{
-						this._RegisteredStaffID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("RegisteredStaff");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2337,11 +2041,11 @@ namespace EnterpriseCourseworkWebForm
 		
 		private int _RatingID;
 		
-		private System.Nullable<int> _IdeaID;
+		private int _IdeaID;
 		
-		private System.Nullable<int> _RegisteredStaffID;
+		private int _RegisteredStaffID;
 		
-		private System.Nullable<bool> _Vote;
+		private bool _Vote;
 		
 		private EntityRef<Idea> _Idea;
 		
@@ -2353,11 +2057,11 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCreated();
     partial void OnRatingIDChanging(int value);
     partial void OnRatingIDChanged();
-    partial void OnIdeaIDChanging(System.Nullable<int> value);
+    partial void OnIdeaIDChanging(int value);
     partial void OnIdeaIDChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
+    partial void OnRegisteredStaffIDChanging(int value);
     partial void OnRegisteredStaffIDChanged();
-    partial void OnVoteChanging(System.Nullable<bool> value);
+    partial void OnVoteChanging(bool value);
     partial void OnVoteChanged();
     #endregion
 		
@@ -2379,6 +2083,10 @@ namespace EnterpriseCourseworkWebForm
 			{
 				if ((this._RatingID != value))
 				{
+					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnRatingIDChanging(value);
 					this.SendPropertyChanging();
 					this._RatingID = value;
@@ -2388,8 +2096,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int")]
-		public System.Nullable<int> IdeaID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL")]
+		public int IdeaID
 		{
 			get
 			{
@@ -2412,8 +2120,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
 		{
 			get
 			{
@@ -2423,10 +2131,6 @@ namespace EnterpriseCourseworkWebForm
 			{
 				if ((this._RegisteredStaffID != value))
 				{
-					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnRegisteredStaffIDChanging(value);
 					this.SendPropertyChanging();
 					this._RegisteredStaffID = value;
@@ -2436,8 +2140,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vote", DbType="Bit")]
-		public System.Nullable<bool> Vote
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vote", DbType="Bit NOT NULL")]
+		public bool Vote
 		{
 			get
 			{
@@ -2483,14 +2187,14 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._IdeaID = default(Nullable<int>);
+						this._IdeaID = default(int);
 					}
 					this.SendPropertyChanged("Idea");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_RegisteredStaff", ThisKey="RatingID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
 		public RegisteredStaff RegisteredStaff
 		{
 			get
@@ -2507,17 +2211,17 @@ namespace EnterpriseCourseworkWebForm
 					if ((previousValue != null))
 					{
 						this._RegisteredStaff.Entity = null;
-						previousValue.Ratings.Remove(this);
+						previousValue.Rating = null;
 					}
 					this._RegisteredStaff.Entity = value;
 					if ((value != null))
 					{
-						value.Ratings.Add(this);
-						this._RegisteredStaffID = value.RegisteredStaffID;
+						value.Rating = this;
+						this._RatingID = value.RegisteredStaffID;
 					}
 					else
 					{
-						this._RegisteredStaffID = default(Nullable<int>);
+						this._RatingID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
 				}
@@ -2557,31 +2261,19 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _RPassword;
 		
-		private System.Nullable<int> _RoleID;
+		private int _AllStaffID;
 		
-		private System.Nullable<int> _DepartmentID;
+		private bool _IsActive;
 		
-		private System.Nullable<int> _AllStaffID;
-		
-		private System.Nullable<bool> _IsActive;
-		
-		private System.Nullable<bool> _IsEnabled;
+		private bool _IsEnabled;
 		
 		private EntitySet<Comment> _Comments;
 		
 		private EntitySet<Idea> _Ideas;
 		
-		private EntitySet<LoginSession> _LoginSessions;
-		
-		private EntitySet<Rating> _Ratings;
-		
-		private EntitySet<Report> _Reports;
+		private EntityRef<Rating> _Rating;
 		
 		private EntityRef<AllStaff> _AllStaff;
-		
-		private EntityRef<Department> _Department;
-		
-		private EntityRef<Role1> _Role1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2593,15 +2285,11 @@ namespace EnterpriseCourseworkWebForm
     partial void OnRUsernameChanged();
     partial void OnRPasswordChanging(string value);
     partial void OnRPasswordChanged();
-    partial void OnRoleIDChanging(System.Nullable<int> value);
-    partial void OnRoleIDChanged();
-    partial void OnDepartmentIDChanging(System.Nullable<int> value);
-    partial void OnDepartmentIDChanged();
-    partial void OnAllStaffIDChanging(System.Nullable<int> value);
+    partial void OnAllStaffIDChanging(int value);
     partial void OnAllStaffIDChanged();
-    partial void OnIsActiveChanging(System.Nullable<bool> value);
+    partial void OnIsActiveChanging(bool value);
     partial void OnIsActiveChanged();
-    partial void OnIsEnabledChanging(System.Nullable<bool> value);
+    partial void OnIsEnabledChanging(bool value);
     partial void OnIsEnabledChanged();
     #endregion
 		
@@ -2609,12 +2297,8 @@ namespace EnterpriseCourseworkWebForm
 		{
 			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
 			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
-			this._LoginSessions = new EntitySet<LoginSession>(new Action<LoginSession>(this.attach_LoginSessions), new Action<LoginSession>(this.detach_LoginSessions));
-			this._Ratings = new EntitySet<Rating>(new Action<Rating>(this.attach_Ratings), new Action<Rating>(this.detach_Ratings));
-			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
+			this._Rating = default(EntityRef<Rating>);
 			this._AllStaff = default(EntityRef<AllStaff>);
-			this._Department = default(EntityRef<Department>);
-			this._Role1 = default(EntityRef<Role1>);
 			OnCreated();
 		}
 		
@@ -2638,7 +2322,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RUsername", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RUsername", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string RUsername
 		{
 			get
@@ -2658,7 +2342,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RPassword", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RPassword", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string RPassword
 		{
 			get
@@ -2678,56 +2362,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int")]
-		public System.Nullable<int> RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					if (this._Role1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int")]
-		public System.Nullable<int> DepartmentID
-		{
-			get
-			{
-				return this._DepartmentID;
-			}
-			set
-			{
-				if ((this._DepartmentID != value))
-				{
-					if (this._Department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDepartmentIDChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentID = value;
-					this.SendPropertyChanged("DepartmentID");
-					this.OnDepartmentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllStaffID", DbType="Int")]
-		public System.Nullable<int> AllStaffID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllStaffID", DbType="Int NOT NULL")]
+		public int AllStaffID
 		{
 			get
 			{
@@ -2750,8 +2386,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit")]
-		public System.Nullable<bool> IsActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
 		{
 			get
 			{
@@ -2770,8 +2406,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEnabled", DbType="Bit")]
-		public System.Nullable<bool> IsEnabled
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEnabled", DbType="Bit NOT NULL")]
+		public bool IsEnabled
 		{
 			get
 			{
@@ -2816,42 +2452,32 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_LoginSession", Storage="_LoginSessions", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<LoginSession> LoginSessions
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_Rating", ThisKey="RegisteredStaffID", OtherKey="RatingID", IsUnique=true, IsForeignKey=false)]
+		public Rating Rating
 		{
 			get
 			{
-				return this._LoginSessions;
+				return this._Rating.Entity;
 			}
 			set
 			{
-				this._LoginSessions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_Ratings", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<Rating> Ratings
-		{
-			get
-			{
-				return this._Ratings;
-			}
-			set
-			{
-				this._Ratings.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Report", Storage="_Reports", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<Report> Reports
-		{
-			get
-			{
-				return this._Reports;
-			}
-			set
-			{
-				this._Reports.Assign(value);
+				Rating previousValue = this._Rating.Entity;
+				if (((previousValue != value) 
+							|| (this._Rating.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Rating.Entity = null;
+						previousValue.RegisteredStaff = null;
+					}
+					this._Rating.Entity = value;
+					if ((value != null))
+					{
+						value.RegisteredStaff = this;
+					}
+					this.SendPropertyChanged("Rating");
+				}
 			}
 		}
 		
@@ -2882,77 +2508,9 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._AllStaffID = default(Nullable<int>);
+						this._AllStaffID = default(int);
 					}
 					this.SendPropertyChanged("AllStaff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_RegisteredStaff", Storage="_Department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
-		public Department Department
-		{
-			get
-			{
-				return this._Department.Entity;
-			}
-			set
-			{
-				Department previousValue = this._Department.Entity;
-				if (((previousValue != value) 
-							|| (this._Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Department.Entity = null;
-						previousValue.RegisteredStaffs.Remove(this);
-					}
-					this._Department.Entity = value;
-					if ((value != null))
-					{
-						value.RegisteredStaffs.Add(this);
-						this._DepartmentID = value.DepartmentID;
-					}
-					else
-					{
-						this._DepartmentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Department");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role1_RegisteredStaff", Storage="_Role1", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-		public Role1 Role1
-		{
-			get
-			{
-				return this._Role1.Entity;
-			}
-			set
-			{
-				Role1 previousValue = this._Role1.Entity;
-				if (((previousValue != value) 
-							|| (this._Role1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Role1.Entity = null;
-						previousValue.RegisteredStaffs.Remove(this);
-					}
-					this._Role1.Entity = value;
-					if ((value != null))
-					{
-						value.RegisteredStaffs.Add(this);
-						this._RoleID = value.RoleID;
-					}
-					else
-					{
-						this._RoleID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Role1");
 				}
 			}
 		}
@@ -3000,42 +2558,6 @@ namespace EnterpriseCourseworkWebForm
 			this.SendPropertyChanging();
 			entity.RegisteredStaff = null;
 		}
-		
-		private void attach_LoginSessions(LoginSession entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = this;
-		}
-		
-		private void detach_LoginSessions(LoginSession entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = null;
-		}
-		
-		private void attach_Ratings(Rating entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = this;
-		}
-		
-		private void detach_Ratings(Rating entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = null;
-		}
-		
-		private void attach_Reports(Report entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = this;
-		}
-		
-		private void detach_Reports(Report entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report")]
@@ -3054,8 +2576,6 @@ namespace EnterpriseCourseworkWebForm
 		
 		private EntityRef<Idea> _Idea;
 		
-		private EntityRef<RegisteredStaff> _RegisteredStaff;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3073,7 +2593,6 @@ namespace EnterpriseCourseworkWebForm
 		public Report()
 		{
 			this._Idea = default(EntityRef<Idea>);
-			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
 			OnCreated();
 		}
 		
@@ -3108,10 +2627,6 @@ namespace EnterpriseCourseworkWebForm
 			{
 				if ((this._RegisteredStaffID != value))
 				{
-					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnRegisteredStaffIDChanging(value);
 					this.SendPropertyChanging();
 					this._RegisteredStaffID = value;
@@ -3199,40 +2714,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Report", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
-		public RegisteredStaff RegisteredStaff
-		{
-			get
-			{
-				return this._RegisteredStaff.Entity;
-			}
-			set
-			{
-				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._RegisteredStaff.Entity = null;
-						previousValue.Reports.Remove(this);
-					}
-					this._RegisteredStaff.Entity = value;
-					if ((value != null))
-					{
-						value.Reports.Add(this);
-						this._RegisteredStaffID = value.RegisteredStaffID;
-					}
-					else
-					{
-						this._RegisteredStaffID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("RegisteredStaff");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3255,7 +2736,7 @@ namespace EnterpriseCourseworkWebForm
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
-	public partial class Role1 : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -3264,7 +2745,7 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _RoleName;
 		
-		private EntitySet<RegisteredStaff> _RegisteredStaffs;
+		private EntitySet<AllStaff> _AllStaffs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3276,9 +2757,9 @@ namespace EnterpriseCourseworkWebForm
     partial void OnRoleNameChanged();
     #endregion
 		
-		public Role1()
+		public Role()
 		{
-			this._RegisteredStaffs = new EntitySet<RegisteredStaff>(new Action<RegisteredStaff>(this.attach_RegisteredStaffs), new Action<RegisteredStaff>(this.detach_RegisteredStaffs));
+			this._AllStaffs = new EntitySet<AllStaff>(new Action<AllStaff>(this.attach_AllStaffs), new Action<AllStaff>(this.detach_AllStaffs));
 			OnCreated();
 		}
 		
@@ -3322,16 +2803,16 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role1_RegisteredStaff", Storage="_RegisteredStaffs", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<RegisteredStaff> RegisteredStaffs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role1_AllStaff", Storage="_AllStaffs", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<AllStaff> AllStaffs
 		{
 			get
 			{
-				return this._RegisteredStaffs;
+				return this._AllStaffs;
 			}
 			set
 			{
-				this._RegisteredStaffs.Assign(value);
+				this._AllStaffs.Assign(value);
 			}
 		}
 		
@@ -3355,16 +2836,16 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		private void attach_RegisteredStaffs(RegisteredStaff entity)
+		private void attach_AllStaffs(AllStaff entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role1 = this;
+			entity.Role = this;
 		}
 		
-		private void detach_RegisteredStaffs(RegisteredStaff entity)
+		private void detach_AllStaffs(AllStaff entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role1 = null;
+			entity.Role = null;
 		}
 	}
 }
