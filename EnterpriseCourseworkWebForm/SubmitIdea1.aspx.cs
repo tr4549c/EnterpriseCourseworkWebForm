@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace EnterpriseCourseworkWebForm
 {
-    public partial class HomePage2 : System.Web.UI.Page
+    public partial class SubmitIdea1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

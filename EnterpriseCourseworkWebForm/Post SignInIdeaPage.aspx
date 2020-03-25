@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Post SignInIdeaPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.SubmitIdea2" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -144,7 +145,7 @@ form.example::after {
 }
 
 .search-button {
-    background-color: #606EB2;
+    background-color: #060360;
     float: right;
     width: 55px;
     height: 46px;
@@ -174,7 +175,7 @@ form.example::after {
 
 .div2 {
     background-color: #606EB2;
-    height: 500px;
+    height: 1100px;
     max-width: 100%;
     float: none;
     margin: auto auto auto auto;
@@ -202,7 +203,6 @@ h3 {
     }
 .h2 {
     font-family: 'Work Sans', sans-serif;
-
     /*font-size: 25px;*/
     color: #060360;
     float: left;
@@ -267,7 +267,21 @@ h3 {
     text-align: left;
 }*/
 
-
+.IdeaTextLable{
+    font-family: Antonio;
+   padding-left:10px;
+   padding-bottom:10px;
+    font-size: 30px;
+    color:#fff;
+    text-align: left;
+}
+.IdeaTextLable1{
+    font-family: 'Work Sans';
+   padding-left:5px;
+    font-size: 14px;
+    color:#060360;
+    text-align: left;
+}
 
 
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
@@ -295,9 +309,72 @@ h3 {
     font-weight: 400;
         color: #fff;
 }
-.connect-with-us{
+.gre-social-main{
     color:white;
 }
+.useful-links{
+
+}
+.dropdown1{
+     color:black;
+     min-width:98%;
+     background-color:white;
+        display: block;
+    float: none;
+    
+    height:auto;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right:10px;
+    margin-top: 7px;
+    height: 60px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+}
+.dropdown2{
+     color:black;
+     background-color:white;
+    display: block;
+    float: right;
+    width:44%;
+    margin-top:-32px;
+   
+    margin-left:5px;
+    font-size: 12px;
+    margin-right:5px;
+    margin-left: 5px;
+   /* margin-right:10px;
+    margin-top: 7px;
+    height: 60px;
+    */
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+    max-height:32px;
+}
+.search-container2 {
+    display: block;
+    float: left;
+    min-width: 30%;
+    height: 32px;
+    font-size: 15px;
+    margin-top: 8px;
+   
+    margin-left:5px;
+    width: 45%;
+}
+.search-button2 {
+    background-color: #060360;
+    float: left;
+    width: 32px;
+    height: 32px;
+    border: none;
+    margin-top:8px;
+    margin-right:45%;
+    color:white;
+}
+
+
+
     .ThumbsDwnBtn {}
 
 </style>
@@ -329,27 +406,44 @@ h3 {
   <input type="text" placeholder="Search.." name="search">
   <button type="submit"><i class="fa fa-search"></i></button> OLD code--%>
 
-        <%--<input class="search-container" type="text" placeholder="Search" name="search" />--%>
+        <%--<input CssClass="search-container" type="text" placeholder="Search" name="search" />--%>
         <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
-        <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
+        <%--<asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />--%>
+        <asp:ImageButton ID="ImageButtonSrch" CssClass="search-button" runat="server" ImageUrl="~/Images/searchbutton.jpg" />
 <%--</form>--%>
-      <h2 style="color: #060360; font-family:Antonio; padding-left:0.5%">HOME</h2>
+      
       <%--<p>Chania is a city on the island of Crete.</p>--%>
      
      
-            <div class="row">
-                <div class="columnleft" style="background-color: aquamarine;"> <asp:Image ID="Image1" runat="server" Height="181px" ImageAlign="Middle" ImageUrl="~/Images/grePic.jpg" Width="780px" /></div>
-
-                <div class="columnright" style="background-color: #606EB2;">
-                    <asp:Label ID="Label7" runat="server" style="color: #f1f1f1; font-family:'Work Sans'; padding-left:0.5%; padding-top:0.5%" Text="Lfbkbkfbbdbhfdfhbhbsbhfbhfbhfbb jvnbhvbv vbbbv hbchbvh"></asp:Label></div>
-
-                <div class="row">
-                <div class="columnleft" style="background-color: #00C499;"> <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%">News</h2> </div>
-
-                <div class="columnright" style="background-color: #060360;"><h2 style="color: #00C499; float:left; font-family:Antonio; padding-left:3%">Updates</h2></div>
-                 </div>
+            
 
                  <div class="div2">
+
+                <asp:Label ID="Label7" runat="server" class="IdeaTextLable" Text =" <b>Ideas</b>"></asp:Label><br /><br />
+                <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Text =" Please select a preffered department:"></asp:Label>
+             <br />
+             <asp:DropDownList ID="DropDownList1" runat="server" Height="38px" class="dropdown1">
+             </asp:DropDownList><br />
+             <asp:Label ID="Label9" runat="server" class="IdeaTextLable1" Text =" Filter By:"></asp:Label>
+             <br />
+           <%--  <input class="search-container" type="text" placeholder="Search for tags.." name="search" />
+             <input class="search-button" type="button" > <i class="fa fa-search"></i> <input/>
+             --%> 
+             <%--<input class="search-container2" type="text" placeholder="Search for tags.." name="search" />--%>
+             <asp:TextBox ID="searchContainer2" CssClass="search-container2" placeholder="Search..." runat="server"></asp:TextBox>
+        
+             <%-- <asp:Button ID="Button1" CssClass="search-button" runat="server"  />--%>
+             <%--<button class="search-button2" id="srcbtn"><i class="fa fa-search"></i></button>--%>
+             <%--<asp:Button ID="srcbtn" CssClass="search-button2" runat="server"  class="fa fa-search" Text="Button" />--%>
+            <asp:ImageButton ID="ImageButtonSearch2" CssClass="search-button2" runat="server" ImageUrl="~/Images/searchbutton.jpg" />
+
+             <asp:DropDownList ID="DropDownList2" runat="server" Height="38px" class="dropdown2">
+             </asp:DropDownList>
+             <br /><br /><br />
+             <asp:Button ID="Button2" class="button11" runat="server" Text="Submit an Idea" />
+            <br /><br />
+
+
                     <h3><b>Most Recent Ideas:</b> </h3>
                     
                     <br />
@@ -408,11 +502,43 @@ h3 {
                               <asp:Label ID="Label3" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label4" runat="server" Text="No"></asp:Label>
                          </div>
+                          </asp:Panel>
+
+                         <asp:Panel ID="Panel4" CssClass="IdeaContainer"  runat="server" >
+                          
+                                <asp:TextBox ID="TextBox4" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton5" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton6" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton7" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink4" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton8" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label10" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label11" runat="server" Text="No"></asp:Label>
+                         </div>
                          
-
-
-
                      </asp:Panel>
+
+                         <asp:Panel ID="Panel5" CssClass="IdeaContainer"  runat="server" >
+                          
+                                <asp:TextBox ID="TextBox5" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton7" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton8" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton9" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink5" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton10" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label12" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label13" runat="server" Text="No"></asp:Label>
+                         </div>
+                         
+                     </asp:Panel>
+
+
+
+                     
                      <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
                      <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
 
@@ -431,12 +557,12 @@ h3 {
  <h3>Useful links</h3> 
 <div class="list-wrapper">
  <ul> 
-     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
-     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
-     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
-     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
+     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" style="color:white" target="_blank">Accessibility Statement</a></li> 
+     <li><a href="https://servicestatus.gre.ac.uk/" style="color:white" target="_blank">IT Service Status</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library" style="color:white" target="_blank">IT and Library Services</a></li>
+     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" style="color:white" target="_blank">Mobile App</a></li> 
+     <li><a href="https://www.gre.ac.uk/contact" style="color:white" target="_blank">Contact Us</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" style="color:white" target="_blank">Need more help?</a></li> 
 
  </ul> 
 </div> </div>
@@ -444,32 +570,32 @@ h3 {
         <h3>Connect with us</h3> 
         <div class="gre-social-main"> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
+                <a class="button" href="https://facebook.com/uniofgreenwich" style="color:white" target="_blank">
                     <i class="fa fa-facebook-official"></i>
                     <span class="sr-only">Facebook page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
+                <a class="button" href="https://twitter.com/UniofGreenwich" style="color:white; display:inline" target="_blank">
                     <i class="fa fa-twitter"></i>
                     <span class="sr-only">Twitter feed</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
+                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" style="color:white; display:inline" target="_blank">
                     <i class="fa fa-youtube-play"></i>
                     <span class="sr-only">YouTube channel</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
+                <a class="button" href="https://instagram.com/uniofgreenwich/" style="color:white" target="_blank">
                     <i class="fa fa-instagram"></i>
-                    <span class="sr-only">Instagram page</span></a> 
+                    <span class="sr-only">Instagram page</span></a> </div>
 
-            </div> <div class="gre-social-button"> 
-                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
+            <div class="gre-social-button"> 
+                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" style="color:white" target="_blank">
                     <i class="fa fa-linkedin"></i>
                     <span class="sr-only">LinkedIn page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
+                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" style="color:white; height: 80px; width:80px"  target="_blank">
                     <i class="fa fa-snapchat-ghost"></i>
-                    <span class="sr-only">Snapchat page</span></a> 
+                    <span class="sr-only">Snapchat page</span></a>  </div> 
 
-            </div> 
+           
 
         </div> 
 

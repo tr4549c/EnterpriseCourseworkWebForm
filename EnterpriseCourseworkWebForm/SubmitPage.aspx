@@ -65,7 +65,7 @@ background-color: #2E2E2E;
 }
 .aside1{
     background-color: #606EB2;
-  height:850px;
+  height:1030px;
   color: #ffffff;
   text-align: left;
   font-size: 14px;
@@ -210,7 +210,7 @@ form.example::after {
 
 .div2 {
     background-color: #606EB2;
-    height: 400px;
+    height: 1080px;
     max-width: 100%;
     float: none;
     margin: auto auto auto auto;
@@ -254,7 +254,7 @@ h3 {
     font-family: Antonio;
    padding-left:10px;
    padding-bottom:10px;
-    font-size: 20px;
+    font-size: 30px;
     color:#fff;
     text-align: left;
 }
@@ -292,11 +292,19 @@ h3 {
     margin-top:10px;
 }
 .IdeaC{
-    background-color: #ffffff;
+    /*background-color: #ffffff;
     margin-top: 13px;
     margin-left: 5px;
     Height: 78px;
-    width:98%;
+    width:98%;*/
+     background-color: #ffffff;
+    margin-top: 13px;
+    margin-left: 10px;
+    Height: 130px;
+    text-align:left;
+    padding-top:5px;
+    padding-left:5px;
+    padding-bottom:5px;
 }
 /* ///////////////////////////////////////////  */
 
@@ -402,7 +410,8 @@ h3 {
 
  <div class="col">
     <div class="aside">
-         <div class="aside1">
+    
+         <div class="div2">
              <br /><br />
         <asp:Label ID="Label1" runat="server" class="IdeaTextLable" Text =" <b>Ideas</b>"></asp:Label><br /><br />
         <asp:Label ID="Label2" runat="server" class="IdeaTextLable1" Text =" Please select a preffered department:"></asp:Label>
@@ -437,6 +446,26 @@ h3 {
                     </div>
                     </section>
              </asp:Panel>
+
+             <asp:Panel ID="Panel6" CssClass="IdeaContainer" runat="server" >
+                         <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+               <div> 
+               </div>
+                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
+&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
+
+                          <div class="bottomDivIdeaLeft"> 
+                              <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
+                              <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>
+                         </div>
+                     </asp:Panel>  
+
              <asp:Panel ID="Panel2" CssClass="IdeaC" runat="server" >
                   <section class="rating-area align-center">
                     <div >
