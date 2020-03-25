@@ -367,7 +367,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                           
                       <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
                         <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
-                        <br /><br />
+                         8<br /><br />
                         
                         <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
                                
