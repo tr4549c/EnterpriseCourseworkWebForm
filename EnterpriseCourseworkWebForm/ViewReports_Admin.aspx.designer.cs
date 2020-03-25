@@ -10,7 +10,7 @@
 namespace EnterpriseCourseworkWebForm {
     
     
-    public partial class ReportPage {
+    public partial class ViewReports_Admin {
         
         /// <summary>
         /// form1 control.
@@ -40,21 +40,21 @@ namespace EnterpriseCourseworkWebForm {
         protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
-        /// TextBoxReportInput control.
+        /// grdPivot control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxReportInput;
+        protected global::System.Web.UI.WebControls.GridView grdPivot;
         
         /// <summary>
-        /// Button2 control.
+        /// DataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.LinqDataSource DataSource;
     }
 }
