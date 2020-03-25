@@ -255,7 +255,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous)
+        static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
             var db = Connection();
 
@@ -265,7 +265,8 @@ namespace EnterpriseCourseworkWebForm
                 Title = title,
                 Description = description,
                 RegisteredStaffID = staffID,
-                IsAnnonymous = IsAnnonymous
+                IsAnnonymous = IsAnnonymous,
+                IsHidden = IsHidden
             };
 
             db.Ideas.InsertOnSubmit(newIdea);
