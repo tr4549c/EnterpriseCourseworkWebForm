@@ -1,14 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SubmitIdea1.aspx.cs" Inherits="EnterpriseCourseworkWebForm.SubmitIdea1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ReportPage" %>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link href="FontAwsm/css/all.css" rel="stylesheet" />
-    <!--Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r  //copy to package manager-->
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NOT NEEDED ANYMORE I THINK-->
-    <link href="Content/font-awesome.css" rel="stylesheet" />
-    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Report </title>
+
 <style>
 body {margin: 0;}
 html {
@@ -320,13 +317,14 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     .ThumbsDwnBtn {}
 
 </style>
-</style>
+
+
+
 </head>
 <body>
-
     <form id="form1" runat="server">
-
-<ul class="topnav">
+      
+        <ul class="topnav">
   <li><a href="#home">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
@@ -345,129 +343,48 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
  <div class="col-3 col-s-12">
     <div class="aside">
 
-        <%--<form class="example" action="/action_page.php">
-  <input type="text" placeholder="Search.." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button> OLD code--%>
 
-        <%--<input class="search-container" type="text" placeholder="Search" name="search" />--%>
-        <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
+
+         <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
         <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
-<%--</form>--%>
       <h2 style="color: #060360; font-family:Antonio; padding-left:0.5%">HOME</h2>
-      <%--<p>Chania is a city on the island of Crete.</p>--%>
-     
-     
-            
+  
 
-                 <div class="div2">
+     <div class="div2">
                     <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >
                          
-               
-                         <%--<asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>--%>
-                          
-                      <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
-                        <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
+                    
                         <br /><br />
                         
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Write a report"></asp:Label>
                                
                          <br /><br />
-                         <%--<asp:TextBox ID="TextBoxIdeaInput" runat="server" BackColor="White" CssClass="SubmitIdeaTextBox" Font-Italic="True" Font-Names="Work Sans" ForeColor="#060360" TextMode="MultiLine"></asp:TextBox>--%>
-                         <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
+                       
+                         <asp:TextBox ID="TextBoxReportInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
                         <br />
-                        <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional)- Uppload Supporting Evidence:"></asp:Label>
+                        
                         <br />
-                        <br />
-                        <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" Width="399px" BorderColor="White" CssClass="FileUpploadIdea" />
-                        <%--<asp:CheckBox ID="CheckBox1" runat="server" />--%>
+                       
                         <br /><br />
                         <br />
                         <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
+                       
 
                         <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
 
                         </div>
                         
-
                      </asp:Panel>        
-                    
-                    
-                     
-
-
-
-                     
-                     
-           
-                     <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
-                     
+                                   
 
                    </div>
 
-            </div>
 
-    </div>
-  
+               </div>
 
-<div class="footer">
-  
-    <div class="containerFooter">
- <div id="useful-links"> 
- <h3>Useful links</h3> 
-<div class="list-wrapper">
- <ul> 
-     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
-     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
-     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
-     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
-
- </ul> 
-</div> </div>
-    <div id="connect-with-us"> 
-        <h3>Connect with us</h3> 
-        <div class="gre-social-main"> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
-                    <i class="fa fa-facebook-official"></i>
-                    <span class="sr-only">Facebook page</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
-                    <i class="fa fa-twitter"></i>
-                    <span class="sr-only">Twitter feed</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
-                    <i class="fa fa-youtube-play"></i>
-                    <span class="sr-only">YouTube channel</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
-                    <i class="fa fa-instagram"></i>
-                    <span class="sr-only">Instagram page</span></a> 
-
-            </div> <div class="gre-social-button"> 
-                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
-                    <i class="fa fa-linkedin"></i>
-                    <span class="sr-only">LinkedIn page</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
-                    <i class="fa fa-snapchat-ghost"></i>
-                    <span class="sr-only">Snapchat page</span></a> 
-
-            </div> 
-
-        </div> 
-
-    </div>
-    </div>
+    </div>       
 
 
-</div>
-  
     </form>
-  
 </body>
-
 </html>
-

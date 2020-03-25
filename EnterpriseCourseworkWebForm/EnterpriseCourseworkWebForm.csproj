@@ -148,6 +148,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Images\grePic.jpg" />
     <Content Include="Images\searchbuttonWhite.jpg" />
+    <Content Include="ReportPage.aspx" />
     <Content Include="SubmitIdea1.aspx" />
     <Content Include="Post SignInIdeaPage.aspx" />
     <Content Include="SubmitPage.aspx" />
@@ -256,6 +257,13 @@
       <DependentUpon>PreSignUpIdeasPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportPage.aspx.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportPage.aspx.designer.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SubmitIdea1.aspx.cs">
       <DependentUpon>SubmitIdea1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
