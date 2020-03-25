@@ -373,7 +373,9 @@ h3 {
     color:white;
 }
 
+.list-wrapper{
 
+}
 
     .ThumbsDwnBtn {}
 
@@ -548,13 +550,13 @@ h3 {
             </div>
 
     </div>
-  </div>
+ 
 
 <div class="footer">
   
     <div class="containerFooter">
  <div id="useful-links"> 
- <h3>Useful links</h3> 
+ <h4>Useful links</h4> 
 <div class="list-wrapper">
  <ul> 
      <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" style="color:white" target="_blank">Accessibility Statement</a></li> 
@@ -567,7 +569,7 @@ h3 {
  </ul> 
 </div> </div>
     <div id="connect-with-us"> 
-        <h3>Connect with us</h3> 
+        <h4>Connect with us</h4> 
         <div class="gre-social-main"> 
             <div class="gre-social-button"> 
                 <a class="button" href="https://facebook.com/uniofgreenwich" style="color:white" target="_blank">
@@ -601,24 +603,6 @@ h3 {
 
     </div>
     </div>
-<%--<%--    <div class="row">
-        
-  <div class="column">
-    <!--<h2>Column 1</h2>-->
-
-    <i class="fa fa-university"></i>
-  </div>
-  <div class="column">
-    <h2>Column 2</h2>
-    <p>Some text..</p>
-  </div>
-  <div class="column">
-    <h2>Location</h2>
-    <p>Some text..</p>
-  </div>
-</div>--%>
-
-
 </div>
   
     </form>

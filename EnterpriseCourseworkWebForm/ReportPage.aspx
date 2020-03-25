@@ -346,12 +346,12 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
      <div class="div2">
                     <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >
                          
-                    
-                        <br /><br />
+                    <h2 style="color: #060360; font-family:Antonio; float:left; padding-left:2.5%">Reports</h2>
+                        <br /><br /><br /><br /><br />
                         
                         <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Write a report"></asp:Label>
                                
-                         <br /><br />
+                         <br /><br /><br />
                        
                          <asp:TextBox ID="TextBoxReportInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
                         <br />
@@ -376,62 +376,63 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                </div>
 
     </div>       
-<div class="footer">
+
+  
+ <div class="footer">
   
     <div class="containerFooter">
  <div id="useful-links"> 
- <h3>Useful links</h3> 
+ <h4>Useful links</h4> 
 <div class="list-wrapper">
  <ul> 
-     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
-     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
-     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
-     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
+     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" style="color:white" target="_blank">Accessibility Statement</a></li> 
+     <li><a href="https://servicestatus.gre.ac.uk/" style="color:white" target="_blank">IT Service Status</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library" style="color:white" target="_blank">IT and Library Services</a></li>
+     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" style="color:white" target="_blank">Mobile App</a></li> 
+     <li><a href="https://www.gre.ac.uk/contact" style="color:white" target="_blank">Contact Us</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" style="color:white" target="_blank">Need more help?</a></li> 
 
  </ul> 
 </div> </div>
     <div id="connect-with-us"> 
-        <h3>Connect with us</h3> 
+        <h4>Connect with us</h4> 
         <div class="gre-social-main"> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
+                <a class="button" href="https://facebook.com/uniofgreenwich" style="color:white" target="_blank">
                     <i class="fa fa-facebook-official"></i>
                     <span class="sr-only">Facebook page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
+                <a class="button" href="https://twitter.com/UniofGreenwich" style="color:white; display:inline" target="_blank">
                     <i class="fa fa-twitter"></i>
                     <span class="sr-only">Twitter feed</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
+                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" style="color:white; display:inline" target="_blank">
                     <i class="fa fa-youtube-play"></i>
                     <span class="sr-only">YouTube channel</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
+                <a class="button" href="https://instagram.com/uniofgreenwich/" style="color:white" target="_blank">
                     <i class="fa fa-instagram"></i>
-                    <span class="sr-only">Instagram page</span></a> 
+                    <span class="sr-only">Instagram page</span></a> </div>
 
-            </div> <div class="gre-social-button"> 
-                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
+            <div class="gre-social-button"> 
+                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" style="color:white" target="_blank">
                     <i class="fa fa-linkedin"></i>
                     <span class="sr-only">LinkedIn page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
+                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" style="color:white; height: 80px; width:80px"  target="_blank">
                     <i class="fa fa-snapchat-ghost"></i>
-                    <span class="sr-only">Snapchat page</span></a> 
+                    <span class="sr-only">Snapchat page</span></a>  </div> 
 
-            </div> 
+           
 
         </div> 
 
     </div>
     </div>
-
-
 </div>
   
-
     </form>
+  
 </body>
+
 </html>
