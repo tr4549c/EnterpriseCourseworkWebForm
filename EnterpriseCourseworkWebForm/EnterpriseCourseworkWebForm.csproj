@@ -189,6 +189,7 @@
     <Content Include="Stylesheets\PreSignUpIdeasPageStyleSheet.css" />
     <Content Include="TermsAndCond.aspx" />
     <Content Include="TestWebform.aspx" />
+    <Content Include="ViewReports_Admin.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -268,6 +269,13 @@
     </Compile>
     <Compile Include="TestWebform.aspx.designer.cs">
       <DependentUpon>TestWebform.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewReports_Admin.aspx.cs">
+      <DependentUpon>ViewReports_Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewReports_Admin.aspx.designer.cs">
+      <DependentUpon>ViewReports_Admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

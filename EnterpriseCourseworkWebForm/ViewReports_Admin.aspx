@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ReportPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewReports_Admin.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ViewReports_Admin" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Report </title>
+    <title></title>
 
-<style>
+    <style>
 body {margin: 0;}
 html {
   font-family: "Work Sans";
@@ -316,19 +316,21 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 }
     .ThumbsDwnBtn {}
 
+    .datagridview{
+        color: black; 
+        width: 80%;
+        margin-left: 10%;
+    }
 </style>
-
-
 
 </head>
 <body>
     <form id="form1" runat="server">
-      
+        
         <ul class="topnav">
   <li><a href="#home">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
-  <li class="right"><a href="#logIn">Login</a></li>
 </ul>
 
  
@@ -343,94 +345,23 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
  <div class="col-3 col-s-12">
     <div class="aside">
 
-     <div class="div2">
-                    <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >
-                         
-                    
-                        <br /><br />
-                        
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Write a report"></asp:Label>
-                               
-                         <br /><br />
-                       
-                         <asp:TextBox ID="TextBoxReportInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
-                        <br />
-                        
-                        <br />
-                       
-                        <br /><br />
-                        <br />
-                        <div class="row">
-                       
+           <div class="div2">
+                    <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >           
 
-                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text ="Reports"></asp:Label><br /><br />
 
-                        </div>
-                        
-                     </asp:Panel>        
-                                   
-
-                   </div>
-
-
+                    <asp:GridView ID="grdPivot" runat="server" class="datagridview" DataSourceID="DataSource" RowHeaderColumn="Change status" OnSelectedIndexChanged="grdPivot_SelectedIndexChanged" OnRowCommand="grdPivot_RowCommand">
+                        <Columns>
+                            <asp:ButtonField Text="Resolve" commandname="Resolve" Visible="True"/>                              
+                               </Columns>
+                </asp:GridView>
+                         <asp:LinqDataSource   ID="DataSource" runat="server" ContextTypeName="EnterpriseCourseworkWebForm.DataClassesUniversityDataContext" TableName="Reports"></asp:LinqDataSource>
+                        </asp:Panel>
                </div>
 
-    </div>       
-<div class="footer">
-  
-    <div class="containerFooter">
- <div id="useful-links"> 
- <h3>Useful links</h3> 
-<div class="list-wrapper">
- <ul> 
-     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
-     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
-     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
-     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
-
- </ul> 
-</div> </div>
-    <div id="connect-with-us"> 
-        <h3>Connect with us</h3> 
-        <div class="gre-social-main"> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
-                    <i class="fa fa-facebook-official"></i>
-                    <span class="sr-only">Facebook page</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
-                    <i class="fa fa-twitter"></i>
-                    <span class="sr-only">Twitter feed</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
-                    <i class="fa fa-youtube-play"></i>
-                    <span class="sr-only">YouTube channel</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
-                    <i class="fa fa-instagram"></i>
-                    <span class="sr-only">Instagram page</span></a> 
-
-            </div> <div class="gre-social-button"> 
-                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
-                    <i class="fa fa-linkedin"></i>
-                    <span class="sr-only">LinkedIn page</span></a> </div> 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
-                    <i class="fa fa-snapchat-ghost"></i>
-                    <span class="sr-only">Snapchat page</span></a> 
-
-            </div> 
-
-        </div> 
-
-    </div>
-    </div>
 
 
-</div>
-  
+
 
     </form>
 </body>
