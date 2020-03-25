@@ -1,9 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SubmitIdea1.aspx.cs" Inherits="EnterpriseCourseworkWebForm.SubmitIdea1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="EnterpriseCourseworkWebForm.WebForm2" %>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <link href="FontAwsm/css/all.css" rel="stylesheet" />
     <!--Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r  //copy to package manager-->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NOT NEEDED ANYMORE I THINK-->
@@ -176,13 +178,12 @@ form.example::after {
 
 .div2 {
     background-color: #606EB2;
-    height: 800px;
+    height: 500px;
     max-width: 100%;
     float: none;
     margin: auto auto auto auto;
     position: center;
     padding-right: 10px;
-    padding-top:10px;
 }
 
 
@@ -224,31 +225,42 @@ h3 {
     font-family: 'Work Sans', sans-serif;
     font-size: 20px;
 }
-.IdeaSubmitPanel{
-    background-color: #F2F2F2;
+.IdeaContainer{
+    background-color: #ffffff;
+    margin-top: 13px;
     margin-left: 10px;
-    Height: 500px;
+    Height: 130px;
     text-align:left;
-    padding-top:5%;
+    padding-top:5px;
     padding-left:5px;
     padding-bottom:5px;
 }
 
 .TextArea {
-        width:99%;
-        height:auto;
+        width:87%;
+        height:78%;
     }
-.IdeaTextLable1{
+.IdeaTextLable{
     font-family: 'Work Sans', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     color:#060360;
     text-align: left;
 }
-.IdeaTextLableH2{
-padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding-left:3%; color: #060360;
-
+.bottomDivIdeaLeft{
+     Height:15%;
+     width:99%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
 }
 
+.bottomDivIdeaRight{
+     Height:15%;
+     width:12%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+}
 
 /*.ThumbsUpLable{
     font-family: 'Work Sans', sans-serif;
@@ -258,8 +270,6 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     margin-bottom: 5%;
     text-align: left;
 }*/
-
-
 
 
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
@@ -287,40 +297,12 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     font-weight: 400;
         color: #fff;
 }
-.btnSubmitIdea{
-  background-color: #060360;
-  color: white;
-  float:right;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 20%;
-  opacity: 0.9;
-  text-align:center;
-  font-family:'Work Sans';
- font-weight:bold;
- margin-right:3%;
- margin-bottom:5%;
-}
-.CheckBoxIdea{
-    font-family:'Work Sans';
-    font-size: 18px;
-    text-align :Right;
-    padding-left:35%;
-    color:#060360;
-}
-
-
-.FileUpploadIdea{
-    margin-left:4%;
-}
 .connect-with-us{
     color:white;
 }
     .ThumbsDwnBtn {}
 
 </style>
-
 </head>
 <body>
 
@@ -357,58 +339,92 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
       <%--<p>Chania is a city on the island of Crete.</p>--%>
      
      
-            
+            <div class="row">
+                <div class="columnleft" style="background-color: aquamarine;"> <asp:Image ID="Image1" runat="server" Height="181px" ImageAlign="Middle" ImageUrl="~/Images/grePic.jpg" Width="780px" /></div>
+
+                <div class="columnright" style="background-color: #606EB2;">
+                    <asp:Label ID="Label7" runat="server" style="color: #f1f1f1; font-family:'Work Sans'; padding-left:0.5%; padding-top:0.5%" Text="Lfbkbkfbbdbhfdfhbhbsbhfbhfbhfbb jvnbhvbv vbbbv hbchbvh"></asp:Label></div>
+
+                <div class="row">
+                <div class="columnleft" style="background-color: #00C499;"> <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%">News</h2> </div>
+
+                <div class="columnright" style="background-color: #060360;"><h2 style="color: #00C499; float:left; font-family:Antonio; padding-left:3%">Updates</h2></div>
+                 </div>
 
                  <div class="div2">
-                    <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >
-                         
-               
-                         <%--<asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>--%>
+                    <h3><b>Most Recent Ideas:</b> </h3>
+                    
+                    <br />
+                    <br />
+                     
+
+
+
+                     
+                     
+           <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
+                         <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+               <div> 
+               </div>
+                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
+&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
+
+                          <div class="bottomDivIdeaLeft"> 
+                              <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
+                              <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>
+                         </div>
+                     </asp:Panel>         
+                     
+                     <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
                           
-                      <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
-                        <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
-                         8<br /><br />
-                        
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
-                               
-                         <br /><br />
-                         <%--<asp:TextBox ID="TextBoxIdeaInput" runat="server" BackColor="White" CssClass="SubmitIdeaTextBox" Font-Italic="True" Font-Names="Work Sans" ForeColor="#060360" TextMode="MultiLine"></asp:TextBox>--%>
-                         <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
-                        <br />
-                        <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional)- Uppload Supporting Evidence:"></asp:Label>
-                        <br />
-                        <br />
-                        <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" Width="399px" BorderColor="White" CssClass="FileUpploadIdea" />
-                        <%--<asp:CheckBox ID="CheckBox1" runat="server" />--%>
-                        <br /><br />
-                        <br />
-                        <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
-
-                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
-
-                        </div>
+                                <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton1" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton1" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink1" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton5" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label1" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label2" runat="server" Text="No"></asp:Label>
+                         </div>
+                         
+                     </asp:Panel>
+                     <asp:Panel ID="Panel3" CssClass="IdeaContainer" runat="server" >
                         
 
-                     </asp:Panel>        
-                    
-                    
+                         <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server"></asp:TextBox>
+                                &nbsp;<asp:ImageButton ID="ImageButton3" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
+                                <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
                      
+                          <div class="bottomDivIdeaLeft"> 
+                               <asp:LinkButton ID="LinkButton3" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
+                              <asp:HyperLink ID="HyperLink3" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
+                              <asp:LinkButton ID="LinkButton6" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label3" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="Label4" runat="server" Text="No"></asp:Label>
+                         </div>
+                         
 
 
 
-                     
-                     
-           
+                     </asp:Panel>
                      <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
-                     
+                     <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
+
 
                    </div>
 
             </div>
 
     </div>
-  
+  </div>
 
 <div class="footer">
   
@@ -461,6 +477,22 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 
     </div>
     </div>
+<%--<%--    <div class="row">
+        
+  <div class="column">
+    <!--<h2>Column 1</h2>-->
+
+    <i class="fa fa-university"></i>
+  </div>
+  <div class="column">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+  </div>
+  <div class="column">
+    <h2>Location</h2>
+    <p>Some text..</p>
+  </div>
+</div>--%>
 
 
 </div>
@@ -470,4 +502,3 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 </body>
 
 </html>
-

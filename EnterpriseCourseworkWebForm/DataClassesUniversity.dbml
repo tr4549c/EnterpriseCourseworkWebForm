@@ -18,7 +18,7 @@
       <Column Name="DepartmentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="AllStaff_RegisteredStaff" Member="RegisteredStaffs" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="RegisteredStaff" />
       <Association Name="Department_AllStaff" Member="Department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="Department" IsForeignKey="true" />
-      <Association Name="Role1_AllStaff" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="Role_AllStaff" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Category" Member="Categories">
@@ -114,20 +114,21 @@
       <Association Name="AllStaff_RegisteredStaff" Member="AllStaff" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="AllStaff" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Role_AllStaff" Member="AllStaffs" ThisKey="RoleID" OtherKey="RoleID" Type="AllStaff" />
+    </Type>
+  </Table>
   <Table Name="dbo.Report" Member="Reports">
     <Type Name="Report">
       <Column Name="ReportID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Idea_Report" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Role" Member="Roles">
-    <Type Name="Role">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="RoleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Role1_AllStaff" Member="AllStaffs" ThisKey="RoleID" OtherKey="RoleID" Type="AllStaff" />
     </Type>
   </Table>
 </Database>

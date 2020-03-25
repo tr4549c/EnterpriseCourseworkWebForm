@@ -1,7 +1,12 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWebForm.aspx.cs" Inherits="EnterpriseCourseworkWebForm.TestWebForm" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <link href="FontAwsm/css/all.css" rel="stylesheet" />
     <!--Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r  //copy to package manager-->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> NOT NEEDED ANYMORE I THINK-->
@@ -266,8 +271,6 @@ h3 {
     margin-bottom: 5%;
     text-align: left;
 }*/
-
-
 
 
     /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */

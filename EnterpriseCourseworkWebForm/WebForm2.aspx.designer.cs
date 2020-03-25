@@ -10,7 +10,7 @@
 namespace EnterpriseCourseworkWebForm {
     
     
-    public partial class TestWebForm {
+    public partial class WebForm2 {
         
         /// <summary>
         /// form1 control.

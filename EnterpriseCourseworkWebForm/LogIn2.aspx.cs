@@ -16,15 +16,22 @@ namespace EnterpriseCourseworkWebForm
         public int id;
         protected void loginB_Click(object sender, EventArgs e)
         {
+   
             //example login username: dignissim  password: DVD49JKR0JO
             int staffID = Database.LoginRegisteredStaff(TextBox1.Text, TextBox2.Text);
 
+            //if (query.Any())
+
             if (staffID > 0)
             {
+
+                Session["RStaffID"] = staffID;
+
+
+
                 if (Database.GetAccountEnabled(staffID))
                 {
                     Response.Redirect("TestWebForm.aspx");
-                    Session["RStaffID"] = staffID;
                 }
                 else
                 {

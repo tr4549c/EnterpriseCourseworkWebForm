@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SubmitIdea1.aspx.cs" Inherits="EnterpriseCourseworkWebForm.SubmitIdea1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CommentsPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.CommentsPage" %>
 
 <!DOCTYPE html>
 <html>
@@ -176,13 +176,12 @@ form.example::after {
 
 .div2 {
     background-color: #606EB2;
-    height: 800px;
+    height: 870px;
     max-width: 100%;
     float: none;
     margin: auto auto auto auto;
     position: center;
     padding-right: 10px;
-    padding-top:10px;
 }
 
 
@@ -190,6 +189,7 @@ form.example::after {
     display: block;
     float: left;
     font-family: 'Work Sans', sans-serif;
+    font-weight:800;
     font-size: 16px;
     color: #060360;
     margin-left: 5px;
@@ -224,19 +224,75 @@ h3 {
     font-family: 'Work Sans', sans-serif;
     font-size: 20px;
 }
-.IdeaSubmitPanel{
-    background-color: #F2F2F2;
+.IdeaContainer{
+    background-color: #ffffff;
+    margin-top: 13px;
     margin-left: 10px;
-    Height: 500px;
+    Height: 130px;
     text-align:left;
-    padding-top:5%;
+    padding-top:5px;
     padding-left:5px;
     padding-bottom:5px;
 }
 
 .TextArea {
+        width:87%;
+        height:78%;
+    }
+.IdeaTextLable{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+    text-align: left;
+}
+.bottomDivIdeaLeft{
+     Height:15%;
+     width:99%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+}
+
+.bottomDivIdeaRight{
+     Height:15%;
+     width:12%;
+     font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    color:#060360;
+}
+
+.btnSubmitIdea{
+  background-color: #060360;
+  color: white;
+  float:right;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+  text-align:center;
+  font-family:'Work Sans';
+ font-weight:bold;
+ margin-right:3%;
+ margin-bottom:5%;
+}
+.CheckBoxComment{
+    font-family:'Work Sans';
+    font-size: 18px;
+    text-align :Right;
+    padding-left:5%;
+    color:#060360;
+}
+.CheckBoxTermsConCom{
+    font-family:'Work Sans';
+    font-size: 18px;
+    text-align :Right;
+    padding-left:10%;
+    color:#060360;
+}
+.TextArea {
         width:99%;
-        height:auto;
+        height:50%;
     }
 .IdeaTextLable1{
     font-family: 'Work Sans', sans-serif;
@@ -248,7 +304,16 @@ h3 {
 padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding-left:3%; color: #060360;
 
 }
+.ComentsSubmitPanel{
+    /*background-color: #606EB2;*/
+    height: 300px;
+    max-width: 100%;
+    float: none;
+    margin: auto auto auto auto;
+    position: center;
+    /*padding-right: 10px;*/
 
+}
 
 /*.ThumbsUpLable{
     font-family: 'Work Sans', sans-serif;
@@ -287,40 +352,12 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     font-weight: 400;
         color: #fff;
 }
-.btnSubmitIdea{
-  background-color: #060360;
-  color: white;
-  float:right;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 20%;
-  opacity: 0.9;
-  text-align:center;
-  font-family:'Work Sans';
- font-weight:bold;
- margin-right:3%;
- margin-bottom:5%;
-}
-.CheckBoxIdea{
-    font-family:'Work Sans';
-    font-size: 18px;
-    text-align :Right;
-    padding-left:35%;
-    color:#060360;
-}
-
-
-.FileUpploadIdea{
-    margin-left:4%;
-}
 .connect-with-us{
     color:white;
 }
     .ThumbsDwnBtn {}
 
 </style>
-
 </head>
 <body>
 
@@ -352,63 +389,119 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
         <%--<input class="search-container" type="text" placeholder="Search" name="search" />--%>
         <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
         <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
-<%--</form>--%>
-      <h2 style="color: #060360; font-family:Antonio; padding-left:0.5%">HOME</h2>
-      <%--<p>Chania is a city on the island of Crete.</p>--%>
-     
-     
-            
 
-                 <div class="div2">
-                    <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >
-                         
-               
-                         <%--<asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>--%>
-                          
-                      <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
-                        <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
-                         8<br /><br />
+    <asp:Panel ID="ComentsSubmitPanel" CssClass="ComentsSubmitPanel" runat="server">
+            <h2 style="color: #060360; font-family:Antonio; float:left; padding-left:0.5%">Comments</h2>
+     
+     
+     
+                                   <br /><br /><br /><br /><br /><br />
                         
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%; float:left;" Text =" Make a Comment"></asp:Label>
                                
-                         <br /><br />
+                         <br /><br /><br /><br />
                          <%--<asp:TextBox ID="TextBoxIdeaInput" runat="server" BackColor="White" CssClass="SubmitIdeaTextBox" Font-Italic="True" Font-Names="Work Sans" ForeColor="#060360" TextMode="MultiLine"></asp:TextBox>--%>
-                         <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
-                        <br />
-                        <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional)- Uppload Supporting Evidence:"></asp:Label>
+                         <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea"  runat="server"></asp:TextBox> 
                         <br />
                         <br />
-                        <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" Width="399px" BorderColor="White" CssClass="FileUpploadIdea" />
+                        <br />
                         <%--<asp:CheckBox ID="CheckBox1" runat="server" />--%>
                         <br /><br />
                         <br />
                         <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
-
+                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxComment" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
+                        <asp:CheckBox id="checkbox2" CssClass="CheckBoxTermsConCom" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/>
                         <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
 
                         </div>
-                        
 
-                     </asp:Panel>        
+
+        </asp:Panel>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+                 <div class="div2">
+                    <h3><b>Most Recent Comments:</b> </h3>
                     
-                    
+                    <br />
+                    <br />
                      
 
 
 
                      
                      
-           
-                     <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
+           <asp:Panel ID="Panel1" CssClass="IdeaContainer" runat="server" >
+                         <%--<asp:Label ID="Label4" CssClass="ThumbsUpLable" runat="server" Text="Label"></asp:Label>
+                         <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
+               <div> 
+               </div>
+                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
+                 
+
+                          <div class="bottomDivIdeaLeft"> 
+                              <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
+                               <asp:Label ID="Label7" runat="server" Style="padding-left:3%; font-weight:800" Text="User"></asp:Label>
+                              
+                              <%--<asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>--%>
+                              <%--<asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>--%>
+                              <%--<asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>--%>
+                              <%-- <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>--%>
+                         </div>
+                     </asp:Panel>         
                      
+                     <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
+                          
+                                <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server"></asp:TextBox>
+                               
+                     
+                          <div class="bottomDivIdeaLeft"> 
+                              <asp:Label ID="Label5" runat="server" Style="padding-left:3%; font-weight:800" Text="User"></asp:Label>
+/
+                         </div>
+                     </asp:Panel>
+
+                     <asp:Panel ID="Panel3" CssClass="IdeaContainer" runat="server" >
+
+                         <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server"></asp:TextBox>
+                     
+                     <div class="bottomDivIdeaLeft"> 
+                              <asp:Label ID="Label1" runat="server" Style="padding-left:3%; font-weight:800" Text="User"></asp:Label>
+                         </div>
+
+                     </asp:Panel>
+
+                     <asp:Panel ID="Panel4" CssClass="IdeaContainer" runat="server" >
+
+                         <asp:TextBox ID="TextBox4" CssClass="TextArea" runat="server"></asp:TextBox>
+                     
+                     <div class="bottomDivIdeaLeft"> 
+                              <asp:Label ID="Label2" runat="server" Style="padding-left:3%; font-weight:800" Text="User"></asp:Label>
+                         </div>
+
+                     </asp:Panel>
+
+                     <asp:Panel ID="Panel5" CssClass="IdeaContainer" runat="server" >
+
+                         <asp:TextBox ID="TextBox5" CssClass="TextArea" runat="server"></asp:TextBox>
+                     
+                     <div class="bottomDivIdeaLeft"> 
+                              <asp:Label ID="Label3" runat="server" Style="padding-left:3%; font-weight:800" Text="User"></asp:Label>
+                         </div>
+
+                     </asp:Panel>
+
+
+                     
+                     <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
+
 
                    </div>
 
             </div>
 
     </div>
-  
+  </div>
 
 <div class="footer">
   
@@ -462,7 +555,6 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     </div>
     </div>
 
-
 </div>
   
     </form>
@@ -470,4 +562,3 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 </body>
 
 </html>
-

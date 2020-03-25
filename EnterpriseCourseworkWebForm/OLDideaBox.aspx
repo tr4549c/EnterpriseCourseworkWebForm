@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ideaBox.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ideaBox" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OLDideaBox.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ideaBox" %>
 
 <!DOCTYPE html>
 
