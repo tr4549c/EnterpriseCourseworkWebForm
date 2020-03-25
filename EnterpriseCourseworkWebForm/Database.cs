@@ -219,10 +219,10 @@ namespace EnterpriseCourseworkWebForm
         /// Returns a list of all Categories stored in database (for filing dropdown lists)
         /// </summary>
         /// <returns></returns>
-        static public string[] GetAllCategories()
+        static public string[] GetAllCategories(string search)
         {
             var db = Connection();
-            return (from cat in db.Categories select cat.CategoryName).ToArray();
+            return (from cat in db.Categories where cat.CategoryName.Contains(search) select cat.CategoryName).ToArray();
         }
         #endregion
 
@@ -255,7 +255,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous)
+        static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
             var db = Connection();
 
@@ -265,7 +265,8 @@ namespace EnterpriseCourseworkWebForm
                 Title = title,
                 Description = description,
                 RegisteredStaffID = staffID,
-                IsAnnonymous = IsAnnonymous
+                IsAnnonymous = IsAnnonymous,
+                IsHidden = IsHidden
             };
 
             db.Ideas.InsertOnSubmit(newIdea);
@@ -282,6 +283,12 @@ namespace EnterpriseCourseworkWebForm
             var db = Connection();
             return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
             //return all doc now?
+        }
+
+        static public string[][] GetLastIdeas(int categoryID, int numberOfIdeas)
+        {
+            var db = Connection();
+            return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
         }
         #endregion
 

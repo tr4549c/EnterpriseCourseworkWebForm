@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWebForm.aspx.cs" Inherits="EnterpriseCourseworkWebForm.TestWebForm" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="EnterpriseCourseworkWebForm.WebForm2" %>
 
 <!DOCTYPE html>
 
@@ -192,7 +191,6 @@ form.example::after {
     display: block;
     float: left;
     font-family: 'Work Sans', sans-serif;
-    font-weight:800;
     font-size: 16px;
     color: #060360;
     margin-left: 5px;
@@ -262,13 +260,6 @@ h3 {
      font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     color:#060360;
-}
-.useful-links{
-    text-align:center;
-}
-.gre-social-main{
-    display:inline-block;
-    
 }
 
 /*.ThumbsUpLable{
@@ -434,58 +425,76 @@ h3 {
 
     </div>
   </div>
-  
-    <div class="footer">
+
+<div class="footer">
   
     <div class="containerFooter">
  <div id="useful-links"> 
- <h4>Useful links</h4> 
+ <h3>Useful links</h3> 
 <div class="list-wrapper">
  <ul> 
-     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" style="color:white" target="_blank">Accessibility Statement</a></li> 
-     <li><a href="https://servicestatus.gre.ac.uk/" style="color:white" target="_blank">IT Service Status</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library" style="color:white" target="_blank">IT and Library Services</a></li>
-     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" style="color:white" target="_blank">Mobile App</a></li> 
-     <li><a href="https://www.gre.ac.uk/contact" style="color:white" target="_blank">Contact Us</a></li> 
-     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" style="color:white" target="_blank">Need more help?</a></li> 
+     <li><a href="https://www.gre.ac.uk/accessibility-statement/portal" target="_blank">Accessibility Statement</a></li> 
+     <li><a href="https://servicestatus.gre.ac.uk/" target="_blank">IT Service Status</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library" target="_blank">IT and Library Services</a></li>
+     <li><a href="https://www.gre.ac.uk/it-and-library/mobile" target="_blank">Mobile App</a></li> 
+     <li><a href="https://www.gre.ac.uk/contact" target="_blank">Contact Us</a></li> 
+     <li><a href="https://www.gre.ac.uk/it-and-library/support/tassistance" target="_blank">Need more help?</a></li> 
 
  </ul> 
 </div> </div>
     <div id="connect-with-us"> 
-        <h4>Connect with us</h4> 
+        <h3>Connect with us</h3> 
         <div class="gre-social-main"> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://facebook.com/uniofgreenwich" style="color:white" target="_blank">
+                <a class="button" href="https://facebook.com/uniofgreenwich" target="_blank">
                     <i class="fa fa-facebook-official"></i>
                     <span class="sr-only">Facebook page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://twitter.com/UniofGreenwich" style="color:white; display:inline" target="_blank">
+                <a class="button" href="https://twitter.com/UniofGreenwich" target="_blank">
                     <i class="fa fa-twitter"></i>
                     <span class="sr-only">Twitter feed</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" style="color:white; display:inline" target="_blank">
+                <a class="button" href="https://www.youtube.com/user/UniversityGreenwich" target="_blank">
                     <i class="fa fa-youtube-play"></i>
                     <span class="sr-only">YouTube channel</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://instagram.com/uniofgreenwich/" style="color:white" target="_blank">
+                <a class="button" href="https://instagram.com/uniofgreenwich/" target="_blank">
                     <i class="fa fa-instagram"></i>
-                    <span class="sr-only">Instagram page</span></a> </div>
+                    <span class="sr-only">Instagram page</span></a> 
 
-            <div class="gre-social-button"> 
-                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" style="color:white" target="_blank">
+            </div> <div class="gre-social-button"> 
+                <a class="button" href="https://www.linkedin.com/edu/school?id=12704" target="_blank">
                     <i class="fa fa-linkedin"></i>
                     <span class="sr-only">LinkedIn page</span></a> </div> 
             <div class="gre-social-button"> 
-                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" style="color:white; height: 80px; width:80px"  target="_blank">
+                <a class="button" href="https://www.snapchat.com/add/uniofgreenwich" target="_blank">
                     <i class="fa fa-snapchat-ghost"></i>
-                    <span class="sr-only">Snapchat page</span></a>  </div> 
+                    <span class="sr-only">Snapchat page</span></a> 
 
-           
+            </div> 
 
         </div> 
 
     </div>
     </div>
+<%--<%--    <div class="row">
+        
+  <div class="column">
+    <!--<h2>Column 1</h2>-->
+
+    <i class="fa fa-university"></i>
+  </div>
+  <div class="column">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+  </div>
+  <div class="column">
+    <h2>Location</h2>
+    <p>Some text..</p>
+  </div>
+</div>--%>
+
+
 </div>
   
     </form>

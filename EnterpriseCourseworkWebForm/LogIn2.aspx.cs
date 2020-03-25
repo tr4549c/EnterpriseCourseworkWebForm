@@ -16,12 +16,7 @@ namespace EnterpriseCourseworkWebForm
         public int id;
         protected void loginB_Click(object sender, EventArgs e)
         {
-            //DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
-            //var query = from q in context.RegisteredStaffs
-            //            where ((q.RUsername == TextBox1.Text) && (q.RPassword == TextBox2.Text))
-            //            select q;
-
-
+   
             //example login username: dignissim  password: DVD49JKR0JO
             int staffID = Database.LoginRegisteredStaff(TextBox1.Text, TextBox2.Text);
 
@@ -29,21 +24,9 @@ namespace EnterpriseCourseworkWebForm
 
             if (staffID > 0)
             {
-                ////HttpCookie Cookie = new HttpCookie("mycookie");
-                //HttpCookie Cookie = new HttpCookie("RStaffID");
-                ////Cookie.Value = TextBox1.Text;
-                //Cookie.Value = staffID.ToString();
-                //Cookie.Expires = DateTime.Now.AddDays(1);
-                //Response.Cookies.Add(Cookie);
+
                 Session["RStaffID"] = staffID;
 
-                //Application["RStaffID"] = staffID;
-
-                //foreach (var query1 in query.ToList())
-                //{
-                //    id = query1.RegisteredStaffID;
-                //    Application["mycookie"] = id.ToString();
-                //}
 
 
                 if (Database.GetAccountEnabled(staffID))
