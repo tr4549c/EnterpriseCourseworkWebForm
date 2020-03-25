@@ -22,7 +22,7 @@ namespace EnterpriseCourseworkWebForm
             //            select q;
 
 
-            //example login username: odio  password: IGP76NQI8TW.
+            //example login username: dignissim  password: DVD49JKR0JO
             int staffID = Database.LoginRegisteredStaff(TextBox1.Text, TextBox2.Text);
 
             //if (query.Any())
@@ -36,7 +36,7 @@ namespace EnterpriseCourseworkWebForm
                 //Cookie.Expires = DateTime.Now.AddDays(1);
                 //Response.Cookies.Add(Cookie);
                 Session["RStaffID"] = staffID;
-                
+
                 //Application["RStaffID"] = staffID;
 
                 //foreach (var query1 in query.ToList())
@@ -44,11 +44,20 @@ namespace EnterpriseCourseworkWebForm
                 //    id = query1.RegisteredStaffID;
                 //    Application["mycookie"] = id.ToString();
                 //}
-                Response.Redirect("TestWebForm.aspx");
+
+
+                if (Database.GetAccountEnabled(staffID))
+                {
+                    Response.Redirect("TestWebForm.aspx");
+                }
+                else
+                {
+                    //Display error (Account not enabled)  (difference between enabled and active?)
+                }
             }
             else
             {
-                //display error
+                //display error (username/password incorrect)
             }
         }
     }

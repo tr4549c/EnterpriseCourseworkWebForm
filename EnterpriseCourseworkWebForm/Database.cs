@@ -48,7 +48,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="name"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        static public bool RegisterAllStaff(int employeeID, string name, string username, string password, string job, string department)
+        static public bool RegisterAllStaff(int employeeID, string name, string username, string password, int roleID, int departmentID)
         {
             var db = Connection();
 
@@ -69,8 +69,8 @@ namespace EnterpriseCourseworkWebForm
                     Name = name,
                     Username = username,
                     Password = password,
-                    Job = job,
-                    Department = department
+                    RoleID = roleID,
+                    DepartmentID = departmentID
 
                 };
 
@@ -89,7 +89,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="roleID"></param>
         /// <param name="departmentID"></param>
         /// <param name="allStaffID"></param>
-        static public bool RegisterRStaff(string username, string password, int roleID, int departmentID, int allStaffID)
+        static public bool RegisterRStaff(string username, string password, int allStaffID)
         {
             var db = Connection();
 
@@ -108,8 +108,6 @@ namespace EnterpriseCourseworkWebForm
                 {
                     RUsername = username,
                     RPassword = password,
-                    RoleID = roleID,
-                    DepartmentID = departmentID,
                     AllStaffID = allStaffID,
                     IsActive = true,
                     IsEnabled = true
@@ -127,17 +125,69 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="id"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        static public void UpdateRStaffUsernamePassword(int id, string username, string password)
+        static public void UpdateRStaffUsernamePassword(int rsID, string username, string password)
         {
             var db = Connection();
 
-            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(id));
+            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
             rs.RUsername = username;
             rs.RPassword = password;
 
             db.SubmitChanges();
         }
 
+        /// <summary>
+        /// Sets RegisteredStaff IsActive value
+        /// </summary>
+        /// <param name="rsID"></param>
+        /// <param name="IsActive"></param>
+        static public void UpdateAccountActive(int rsID, bool IsActive)
+        {
+            var db = Connection();
+
+            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
+            rs.IsActive = IsActive;
+
+            db.SubmitChanges();
+        }
+        /// <summary>
+        /// Gets RegisteredStaff IsActive Value
+        /// </summary>
+        /// <param name="rsID"></param>
+        /// <returns></returns>
+        static public bool GetAccountActive(int rsID)
+        {
+            var db = Connection();
+
+            return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select (bool) staff.IsActive).FirstOrDefault(); 
+        }
+
+        /// <summary>
+        /// Sets RegisteredStaff IsEnabled value
+        /// </summary>
+        /// <param name="rsID"></param>
+        /// <param name="IsEnabled"></param>
+        static public void UpdateAccountEnabled(int rsID, bool IsEnabled)
+        {
+            var db = Connection();
+
+            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
+            rs.IsEnabled = IsEnabled;
+
+            db.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Gets RegisteredStaff IsEnabled value
+        /// </summary>
+        /// <param name="rsID"></param>
+        /// <returns></returns>
+        static public bool GetAccountEnabled(int rsID)
+        {
+            var db = Connection();
+
+            return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select (bool)staff.IsEnabled).FirstOrDefault();
+        }
         #endregion
 
         #region Role
@@ -148,7 +198,7 @@ namespace EnterpriseCourseworkWebForm
         static public string[] GetAllRoles()
         {
             var db = Connection();
-            return (from r in db.Role1s select r.RoleName).ToArray();
+            return (from r in db.Roles select r.RoleName).ToArray();
         }
         #endregion
 
