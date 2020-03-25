@@ -422,7 +422,7 @@ h3 {
                 <asp:Label ID="Label7" runat="server" class="IdeaTextLable" Text =" <b>Ideas</b>"></asp:Label><br /><br />
                 <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Text =" Please select a preffered department:"></asp:Label>
              <br />
-             <asp:DropDownList ID="DropDownList1" runat="server" Height="38px" class="dropdown1">
+             <asp:DropDownList ID="DropDownList1" runat="server" Height="38px" class="dropdown1" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
              </asp:DropDownList><br />
              <asp:Label ID="Label9" runat="server" class="IdeaTextLable1" Text =" Filter By:"></asp:Label>
              <br />
@@ -430,7 +430,7 @@ h3 {
              <input class="search-button" type="button" > <i class="fa fa-search"></i> <input/>
              --%> 
              <%--<input class="search-container2" type="text" placeholder="Search for tags.." name="search" />--%>
-             <asp:TextBox ID="searchContainer2" CssClass="search-container2" placeholder="Search..." runat="server"></asp:TextBox>
+             <asp:TextBox ID="searchContainer2" CssClass="search-container2" placeholder="Search..." runat="server" OnTextChanged="searchContainer2_TextChanged" AutoPostBack="True"></asp:TextBox>
         
              <%-- <asp:Button ID="Button1" CssClass="search-button" runat="server"  />--%>
              <%--<button class="search-button2" id="srcbtn"><i class="fa fa-search"></i></button>--%>
