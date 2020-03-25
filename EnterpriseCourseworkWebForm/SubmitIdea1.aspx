@@ -182,6 +182,7 @@ form.example::after {
     margin: auto auto auto auto;
     position: center;
     padding-right: 10px;
+    padding-top:10px;
 }
 
 
@@ -225,7 +226,6 @@ h3 {
 }
 .IdeaSubmitPanel{
     background-color: #F2F2F2;
-    margin-top: 5%;
     margin-left: 10px;
     Height: 500px;
     text-align:left;
@@ -235,9 +235,8 @@ h3 {
 }
 
 .TextArea {
-        width:60%;
+        width:99%;
         height:50%;
-        margin-left:25%;
     }
 .IdeaTextLable1{
     font-family: 'Work Sans', sans-serif;
@@ -320,6 +319,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 }
     .ThumbsDwnBtn {}
 
+</style>
 </style>
 </head>
 <body>
