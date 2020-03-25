@@ -288,6 +288,33 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     font-weight: 400;
         color: #fff;
 }
+.btnSubmitIdea{
+  background-color: #060360;
+  color: white;
+  float:right;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+  text-align:center;
+  font-family:'Work Sans';
+ font-weight:bold;
+ margin-right:3%;
+ margin-bottom:5%;
+}
+.CheckBoxIdea{
+    font-family:'Work Sans';
+    font-size: 18px;
+    text-align :Right;
+    padding-left:35%;
+    color:#060360;
+}
+
+
+.FileUpploadIdea{
+    margin-left:4%;
+}
 .connect-with-us{
     color:white;
 }
@@ -350,9 +377,19 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <br />
                         <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional)- Uppload Supporting Evidence:"></asp:Label>
                         <br />
-                        <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" />
-
+                        <br />
+                        <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" Width="399px" BorderColor="White" CssClass="FileUpploadIdea" />
                         <%--<asp:CheckBox ID="CheckBox1" runat="server" />--%>
+                        <br /><br />
+                        <br />
+                        <div class="row">
+                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
+
+                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
+
+                        </div>
+                        
+
                      </asp:Panel>        
                     
                     
