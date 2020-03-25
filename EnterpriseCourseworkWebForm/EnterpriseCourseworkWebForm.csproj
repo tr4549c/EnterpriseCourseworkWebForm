@@ -100,8 +100,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -109,7 +107,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FontAwsm\css\all.css" />
     <Content Include="FontAwsm\css\all.min.css" />
@@ -150,15 +147,14 @@
     <Content Include="Images\searchbuttonWhite.jpg" />
     <Content Include="SubmitIdea1.aspx" />
     <Content Include="Post SignInIdeaPage.aspx" />
-    <Content Include="SubmitPage.aspx" />
+    <Content Include="OLDSubmitPage.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="HomePage.aspx" />
-    <Content Include="ideaBox.aspx" />
+    <Content Include="OLDHomePage.aspx" />
+    <Content Include="OLDideaBox.aspx" />
     <Content Include="Images\thumbs down.png" />
     <Content Include="Images\thumbs up.png" />
     <Content Include="Images\u18.png" />
     <Content Include="LogIn2.aspx" />
-    <Content Include="PreSignUpIdeasPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -196,50 +192,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="DataClassesUniversity.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClassesUniversity.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HomePage.aspx.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
+    <Compile Include="OLDHomePage.aspx.cs">
+      <DependentUpon>OLDHomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HomePage.aspx.designer.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
+    <Compile Include="OLDHomePage.aspx.designer.cs">
+      <DependentUpon>OLDHomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ideaBox.aspx.cs">
-      <DependentUpon>ideaBox.aspx</DependentUpon>
+    <Compile Include="OLDideaBox.aspx.cs">
+      <DependentUpon>OLDideaBox.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ideaBox.aspx.designer.cs">
-      <DependentUpon>ideaBox.aspx</DependentUpon>
+    <Compile Include="OLDideaBox.aspx.designer.cs">
+      <DependentUpon>OLDideaBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogIn2.aspx.cs">
       <DependentUpon>LogIn2.aspx</DependentUpon>
@@ -247,13 +222,6 @@
     </Compile>
     <Compile Include="LogIn2.aspx.designer.cs">
       <DependentUpon>LogIn2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreSignUpIdeasPage.aspx.cs">
-      <DependentUpon>PreSignUpIdeasPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreSignUpIdeasPage.aspx.designer.cs">
-      <DependentUpon>PreSignUpIdeasPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubmitIdea1.aspx.cs">
@@ -284,12 +252,12 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="SubmitPage.aspx.cs">
-      <DependentUpon>SubmitPage.aspx</DependentUpon>
+    <Compile Include="OLDSubmitPage.aspx.cs">
+      <DependentUpon>OLDSubmitPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SubmitPage.aspx.designer.cs">
-      <DependentUpon>SubmitPage.aspx</DependentUpon>
+    <Compile Include="OLDSubmitPage.aspx.designer.cs">
+      <DependentUpon>OLDSubmitPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

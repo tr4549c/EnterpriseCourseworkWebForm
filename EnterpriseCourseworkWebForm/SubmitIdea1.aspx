@@ -229,7 +229,7 @@ h3 {
     margin-left: 10px;
     Height: 500px;
     text-align:left;
-    padding-top:5px;
+    padding-top:5%;
     padding-left:5px;
     padding-bottom:5px;
 }
@@ -320,7 +320,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
     .ThumbsDwnBtn {}
 
 </style>
-</style>
+
 </head>
 <body>
 
