@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CommentsPage.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -185,6 +186,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Stylesheets\BaseStyles.css" />
     <Content Include="Stylesheets\PreSignUpIdeasPageStyleSheet.css" />
+    <Content Include="TermsAndCond.aspx" />
     <Content Include="TestWebform.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -193,6 +195,13 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CommentsPage.aspx.cs">
+      <DependentUpon>CommentsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommentsPage.aspx.designer.cs">
+      <DependentUpon>CommentsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="DataClassesUniversity.designer.cs">
       <AutoGen>True</AutoGen>
@@ -237,6 +246,13 @@
     </Compile>
     <Compile Include="Post SignInIdeaPage.aspx.designer.cs">
       <DependentUpon>Post SignInIdeaPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TermsAndCond.aspx.cs">
+      <DependentUpon>TermsAndCond.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TermsAndCond.aspx.designer.cs">
+      <DependentUpon>TermsAndCond.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestWebform.aspx.cs">
       <DependentUpon>TestWebform.aspx</DependentUpon>
