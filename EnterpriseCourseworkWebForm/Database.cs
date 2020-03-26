@@ -285,6 +285,13 @@ namespace EnterpriseCourseworkWebForm
             //return all doc now?
         }
 
+        static public List<Idea> GetAllIdeasByMostRecent() {
+            var db = Connection();
+            return (from i in db.Ideas
+                    orderby i.IdeaID descending
+                    select i).ToList();
+        }
+
         static public string[][] GetLastIdeas(int categoryID, int numberOfIdeas)
         {
             var db = Connection();
@@ -452,13 +459,27 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="ideaID"></param>
         /// <param name="staffID"></param>
         /// <returns></returns>
-        static public bool[] GetVotesForIdea(int ideaID, int staffID)
+        static public bool[] GetVotesForIdeaByStaff(int ideaID, int staffID)
         {
             //1 for upvote, 0 for downvote
             var db = Connection();
             return (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select (bool)r.Vote).ToArray();
 
             //loop through list here and return tupe of upvote/downvote?
+        }
+
+        /// <summary>
+        /// Returns a list containing all votes for idea
+        /// </summary>
+        /// <param name="ideaID"></param>
+        /// <param name="staffID"></param>
+        /// <returns></returns>
+        static public List<Rating> GetVotesForIdea(int ideaID)
+        {
+            //1 for upvote, 0 for downvote
+            var db = Connection();
+            return (from r in db.Ratings where r.IdeaID == ideaID select r).ToList();
+
         }
         #endregion
     }

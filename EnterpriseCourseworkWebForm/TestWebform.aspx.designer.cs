@@ -10,7 +10,7 @@
 namespace EnterpriseCourseworkWebForm {
     
     
-    public partial class TestWebForm {
+    public partial class TestWebform {
         
         /// <summary>
         /// form1 control.
@@ -121,22 +121,22 @@ namespace EnterpriseCourseworkWebForm {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
         
         /// <summary>
-        /// Label5 control.
+        /// lblUpIdea1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lblUpIdea1;
         
         /// <summary>
-        /// Label6 control.
+        /// lblDownIdea1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.Label lblDownIdea1;
         
         /// <summary>
         /// Panel2 control.

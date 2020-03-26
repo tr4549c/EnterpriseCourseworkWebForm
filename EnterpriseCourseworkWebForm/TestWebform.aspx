@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWebForm.aspx.cs" Inherits="EnterpriseCourseworkWebForm.TestWebForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestWebform.aspx.cs" Inherits="EnterpriseCourseworkWebForm.TestWebform" %>
 
 
 <!DOCTYPE html>
@@ -327,7 +327,7 @@ h3 {
  
 
 <div class="uniLogoBanner" style="padding:0 16px;">
-  <%--<h4>Resize the browser window to see the effect.</h4>--%>
+    <%--<h4>Resize the browser window to see the effect.</h4>--%>
       <section>
             <img src="Images/u18.png" />
         </section>
@@ -339,13 +339,12 @@ h3 {
         <%--<form class="example" action="/action_page.php">
   <input type="text" placeholder="Search.." name="search">
   <button type="submit"><i class="fa fa-search"></i></button> OLD code--%>
-
         <%--<input class="search-container" type="text" placeholder="Search" name="search" />--%>
         <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
         <asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />
-<%--</form>--%>
+        <%--</form>--%>
       <h2 style="color: #060360; font-family:Antonio; padding-left:0.5%">HOME</h2>
-      <%--<p>Chania is a city on the island of Crete.</p>--%>
+        <%--<p>Chania is a city on the island of Crete.</p>--%>
      
      
             <div class="row">
@@ -385,8 +384,8 @@ h3 {
                               <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
                               <asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
                               <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
-                              <asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
-                               <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>
+                              <asp:Label ID="lblUpIdea1" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
+                               <asp:Label ID="lblDownIdea1" runat="server" Text="No"></asp:Label>
                          </div>
                      </asp:Panel>         
                      
