@@ -16,27 +16,13 @@ namespace EnterpriseCourseworkWebForm
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            //temp
+            int ideaID = 2;
+            Session["RStaffID"] = 1;
 
-            DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
-            var report = new Report
-            {
-                //RegisteredStaffID = (int)Session["RStaffID"],
-                RegisteredStaffID = 1,
-                //IdeaID = ?
-                IdeaID = 2,
-                Description = TextBoxReportInput.Text.ToString(),
-                Status = "Pending"
-            };
-            try
-            {
-                context.Reports.InsertOnSubmit(report);
-                context.SubmitChanges();
-                Response.Redirect("WebForm2.aspx");
-            }
-            catch (Exception em)
-            {
-                System.Console.WriteLine(em);
-            }
+
+            Database.InsertReport((int) Session["RStaffID"], ideaID, TextBoxReportInput.Text, "Pending");
+            Response.Redirect("WebForm2.aspx");
         }
     }
 }

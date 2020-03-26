@@ -27,24 +27,10 @@ namespace EnterpriseCourseworkWebForm
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-  
-                DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
-               var category = new Category
-                {
-                CategoryName = TextBoxCategory.Text.ToString()
-                };
-            try
-            {
-                context.Categories.InsertOnSubmit(category);
-                context.SubmitChanges();
-                Response.Redirect("ManageCategories_QAManager.aspx");
-            }
-            catch (Exception em)
-            {
-                System.Console.WriteLine(em);
-            }
-           
-            
+            Database.InsertCategory(TextBoxCategory.Text);
+            Response.Redirect("ManageCategories_QAManager.aspx");
+
+
         }
     }
 }

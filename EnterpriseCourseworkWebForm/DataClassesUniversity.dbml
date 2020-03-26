@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="as6501h" Class="DataClassesUniversityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=sql-server;Initial Catalog=as6501h;User ID=as6501h" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="as6501hConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Admins" Member="Admins">
-    <Type Name="Admin">
-      <Column Name="AdminID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UsernameA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="PasswordA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.AllStaff" Member="AllStaffs">
     <Type Name="AllStaff">
       <Column Name="AllStaffID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

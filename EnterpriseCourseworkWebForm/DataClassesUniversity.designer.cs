@@ -30,9 +30,6 @@ namespace EnterpriseCourseworkWebForm
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAdmin(Admin instance);
-    partial void UpdateAdmin(Admin instance);
-    partial void DeleteAdmin(Admin instance);
     partial void InsertAllStaff(AllStaff instance);
     partial void UpdateAllStaff(AllStaff instance);
     partial void DeleteAllStaff(AllStaff instance);
@@ -99,14 +96,6 @@ namespace EnterpriseCourseworkWebForm
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Admin> Admins
-		{
-			get
-			{
-				return this.GetTable<Admin>();
-			}
 		}
 		
 		public System.Data.Linq.Table<AllStaff> AllStaffs
@@ -202,116 +191,6 @@ namespace EnterpriseCourseworkWebForm
 			get
 			{
 				return this.GetTable<Category>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admins")]
-	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AdminID;
-		
-		private string _UsernameA;
-		
-		private string _PasswordA;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAdminIDChanging(int value);
-    partial void OnAdminIDChanged();
-    partial void OnUsernameAChanging(string value);
-    partial void OnUsernameAChanged();
-    partial void OnPasswordAChanging(string value);
-    partial void OnPasswordAChanged();
-    #endregion
-		
-		public Admin()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AdminID
-		{
-			get
-			{
-				return this._AdminID;
-			}
-			set
-			{
-				if ((this._AdminID != value))
-				{
-					this.OnAdminIDChanging(value);
-					this.SendPropertyChanging();
-					this._AdminID = value;
-					this.SendPropertyChanged("AdminID");
-					this.OnAdminIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsernameA", DbType="VarChar(MAX)")]
-		public string UsernameA
-		{
-			get
-			{
-				return this._UsernameA;
-			}
-			set
-			{
-				if ((this._UsernameA != value))
-				{
-					this.OnUsernameAChanging(value);
-					this.SendPropertyChanging();
-					this._UsernameA = value;
-					this.SendPropertyChanged("UsernameA");
-					this.OnUsernameAChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordA", DbType="VarChar(MAX)")]
-		public string PasswordA
-		{
-			get
-			{
-				return this._PasswordA;
-			}
-			set
-			{
-				if ((this._PasswordA != value))
-				{
-					this.OnPasswordAChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordA = value;
-					this.SendPropertyChanged("PasswordA");
-					this.OnPasswordAChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

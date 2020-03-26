@@ -8,6 +8,10 @@ namespace EnterpriseCourseworkWebForm
 {
     //Useful LinQ : https://www.tutorialspoint.com/linq/linq_sql.htm
 
+        /// <summary>
+        /// All methods are wrapped in try catch statements. If an error occurs, the exception will be written to console and a default value will be returned.
+        /// (int returns 0, bool returns false, string/arrays returns null)
+        /// </summary>
     static public class Database
     {
         #region Login
@@ -26,16 +30,48 @@ namespace EnterpriseCourseworkWebForm
             return new DataClassesUniversityDataContext();
         }
 
+        static private object GetDefaultReturn(Type type)
+        {
+            if (type.GetType() == typeof(bool))
+            {
+                return false;
+            }
+            else if (type.GetType() == typeof(int))
+            {
+                return 0;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         static public int LoginAllStaff(string username, string password)
         {
-            var db = Connection();
-            return (from staff in db.AllStaffs where staff.Username == username && staff.Password == password select staff.AllStaffID).FirstOrDefault();
+            try
+            {
+                var db = Connection();
+                return (from staff in db.AllStaffs where staff.Username == username && staff.Password == password select staff.AllStaffID).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (int) GetDefaultReturn(typeof(int));
+            }
         }
 
         static public int LoginRegisteredStaff(string username, string password)
         {
-            var db = Connection();
-            return (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
+            try
+            {
+                var db = Connection();
+                return (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (int) GetDefaultReturn(typeof(int));
+            }
         }
         #endregion
 
@@ -50,34 +86,42 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="password"></param>
         static public bool RegisterAllStaff(int employeeID, string name, string username, string password, int roleID, int departmentID)
         {
-            var db = Connection();
-
-            //check if username already exists
-            var query = from staff in db.AllStaffs where staff.Username == username select staff;
-
-            if (query.Any())
+            try
             {
-                //if username exists, exit
-                return false;
-            }
-            else
-            {
-                //if username not taken, create account
-                AllStaff newStaff = new AllStaff
+                var db = Connection();
+
+                //check if username already exists
+                var query = from staff in db.AllStaffs where staff.Username == username select staff;
+
+                if (query.Any())
                 {
-                    EmployeeID = employeeID,
-                    Name = name,
-                    Username = username,
-                    Password = password,
-                    RoleID = roleID,
-                    DepartmentID = departmentID
+                    //if username exists, exit
+                    return false;
+                }
+                else
+                {
+                    //if username not taken, create account
+                    AllStaff newStaff = new AllStaff
+                    {
+                        EmployeeID = employeeID,
+                        Name = name,
+                        Username = username,
+                        Password = password,
+                        RoleID = roleID,
+                        DepartmentID = departmentID
 
-                };
+                    };
 
-                db.AllStaffs.InsertOnSubmit(newStaff);
-                db.SubmitChanges();
+                    db.AllStaffs.InsertOnSubmit(newStaff);
+                    db.SubmitChanges();
 
-                return true;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool) GetDefaultReturn(typeof(bool));
             }
         }
 
@@ -91,31 +135,39 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="allStaffID"></param>
         static public bool RegisterRStaff(string username, string password, int allStaffID)
         {
-            var db = Connection();
-
-            //check if username already exists
-            var query = from staff in db.RegisteredStaffs where staff.RUsername == username select staff;
-
-            if (query.Any())
+            try
             {
-                //if username exists, exit
-                return false;
-            }
-            else
-            {
-                //if username not taken, create account
-                RegisteredStaff newStaff = new RegisteredStaff
+                var db = Connection();
+
+                //check if username already exists
+                var query = from staff in db.RegisteredStaffs where staff.RUsername == username select staff;
+
+                if (query.Any())
                 {
-                    RUsername = username,
-                    RPassword = password,
-                    AllStaffID = allStaffID,
-                    IsActive = true,
-                    IsEnabled = true
-                };
+                    //if username exists, exit
+                    return false;
+                }
+                else
+                {
+                    //if username not taken, create account
+                    RegisteredStaff newStaff = new RegisteredStaff
+                    {
+                        RUsername = username,
+                        RPassword = password,
+                        AllStaffID = allStaffID,
+                        IsActive = true,
+                        IsEnabled = true
+                    };
 
-                db.RegisteredStaffs.InsertOnSubmit(newStaff);
-                db.SubmitChanges();
-                return true;
+                    db.RegisteredStaffs.InsertOnSubmit(newStaff);
+                    db.SubmitChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
             }
         }
 
@@ -125,15 +177,24 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="id"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        static public void UpdateRStaffUsernamePassword(int rsID, string username, string password)
+        static public bool UpdateRStaffUsernamePassword(int rsID, string username, string password)
         {
-            var db = Connection();
+            try
+            {
+                var db = Connection();
 
-            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
-            rs.RUsername = username;
-            rs.RPassword = password;
+                RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
+                rs.RUsername = username;
+                rs.RPassword = password;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -141,14 +202,23 @@ namespace EnterpriseCourseworkWebForm
         /// </summary>
         /// <param name="rsID"></param>
         /// <param name="IsActive"></param>
-        static public void UpdateAccountActive(int rsID, bool IsActive)
+        static public bool UpdateAccountActive(int rsID, bool IsActive)
         {
-            var db = Connection();
+            try
+            {
+                var db = Connection();
 
-            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
-            rs.IsActive = IsActive;
+                RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
+                rs.IsActive = IsActive;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
         /// <summary>
         /// Gets RegisteredStaff IsActive Value
@@ -159,7 +229,7 @@ namespace EnterpriseCourseworkWebForm
         {
             var db = Connection();
 
-            return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select (bool) staff.IsActive).FirstOrDefault(); 
+            return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select staff.IsActive).FirstOrDefault(); 
         }
 
         /// <summary>
@@ -167,14 +237,23 @@ namespace EnterpriseCourseworkWebForm
         /// </summary>
         /// <param name="rsID"></param>
         /// <param name="IsEnabled"></param>
-        static public void UpdateAccountEnabled(int rsID, bool IsEnabled)
+        static public bool UpdateAccountEnabled(int rsID, bool IsEnabled)
         {
-            var db = Connection();
+            try
+            {
+                var db = Connection();
 
-            RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
-            rs.IsEnabled = IsEnabled;
+                RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rsID));
+                rs.IsEnabled = IsEnabled;
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -184,9 +263,17 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public bool GetAccountEnabled(int rsID)
         {
-            var db = Connection();
+            try
+            {
+                var db = Connection();
 
-            return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select (bool)staff.IsEnabled).FirstOrDefault();
+                return (from staff in db.RegisteredStaffs where staff.RegisteredStaffID == rsID select (bool)staff.IsEnabled).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
         #endregion
 
@@ -209,8 +296,16 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetAllDepartments()
         {
-            var db = Connection();
-            return (from dep in db.Departments select dep.DepartementName).ToArray();
+            try
+            {
+                var db = Connection();
+                return (from dep in db.Departments select dep.DepartementName).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[])GetDefaultReturn(typeof(string[]));
+            }
         }
         #endregion
 
@@ -221,26 +316,63 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetAllCategories(string search)
         {
-            var db = Connection();
-            return (from cat in db.Categories where cat.CategoryName.Contains(search) select cat.CategoryName).ToArray();
+            try
+            {
+                var db = Connection();
+                return (from cat in db.Categories where cat.CategoryName.Contains(search) select cat.CategoryName).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[])GetDefaultReturn(typeof(string[]));
+            }
+        }
+
+        static public bool InsertCategory(string name)
+        {
+            try
+            {
+                var db = Connection();
+                var category = new Category
+                {
+                    CategoryName = name
+                };
+                db.Categories.InsertOnSubmit(category);
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception em)
+            {
+                Console.WriteLine(em);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
         #endregion
 
         #region DepartmentCategory
         //Not sure what I'm meant to put in here
 
-        static public void InsertDepartmentCategory(int depID, int catID)
+        static public bool InsertDepartmentCategory(int depID, int catID)
         {
-            var db = Connection();
-
-            DepartmentCategory dc = new DepartmentCategory
+            try
             {
-                DepartmentID = depID,
-                CategoryID = catID
-            };
+                var db = Connection();
 
-            db.DepartmentCategories.InsertOnSubmit(dc);
-            db.SubmitChanges();
+                DepartmentCategory dc = new DepartmentCategory
+                {
+                    DepartmentID = depID,
+                    CategoryID = catID
+                };
+
+                db.DepartmentCategories.InsertOnSubmit(dc);
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
 
@@ -255,22 +387,31 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public void InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
+        static public bool InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
-            var db = Connection();
-
-            Idea newIdea = new Idea
+            try
             {
-                CategoryID = categoryID,
-                Title = title,
-                Description = description,
-                RegisteredStaffID = staffID,
-                IsAnnonymous = IsAnnonymous,
-                IsHidden = IsHidden
-            };
+                var db = Connection();
 
-            db.Ideas.InsertOnSubmit(newIdea);
-            db.SubmitChanges();
+                Idea newIdea = new Idea
+                {
+                    CategoryID = categoryID,
+                    Title = title,
+                    Description = description,
+                    RegisteredStaffID = staffID,
+                    IsAnnonymous = IsAnnonymous,
+                    IsHidden = IsHidden
+                };
+
+                db.Ideas.InsertOnSubmit(newIdea);
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -280,22 +421,46 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[][] SelectIdeas(int categoryID)
         {
-            var db = Connection();
-            return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
+            try
+            {
+                var db = Connection();
+                return (from i in db.Ideas where i.CategoryID == categoryID select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[][])GetDefaultReturn(typeof(string[][]));
+            }
             //return all doc now?
         }
 
         static public List<Idea> GetAllIdeasByMostRecent() {
-            var db = Connection();
-            return (from i in db.Ideas
-                    orderby i.IdeaID descending
-                    select i).ToList();
+            try
+            {
+                var db = Connection();
+                return (from i in db.Ideas
+                        orderby i.IdeaID descending
+                        select i).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (List<Idea>)GetDefaultReturn(typeof(List<Idea>));
+            }
         }
 
         static public string[][] GetLastIdeas(int categoryID, int numberOfIdeas)
         {
-            var db = Connection();
-            return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
+            try
+            {
+                var db = Connection();
+                return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[][])GetDefaultReturn(typeof(string[][]));
+            }
         }
         #endregion
 
@@ -305,21 +470,30 @@ namespace EnterpriseCourseworkWebForm
         /// </summary>
         /// <param name="ideaID"></param>
         /// <param name="docPath"></param>
-        static public void InsertDoc(int ideaID, string docPath)      //docpah will be changed to image?
+        static public bool InsertDoc(int ideaID, string docPath)      //docpah will be changed to image?
         {
-            var db = Connection();
-
-            //foreach (string doc in docPath) {                     //ideaID would stay constant, so just loop through docs list
-            Document newDoc = new Document
+            try
             {
-                IdeaID = ideaID,
-                DocPath = docPath
-            };
+                var db = Connection();
 
-            db.Documents.InsertOnSubmit(newDoc);
-            //}
+                //foreach (string doc in docPath) {                     //ideaID would stay constant, so just loop through docs list
+                Document newDoc = new Document
+                {
+                    IdeaID = ideaID,
+                    DocPath = docPath
+                };
 
-            db.SubmitChanges();
+                db.Documents.InsertOnSubmit(newDoc);
+                //}
+
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -329,8 +503,16 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public string[] GetDocs(int ideaID)
         {
-            var db = Connection();
-            return (from doc in db.Documents select doc.DocPath).ToArray();
+            try
+            {
+                var db = Connection();
+                return (from doc in db.Documents select doc.DocPath).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[])GetDefaultReturn(typeof(string[]));
+            }
         }
         #endregion
 
@@ -342,20 +524,29 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="ideaID"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public void InsertComment(string comment, int ideaID, int staffID, bool IsAnnonymous)
+        static public bool InsertComment(string comment, int ideaID, int staffID, bool IsAnnonymous)
         {
-            var db = Connection();
-
-            Comment newComment = new Comment
+            try
             {
-                Comment1 = comment,
-                IdeaID = ideaID,
-                RegisteredStaffID = staffID,
-                IsAnnonymous = IsAnnonymous
-            };
+                var db = Connection();
 
-            db.Comments.InsertOnSubmit(newComment);
-            db.SubmitChanges();
+                Comment newComment = new Comment
+                {
+                    Comment1 = comment,
+                    IdeaID = ideaID,
+                    RegisteredStaffID = staffID,
+                    IsAnnonymous = IsAnnonymous
+                };
+
+                db.Comments.InsertOnSubmit(newComment);
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -366,8 +557,16 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public object[] SelectComment(int ideaID)
         {
-            var db = Connection();
-            return (from c in db.Comments where c.IdeaID == ideaID select new { c.Comment1, c.RegisteredStaffID, c.IsAnnonymous }).ToArray();
+            try
+            {
+                var db = Connection();
+                return (from c in db.Comments where c.IdeaID == ideaID select new { c.Comment1, c.RegisteredStaffID, c.IsAnnonymous }).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (object[])GetDefaultReturn(typeof(object[]));
+            }
         }
         #endregion
 
@@ -380,17 +579,25 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static private bool RatingExists(int ideaID, int staffID)
         {
-            var db = Connection();
-
-            var query = (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r).FirstOrDefault();
-
-            if (query != null)
+            try
             {
-                return true;
+                var db = Connection();
+
+                var query = (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r).FirstOrDefault();
+
+                if (query != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return false;
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
             }
         }
 
@@ -402,10 +609,17 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static private bool RatingValue(int ideaID, int staffID)
         {
-            var db = Connection();
+            try
+            {
+                var db = Connection();
 
-            return bool.Parse((from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r.Vote).FirstOrDefault().ToString());
-
+                return bool.Parse((from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select r.Vote).FirstOrDefault().ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -414,43 +628,52 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="ideaID"></param>
         /// <param name="staffID"></param>
         /// <param name="voteValue"></param>
-        static public void UpdateRating(int ideaID, int staffID, bool voteValue)
+        static public bool UpdateRating(int ideaID, int staffID, bool voteValue)
         {
-            var db = Connection();
-
-            if (RatingExists(ideaID, staffID))
+            try
             {
-                //if rating exists, find stored user rating
-                Rating findRating = db.Ratings.FirstOrDefault(r => r.IdeaID.Equals(ideaID) && r.RegisteredStaffID.Equals(staffID));
+                var db = Connection();
 
-                //Get current value of rating
-                bool currentValue = RatingValue(ideaID, staffID);
-
-
-                if (currentValue == voteValue)
+                if (RatingExists(ideaID, staffID))
                 {
-                    //if user has clicked same vote twice, delete the rating
-                    db.Ratings.DeleteOnSubmit(findRating);
+                    //if rating exists, find stored user rating
+                    Rating findRating = db.Ratings.FirstOrDefault(r => r.IdeaID.Equals(ideaID) && r.RegisteredStaffID.Equals(staffID));
+
+                    //Get current value of rating
+                    bool currentValue = RatingValue(ideaID, staffID);
+
+
+                    if (currentValue == voteValue)
+                    {
+                        //if user has clicked same vote twice, delete the rating
+                        db.Ratings.DeleteOnSubmit(findRating);
+                    }
+                    else
+                    {
+                        //if the vote is different, update the vote value
+                        findRating.Vote = voteValue;
+                    }
                 }
                 else
                 {
-                    //if the vote is different, update the vote value
-                    findRating.Vote = voteValue;
-                }
-            }
-            else
-            {
-                //No current rating so create new record
-                Rating newRating = new Rating
-                {
-                    IdeaID = ideaID,
-                    RegisteredStaffID = staffID,
-                    Vote = voteValue
-                };
+                    //No current rating so create new record
+                    Rating newRating = new Rating
+                    {
+                        IdeaID = ideaID,
+                        RegisteredStaffID = staffID,
+                        Vote = voteValue
+                    };
 
-                db.Ratings.InsertOnSubmit(newRating);
+                    db.Ratings.InsertOnSubmit(newRating);
+                }
+                db.SubmitChanges();
+                return true;
             }
-            db.SubmitChanges();
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
 
         /// <summary>
@@ -461,9 +684,19 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public bool[] GetVotesForIdeaByStaff(int ideaID, int staffID)
         {
-            //1 for upvote, 0 for downvote
-            var db = Connection();
-            return (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select (bool)r.Vote).ToArray();
+            try
+            {
+                //1 for upvote, 0 for downvote
+                var db = Connection();
+                return (from r in db.Ratings where r.IdeaID == ideaID && r.RegisteredStaffID == staffID select (bool)r.Vote).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool[])GetDefaultReturn(typeof(bool[]));
+            }
+
+
 
             //loop through list here and return tupe of upvote/downvote?
         }
@@ -476,10 +709,71 @@ namespace EnterpriseCourseworkWebForm
         /// <returns></returns>
         static public List<Rating> GetVotesForIdea(int ideaID)
         {
-            //1 for upvote, 0 for downvote
-            var db = Connection();
-            return (from r in db.Ratings where r.IdeaID == ideaID select r).ToList();
+            try
+            {
+                //1 for upvote, 0 for downvote
+                var db = Connection();
+                return (from r in db.Ratings where r.IdeaID == ideaID select r).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (List<Rating>)GetDefaultReturn(typeof(List<Rating>));
+            }
 
+        }
+        #endregion
+
+        #region Report
+
+        static public bool InsertReport(int rStaffID, int ideaID, string desc, string status)
+        {
+            try { 
+            var db = Connection();
+            Report report = new Report
+            {
+                RegisteredStaffID = rStaffID,
+                IdeaID = ideaID,
+                Description = desc,
+                Status = status
+            };
+                db.Reports.InsertOnSubmit(report);
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
+        }
+
+        static public List<Report> GetAllReports()
+        {
+            try
+            {
+                var db = Connection();
+                return (from r in db.Reports select r).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (List<Report>)GetDefaultReturn(typeof(List<Report>));
+            }
+        }
+
+        static public List<Report> GetAllReportsWithStatus(string status)
+        {
+            try
+            {
+                var db = Connection();
+                return (from r in db.Reports where r.Status == status select r).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (List<Report>)GetDefaultReturn(typeof(List<Report>));
+            }
         }
         #endregion
     }
