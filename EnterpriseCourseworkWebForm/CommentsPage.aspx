@@ -304,6 +304,18 @@ h3 {
 padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding-left:3%; color: #060360;
 
 }
+
+.pagination { display: inline-block;
+}
+
+    .pagination a {
+        color: #060360;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+
 .ComentsSubmitPanel{
     /*background-color: #606EB2;*/
     height: 300px;
@@ -493,8 +505,17 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 
 
                      
-                     <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
-
+                     <%--<b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>--%>
+                     <div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>
 
                    </div>
 
