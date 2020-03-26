@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ReportPage" %>
+﻿=<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportPage.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ReportPage" %>
 
 <!DOCTYPE html>
 
@@ -336,7 +336,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
 <div class="uniLogoBanner" style="padding:0 16px;">
   <%--<h4>Resize the browser window to see the effect.</h4>--%>
       <section>
-            <img src="Images/u18.png" />
+        
         </section>
 </div>
 
@@ -363,7 +363,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <div class="row">
                        
 
-                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
+                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" OnClick="Button2_Click" />
 
                         </div>
                         
@@ -382,6 +382,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
   
     <div class="containerFooter">
  <div id="useful-links"> 
+ <h4>Useful linkseful-links"> 
  <h4>Useful links</h4> 
 <div class="list-wrapper">
  <ul> 

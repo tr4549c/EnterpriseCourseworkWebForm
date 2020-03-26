@@ -13,5 +13,30 @@ namespace EnterpriseCourseworkWebForm
         {
 
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+            DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
+            var report = new Report
+            {
+                //RegisteredStaffID = (int)Session["RStaffID"],
+                RegisteredStaffID = 1,
+                //IdeaID = ?
+                IdeaID = 2,
+                Description = TextBoxReportInput.Text.ToString(),
+                Status = "Pending"
+            };
+            try
+            {
+                context.Reports.InsertOnSubmit(report);
+                context.SubmitChanges();
+                Response.Redirect("WebForm2.aspx");
+            }
+            catch (Exception em)
+            {
+                System.Console.WriteLine(em);
+            }
+        }
     }
 }

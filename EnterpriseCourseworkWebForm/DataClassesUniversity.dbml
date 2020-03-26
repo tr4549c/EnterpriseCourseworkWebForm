@@ -21,14 +21,6 @@
       <Association Name="Role_AllStaff" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Category" Member="Categories">
-    <Type Name="Category">
-      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CategoryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Category_DepartmentCategory" Member="DepartmentCategories" ThisKey="CategoryID" OtherKey="CategoryID" Type="DepartmentCategory" />
-      <Association Name="Category_Idea" Member="Ideas" ThisKey="CategoryID" OtherKey="CategoryID" Type="Idea" />
-    </Type>
-  </Table>
   <Table Name="dbo.Comment" Member="Comments">
     <Type Name="Comment">
       <Column Name="CommentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -53,8 +45,8 @@
       <Column Name="DepartmentCategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DepartmentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Category_DepartmentCategory" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
       <Association Name="Department_DepartmentCategory" Member="Department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="Department" IsForeignKey="true" />
+      <Association Name="Category_DepartmentCategory" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Document" Member="Documents">
@@ -78,8 +70,8 @@
       <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
       <Association Name="Idea_Rating" Member="Ratings" ThisKey="IdeaID" OtherKey="IdeaID" Type="Rating" />
       <Association Name="Idea_Report" Member="Reports" ThisKey="IdeaID" OtherKey="IdeaID" Type="Report" />
-      <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
       <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+      <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.LoginSession" Member="LoginSessions">
@@ -129,6 +121,14 @@
       <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Idea_Report" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Category_DepartmentCategory" Member="DepartmentCategories" ThisKey="CategoryID" OtherKey="CategoryID" Type="DepartmentCategory" />
+      <Association Name="Category_Idea" Member="Ideas" ThisKey="CategoryID" OtherKey="CategoryID" Type="Idea" />
     </Type>
   </Table>
 </Database>
