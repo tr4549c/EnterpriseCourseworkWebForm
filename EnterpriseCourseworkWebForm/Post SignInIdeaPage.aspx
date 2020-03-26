@@ -373,11 +373,19 @@ h3 {
     color:white;
 }
 
-.list-wrapper{
-
+.pagination { display: inline-block;
 }
 
-    .ThumbsDwnBtn {}
+    .pagination a {
+        color: #060360;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+
+
+
 
 </style>
 </head>
@@ -542,7 +550,17 @@ h3 {
 
                      
                      <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
-                     <b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>
+                     <%--<b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>--%>
+                     <div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>
 
 
                    </div>
