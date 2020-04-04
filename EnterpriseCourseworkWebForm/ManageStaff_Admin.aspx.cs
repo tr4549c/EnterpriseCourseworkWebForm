@@ -17,39 +17,15 @@ namespace EnterpriseCourseworkWebForm
 
         protected void grdPivot_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
-            if (e.CommandName == "Disable")
+            bool isEnabled = false;
+            if (e.CommandName == "Enable")
             {
-                
-                var query = from r in context.RegisteredStaffs
-                            where r.RegisteredStaffID == Convert.ToInt32(e.CommandArgument) + 1
-                            select r;
-                foreach (var q in query)
-                {
-                    if (q.IsEnabled == true)
-                    {
-                        q.IsEnabled = false;
-                    }
-                    context.SubmitChanges();
-                    Response.Redirect("ManageStaff_Admin.aspx");
-                }
+                isEnabled = true;
             }
-            else if (e.CommandName == "Enable")
-            {
-       
-                var query = from r in context.RegisteredStaffs
-                            where r.RegisteredStaffID == Convert.ToInt32(e.CommandArgument) + 1
-                            select r;
-                foreach (var q in query)
-                {
-                    if (q.IsEnabled == false)
-                    {
-                        q.IsEnabled = true;
-                    }
-                    context.SubmitChanges();
-                    Response.Redirect("ManageStaff_Admin.aspx");
-                }
-            }
+
+            Database.UpdateAccountEnabled(Convert.ToInt32(e.CommandArgument) + 1, isEnabled);
+            Response.Redirect("ManageStaff_Admin.aspx");
+            
         }
 
         protected void grdPivot_SelectedIndexChanged(object sender, EventArgs e)

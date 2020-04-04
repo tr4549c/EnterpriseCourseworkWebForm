@@ -375,7 +375,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                          <%--<asp:TextBox ID="TextBoxIdeaInput" runat="server" BackColor="White" CssClass="SubmitIdeaTextBox" Font-Italic="True" Font-Names="Work Sans" ForeColor="#060360" TextMode="MultiLine"></asp:TextBox>--%>
                          <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
                         <br />
-                        <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional)- Uppload Supporting Evidence:"></asp:Label>
+                        <asp:Label ID="Lable22" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" (Optional) - Upload Supporting Evidence:"></asp:Label>
                         <br />
                         <br />
                         <asp:FileUpload ID="FileUpload1" runat="server" BackColor="White" BorderStyle="None" Font-Names="Work Sans" Width="399px" BorderColor="White" CssClass="FileUpploadIdea" />
@@ -385,7 +385,7 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <div class="row">
                         <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
 
-                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" />
+                        <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" OnClick="Button2_Click" />
 
                         </div>
                         

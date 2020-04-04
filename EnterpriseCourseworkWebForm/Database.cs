@@ -387,7 +387,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public bool InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
+        static public int InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
             try
             {
@@ -405,12 +405,12 @@ namespace EnterpriseCourseworkWebForm
 
                 db.Ideas.InsertOnSubmit(newIdea);
                 db.SubmitChanges();
-                return true;
+                return newIdea.IdeaID;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return (bool)GetDefaultReturn(typeof(bool));
+                return (int)GetDefaultReturn(typeof(int));
             }
         }
 
