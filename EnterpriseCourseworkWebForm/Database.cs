@@ -555,7 +555,7 @@ namespace EnterpriseCourseworkWebForm
         /// </summary>
         /// <param name="ideaID"></param>
         /// <returns></returns>
-        static public object[] SelectComment(int ideaID)
+        static public object[] SelectAllComments(int ideaID)
         {
             try
             {
@@ -566,6 +566,24 @@ namespace EnterpriseCourseworkWebForm
             {
                 Console.WriteLine(e);
                 return (object[])GetDefaultReturn(typeof(object[]));
+            }
+        }
+
+        static public string[][] SelectAllCommentsByMostRecent(int ideaID) {
+            try
+            {
+                var db = Connection();
+                return (from c in db.Comments
+                        join r in db.RegisteredStaffs on c.RegisteredStaffID equals r.RegisteredStaffID
+                        join s in db.AllStaffs on r.AllStaffID equals s.AllStaffID
+                        where c.IdeaID == ideaID
+                        orderby c.CommentID descending
+                        select new string[] { c.CommentID.ToString(), c.Comment1, c.IsAnnonymous.ToString(), s.Name }).ToArray();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (string[][])GetDefaultReturn(typeof(string[][]));
             }
         }
         #endregion
