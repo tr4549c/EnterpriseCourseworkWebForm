@@ -33,6 +33,9 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertAllStaff(AllStaff instance);
     partial void UpdateAllStaff(AllStaff instance);
     partial void DeleteAllStaff(AllStaff instance);
+    partial void InsertCategory(Category instance);
+    partial void UpdateCategory(Category instance);
+    partial void DeleteCategory(Category instance);
     partial void InsertComment(Comment instance);
     partial void UpdateComment(Comment instance);
     partial void DeleteComment(Comment instance);
@@ -45,6 +48,9 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertDocument(Document instance);
     partial void UpdateDocument(Document instance);
     partial void DeleteDocument(Document instance);
+    partial void InsertIdea(Idea instance);
+    partial void UpdateIdea(Idea instance);
+    partial void DeleteIdea(Idea instance);
     partial void InsertLoginSession(LoginSession instance);
     partial void UpdateLoginSession(LoginSession instance);
     partial void DeleteLoginSession(LoginSession instance);
@@ -54,18 +60,12 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertRegisteredStaff(RegisteredStaff instance);
     partial void UpdateRegisteredStaff(RegisteredStaff instance);
     partial void DeleteRegisteredStaff(RegisteredStaff instance);
-    partial void InsertRole(Role instance);
-    partial void UpdateRole(Role instance);
-    partial void DeleteRole(Role instance);
     partial void InsertReport(Report instance);
     partial void UpdateReport(Report instance);
     partial void DeleteReport(Report instance);
-    partial void InsertCategory(Category instance);
-    partial void UpdateCategory(Category instance);
-    partial void DeleteCategory(Category instance);
-    partial void InsertIdea(Idea instance);
-    partial void UpdateIdea(Idea instance);
-    partial void DeleteIdea(Idea instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
     #endregion
 		
 		public DataClassesUniversityDataContext() : 
@@ -106,6 +106,14 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		public System.Data.Linq.Table<Category> Categories
+		{
+			get
+			{
+				return this.GetTable<Category>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Comment> Comments
 		{
 			get
@@ -138,6 +146,14 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		public System.Data.Linq.Table<Idea> Ideas
+		{
+			get
+			{
+				return this.GetTable<Idea>();
+			}
+		}
+		
 		public System.Data.Linq.Table<LoginSession> LoginSessions
 		{
 			get
@@ -162,14 +178,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		public System.Data.Linq.Table<Role> Roles
-		{
-			get
-			{
-				return this.GetTable<Role>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Report> Reports
 		{
 			get
@@ -178,19 +186,11 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		public System.Data.Linq.Table<Category> Categories
+		public System.Data.Linq.Table<Role> Roles
 		{
 			get
 			{
-				return this.GetTable<Category>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Idea> Ideas
-		{
-			get
-			{
-				return this.GetTable<Idea>();
+				return this.GetTable<Role>();
 			}
 		}
 	}
@@ -511,6 +511,172 @@ namespace EnterpriseCourseworkWebForm
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Category")]
+	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CategoryID;
+		
+		private string _CategoryName;
+		
+		private string _ClosureDate;
+		
+		private EntitySet<DepartmentCategory> _DepartmentCategories;
+		
+		private EntitySet<Idea> _Ideas;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCategoryIDChanging(int value);
+    partial void OnCategoryIDChanged();
+    partial void OnCategoryNameChanging(string value);
+    partial void OnCategoryNameChanged();
+    partial void OnClosureDateChanging(string value);
+    partial void OnClosureDateChanged();
+    #endregion
+		
+		public Category()
+		{
+			this._DepartmentCategories = new EntitySet<DepartmentCategory>(new Action<DepartmentCategory>(this.attach_DepartmentCategories), new Action<DepartmentCategory>(this.detach_DepartmentCategories));
+			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					this.OnCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryID = value;
+					this.SendPropertyChanged("CategoryID");
+					this.OnCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="VarChar(50)")]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this.OnCategoryNameChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryName = value;
+					this.SendPropertyChanged("CategoryName");
+					this.OnCategoryNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClosureDate", DbType="VarChar(50)")]
+		public string ClosureDate
+		{
+			get
+			{
+				return this._ClosureDate;
+			}
+			set
+			{
+				if ((this._ClosureDate != value))
+				{
+					this.OnClosureDateChanging(value);
+					this.SendPropertyChanging();
+					this._ClosureDate = value;
+					this.SendPropertyChanged("ClosureDate");
+					this.OnClosureDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_DepartmentCategory", Storage="_DepartmentCategories", ThisKey="CategoryID", OtherKey="CategoryID")]
+		public EntitySet<DepartmentCategory> DepartmentCategories
+		{
+			get
+			{
+				return this._DepartmentCategories;
+			}
+			set
+			{
+				this._DepartmentCategories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Idea", Storage="_Ideas", ThisKey="CategoryID", OtherKey="CategoryID")]
+		public EntitySet<Idea> Ideas
+		{
+			get
+			{
+				return this._Ideas;
+			}
+			set
+			{
+				this._Ideas.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_DepartmentCategories(DepartmentCategory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = this;
+		}
+		
+		private void detach_DepartmentCategories(DepartmentCategory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = null;
+		}
+		
+		private void attach_Ideas(Idea entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = this;
+		}
+		
+		private void detach_Ideas(Idea entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
 	public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -527,9 +693,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private bool _IsAnnonymous;
 		
-		private EntityRef<RegisteredStaff> _RegisteredStaff;
-		
 		private EntityRef<Idea> _Idea;
+		
+		private EntityRef<RegisteredStaff> _RegisteredStaff;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -549,8 +715,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		public Comment()
 		{
-			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
 			this._Idea = default(EntityRef<Idea>);
+			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
 			OnCreated();
 		}
 		
@@ -662,40 +828,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Comment", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
-		public RegisteredStaff RegisteredStaff
-		{
-			get
-			{
-				return this._RegisteredStaff.Entity;
-			}
-			set
-			{
-				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._RegisteredStaff.Entity = null;
-						previousValue.Comments.Remove(this);
-					}
-					this._RegisteredStaff.Entity = value;
-					if ((value != null))
-					{
-						value.Comments.Add(this);
-						this._RegisteredStaffID = value.RegisteredStaffID;
-					}
-					else
-					{
-						this._RegisteredStaffID = default(int);
-					}
-					this.SendPropertyChanged("RegisteredStaff");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Comment", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
 		public Idea Idea
 		{
@@ -726,6 +858,40 @@ namespace EnterpriseCourseworkWebForm
 						this._IdeaID = default(int);
 					}
 					this.SendPropertyChanged("Idea");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Comment", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		public RegisteredStaff RegisteredStaff
+		{
+			get
+			{
+				return this._RegisteredStaff.Entity;
+			}
+			set
+			{
+				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RegisteredStaff.Entity = null;
+						previousValue.Comments.Remove(this);
+					}
+					this._RegisteredStaff.Entity = value;
+					if ((value != null))
+					{
+						value.Comments.Add(this);
+						this._RegisteredStaffID = value.RegisteredStaffID;
+					}
+					else
+					{
+						this._RegisteredStaffID = default(int);
+					}
+					this.SendPropertyChanged("RegisteredStaff");
 				}
 			}
 		}
@@ -905,9 +1071,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private System.Nullable<int> _DepartmentID;
 		
-		private EntityRef<Department> _Department;
-		
 		private EntityRef<Category> _Category;
+		
+		private EntityRef<Department> _Department;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -923,8 +1089,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		public DepartmentCategory()
 		{
-			this._Department = default(EntityRef<Department>);
 			this._Category = default(EntityRef<Category>);
+			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
 		
@@ -996,40 +1162,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_DepartmentCategory", Storage="_Department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
-		public Department Department
-		{
-			get
-			{
-				return this._Department.Entity;
-			}
-			set
-			{
-				Department previousValue = this._Department.Entity;
-				if (((previousValue != value) 
-							|| (this._Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Department.Entity = null;
-						previousValue.DepartmentCategories.Remove(this);
-					}
-					this._Department.Entity = value;
-					if ((value != null))
-					{
-						value.DepartmentCategories.Add(this);
-						this._DepartmentID = value.DepartmentID;
-					}
-					else
-					{
-						this._DepartmentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Department");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_DepartmentCategory", Storage="_Category", ThisKey="CategoryID", OtherKey="CategoryID", IsForeignKey=true)]
 		public Category Category
 		{
@@ -1060,6 +1192,40 @@ namespace EnterpriseCourseworkWebForm
 						this._CategoryID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Category");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_DepartmentCategory", Storage="_Department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
+		public Department Department
+		{
+			get
+			{
+				return this._Department.Entity;
+			}
+			set
+			{
+				Department previousValue = this._Department.Entity;
+				if (((previousValue != value) 
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Department.Entity = null;
+						previousValue.DepartmentCategories.Remove(this);
+					}
+					this._Department.Entity = value;
+					if ((value != null))
+					{
+						value.DepartmentCategories.Add(this);
+						this._DepartmentID = value.DepartmentID;
+					}
+					else
+					{
+						this._DepartmentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Department");
 				}
 			}
 		}
@@ -1233,1146 +1399,6 @@ namespace EnterpriseCourseworkWebForm
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoginSession")]
-	public partial class LoginSession : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _LoginSessionID;
-		
-		private System.Nullable<int> _RegisteredStaffID;
-		
-		private string _Date;
-		
-		private string _Browser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnLoginSessionIDChanging(int value);
-    partial void OnLoginSessionIDChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
-    partial void OnRegisteredStaffIDChanged();
-    partial void OnDateChanging(string value);
-    partial void OnDateChanged();
-    partial void OnBrowserChanging(string value);
-    partial void OnBrowserChanged();
-    #endregion
-		
-		public LoginSession()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSessionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int LoginSessionID
-		{
-			get
-			{
-				return this._LoginSessionID;
-			}
-			set
-			{
-				if ((this._LoginSessionID != value))
-				{
-					this.OnLoginSessionIDChanging(value);
-					this.SendPropertyChanging();
-					this._LoginSessionID = value;
-					this.SendPropertyChanged("LoginSessionID");
-					this.OnLoginSessionIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
-		{
-			get
-			{
-				return this._RegisteredStaffID;
-			}
-			set
-			{
-				if ((this._RegisteredStaffID != value))
-				{
-					this.OnRegisteredStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._RegisteredStaffID = value;
-					this.SendPropertyChanged("RegisteredStaffID");
-					this.OnRegisteredStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="VarChar(50)")]
-		public string Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Browser", DbType="VarChar(50)")]
-		public string Browser
-		{
-			get
-			{
-				return this._Browser;
-			}
-			set
-			{
-				if ((this._Browser != value))
-				{
-					this.OnBrowserChanging(value);
-					this.SendPropertyChanging();
-					this._Browser = value;
-					this.SendPropertyChanged("Browser");
-					this.OnBrowserChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rating")]
-	public partial class Rating : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RatingID;
-		
-		private int _IdeaID;
-		
-		private int _RegisteredStaffID;
-		
-		private bool _Vote;
-		
-		private EntityRef<RegisteredStaff> _RegisteredStaff;
-		
-		private EntityRef<Idea> _Idea;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRatingIDChanging(int value);
-    partial void OnRatingIDChanged();
-    partial void OnIdeaIDChanging(int value);
-    partial void OnIdeaIDChanged();
-    partial void OnRegisteredStaffIDChanging(int value);
-    partial void OnRegisteredStaffIDChanged();
-    partial void OnVoteChanging(bool value);
-    partial void OnVoteChanged();
-    #endregion
-		
-		public Rating()
-		{
-			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
-			this._Idea = default(EntityRef<Idea>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatingID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int RatingID
-		{
-			get
-			{
-				return this._RatingID;
-			}
-			set
-			{
-				if ((this._RatingID != value))
-				{
-					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRatingIDChanging(value);
-					this.SendPropertyChanging();
-					this._RatingID = value;
-					this.SendPropertyChanged("RatingID");
-					this.OnRatingIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL")]
-		public int IdeaID
-		{
-			get
-			{
-				return this._IdeaID;
-			}
-			set
-			{
-				if ((this._IdeaID != value))
-				{
-					if (this._Idea.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdeaIDChanging(value);
-					this.SendPropertyChanging();
-					this._IdeaID = value;
-					this.SendPropertyChanged("IdeaID");
-					this.OnIdeaIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
-		public int RegisteredStaffID
-		{
-			get
-			{
-				return this._RegisteredStaffID;
-			}
-			set
-			{
-				if ((this._RegisteredStaffID != value))
-				{
-					this.OnRegisteredStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._RegisteredStaffID = value;
-					this.SendPropertyChanged("RegisteredStaffID");
-					this.OnRegisteredStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vote", DbType="Bit NOT NULL")]
-		public bool Vote
-		{
-			get
-			{
-				return this._Vote;
-			}
-			set
-			{
-				if ((this._Vote != value))
-				{
-					this.OnVoteChanging(value);
-					this.SendPropertyChanging();
-					this._Vote = value;
-					this.SendPropertyChanged("Vote");
-					this.OnVoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_RegisteredStaff", ThisKey="RatingID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
-		public RegisteredStaff RegisteredStaff
-		{
-			get
-			{
-				return this._RegisteredStaff.Entity;
-			}
-			set
-			{
-				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._RegisteredStaff.Entity = null;
-						previousValue.Rating = null;
-					}
-					this._RegisteredStaff.Entity = value;
-					if ((value != null))
-					{
-						value.Rating = this;
-						this._RatingID = value.RegisteredStaffID;
-					}
-					else
-					{
-						this._RatingID = default(int);
-					}
-					this.SendPropertyChanged("RegisteredStaff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
-		public Idea Idea
-		{
-			get
-			{
-				return this._Idea.Entity;
-			}
-			set
-			{
-				Idea previousValue = this._Idea.Entity;
-				if (((previousValue != value) 
-							|| (this._Idea.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Idea.Entity = null;
-						previousValue.Ratings.Remove(this);
-					}
-					this._Idea.Entity = value;
-					if ((value != null))
-					{
-						value.Ratings.Add(this);
-						this._IdeaID = value.IdeaID;
-					}
-					else
-					{
-						this._IdeaID = default(int);
-					}
-					this.SendPropertyChanged("Idea");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RegisteredStaff")]
-	public partial class RegisteredStaff : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RegisteredStaffID;
-		
-		private string _RUsername;
-		
-		private string _RPassword;
-		
-		private int _AllStaffID;
-		
-		private bool _IsActive;
-		
-		private bool _IsEnabled;
-		
-		private EntitySet<Comment> _Comments;
-		
-		private EntityRef<Rating> _Rating;
-		
-		private EntitySet<Idea> _Ideas;
-		
-		private EntityRef<AllStaff> _AllStaff;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRegisteredStaffIDChanging(int value);
-    partial void OnRegisteredStaffIDChanged();
-    partial void OnRUsernameChanging(string value);
-    partial void OnRUsernameChanged();
-    partial void OnRPasswordChanging(string value);
-    partial void OnRPasswordChanged();
-    partial void OnAllStaffIDChanging(int value);
-    partial void OnAllStaffIDChanged();
-    partial void OnIsActiveChanging(bool value);
-    partial void OnIsActiveChanged();
-    partial void OnIsEnabledChanging(bool value);
-    partial void OnIsEnabledChanged();
-    #endregion
-		
-		public RegisteredStaff()
-		{
-			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-			this._Rating = default(EntityRef<Rating>);
-			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
-			this._AllStaff = default(EntityRef<AllStaff>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int RegisteredStaffID
-		{
-			get
-			{
-				return this._RegisteredStaffID;
-			}
-			set
-			{
-				if ((this._RegisteredStaffID != value))
-				{
-					this.OnRegisteredStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._RegisteredStaffID = value;
-					this.SendPropertyChanged("RegisteredStaffID");
-					this.OnRegisteredStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RUsername", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string RUsername
-		{
-			get
-			{
-				return this._RUsername;
-			}
-			set
-			{
-				if ((this._RUsername != value))
-				{
-					this.OnRUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._RUsername = value;
-					this.SendPropertyChanged("RUsername");
-					this.OnRUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RPassword", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string RPassword
-		{
-			get
-			{
-				return this._RPassword;
-			}
-			set
-			{
-				if ((this._RPassword != value))
-				{
-					this.OnRPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._RPassword = value;
-					this.SendPropertyChanged("RPassword");
-					this.OnRPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllStaffID", DbType="Int NOT NULL")]
-		public int AllStaffID
-		{
-			get
-			{
-				return this._AllStaffID;
-			}
-			set
-			{
-				if ((this._AllStaffID != value))
-				{
-					if (this._AllStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAllStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._AllStaffID = value;
-					this.SendPropertyChanged("AllStaffID");
-					this.OnAllStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
-		public bool IsActive
-		{
-			get
-			{
-				return this._IsActive;
-			}
-			set
-			{
-				if ((this._IsActive != value))
-				{
-					this.OnIsActiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsActive = value;
-					this.SendPropertyChanged("IsActive");
-					this.OnIsActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEnabled", DbType="Bit NOT NULL")]
-		public bool IsEnabled
-		{
-			get
-			{
-				return this._IsEnabled;
-			}
-			set
-			{
-				if ((this._IsEnabled != value))
-				{
-					this.OnIsEnabledChanging(value);
-					this.SendPropertyChanging();
-					this._IsEnabled = value;
-					this.SendPropertyChanged("IsEnabled");
-					this.OnIsEnabledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Comment", Storage="_Comments", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<Comment> Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				this._Comments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_Rating", ThisKey="RegisteredStaffID", OtherKey="RatingID", IsUnique=true, IsForeignKey=false)]
-		public Rating Rating
-		{
-			get
-			{
-				return this._Rating.Entity;
-			}
-			set
-			{
-				Rating previousValue = this._Rating.Entity;
-				if (((previousValue != value) 
-							|| (this._Rating.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Rating.Entity = null;
-						previousValue.RegisteredStaff = null;
-					}
-					this._Rating.Entity = value;
-					if ((value != null))
-					{
-						value.RegisteredStaff = this;
-					}
-					this.SendPropertyChanged("Rating");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_Ideas", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<Idea> Ideas
-		{
-			get
-			{
-				return this._Ideas;
-			}
-			set
-			{
-				this._Ideas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AllStaff_RegisteredStaff", Storage="_AllStaff", ThisKey="AllStaffID", OtherKey="AllStaffID", IsForeignKey=true)]
-		public AllStaff AllStaff
-		{
-			get
-			{
-				return this._AllStaff.Entity;
-			}
-			set
-			{
-				AllStaff previousValue = this._AllStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._AllStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AllStaff.Entity = null;
-						previousValue.RegisteredStaffs.Remove(this);
-					}
-					this._AllStaff.Entity = value;
-					if ((value != null))
-					{
-						value.RegisteredStaffs.Add(this);
-						this._AllStaffID = value.AllStaffID;
-					}
-					else
-					{
-						this._AllStaffID = default(int);
-					}
-					this.SendPropertyChanged("AllStaff");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = this;
-		}
-		
-		private void detach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = null;
-		}
-		
-		private void attach_Ideas(Idea entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = this;
-		}
-		
-		private void detach_Ideas(Idea entity)
-		{
-			this.SendPropertyChanging();
-			entity.RegisteredStaff = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
-	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RoleID;
-		
-		private string _RoleName;
-		
-		private EntitySet<AllStaff> _AllStaffs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnRoleNameChanging(string value);
-    partial void OnRoleNameChanged();
-    #endregion
-		
-		public Role()
-		{
-			this._AllStaffs = new EntitySet<AllStaff>(new Action<AllStaff>(this.attach_AllStaffs), new Action<AllStaff>(this.detach_AllStaffs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="VarChar(50)")]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this.OnRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._RoleName = value;
-					this.SendPropertyChanged("RoleName");
-					this.OnRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_AllStaff", Storage="_AllStaffs", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<AllStaff> AllStaffs
-		{
-			get
-			{
-				return this._AllStaffs;
-			}
-			set
-			{
-				this._AllStaffs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_AllStaffs(AllStaff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = this;
-		}
-		
-		private void detach_AllStaffs(AllStaff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report")]
-	public partial class Report : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ReportID;
-		
-		private System.Nullable<int> _RegisteredStaffID;
-		
-		private System.Nullable<int> _IdeaID;
-		
-		private string _Description;
-		
-		private string _Status;
-		
-		private EntityRef<Idea> _Idea;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnReportIDChanging(int value);
-    partial void OnReportIDChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
-    partial void OnRegisteredStaffIDChanged();
-    partial void OnIdeaIDChanging(System.Nullable<int> value);
-    partial void OnIdeaIDChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    #endregion
-		
-		public Report()
-		{
-			this._Idea = default(EntityRef<Idea>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReportID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ReportID
-		{
-			get
-			{
-				return this._ReportID;
-			}
-			set
-			{
-				if ((this._ReportID != value))
-				{
-					this.OnReportIDChanging(value);
-					this.SendPropertyChanging();
-					this._ReportID = value;
-					this.SendPropertyChanged("ReportID");
-					this.OnReportIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
-		{
-			get
-			{
-				return this._RegisteredStaffID;
-			}
-			set
-			{
-				if ((this._RegisteredStaffID != value))
-				{
-					this.OnRegisteredStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._RegisteredStaffID = value;
-					this.SendPropertyChanged("RegisteredStaffID");
-					this.OnRegisteredStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int")]
-		public System.Nullable<int> IdeaID
-		{
-			get
-			{
-				return this._IdeaID;
-			}
-			set
-			{
-				if ((this._IdeaID != value))
-				{
-					if (this._Idea.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdeaIDChanging(value);
-					this.SendPropertyChanging();
-					this._IdeaID = value;
-					this.SendPropertyChanged("IdeaID");
-					this.OnIdeaIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(MAX)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Report", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
-		public Idea Idea
-		{
-			get
-			{
-				return this._Idea.Entity;
-			}
-			set
-			{
-				Idea previousValue = this._Idea.Entity;
-				if (((previousValue != value) 
-							|| (this._Idea.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Idea.Entity = null;
-						previousValue.Reports.Remove(this);
-					}
-					this._Idea.Entity = value;
-					if ((value != null))
-					{
-						value.Reports.Add(this);
-						this._IdeaID = value.IdeaID;
-					}
-					else
-					{
-						this._IdeaID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Idea");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Category")]
-	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CategoryID;
-		
-		private string _CategoryName;
-		
-		private string _ClosureDate;
-		
-		private EntitySet<DepartmentCategory> _DepartmentCategories;
-		
-		private EntitySet<Idea> _Ideas;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCategoryIDChanging(int value);
-    partial void OnCategoryIDChanged();
-    partial void OnCategoryNameChanging(string value);
-    partial void OnCategoryNameChanged();
-    partial void OnClosureDateChanging(string value);
-    partial void OnClosureDateChanged();
-    #endregion
-		
-		public Category()
-		{
-			this._DepartmentCategories = new EntitySet<DepartmentCategory>(new Action<DepartmentCategory>(this.attach_DepartmentCategories), new Action<DepartmentCategory>(this.detach_DepartmentCategories));
-			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CategoryID
-		{
-			get
-			{
-				return this._CategoryID;
-			}
-			set
-			{
-				if ((this._CategoryID != value))
-				{
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="VarChar(50)")]
-		public string CategoryName
-		{
-			get
-			{
-				return this._CategoryName;
-			}
-			set
-			{
-				if ((this._CategoryName != value))
-				{
-					this.OnCategoryNameChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryName = value;
-					this.SendPropertyChanged("CategoryName");
-					this.OnCategoryNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClosureDate", DbType="VarChar(50)")]
-		public string ClosureDate
-		{
-			get
-			{
-				return this._ClosureDate;
-			}
-			set
-			{
-				if ((this._ClosureDate != value))
-				{
-					this.OnClosureDateChanging(value);
-					this.SendPropertyChanging();
-					this._ClosureDate = value;
-					this.SendPropertyChanged("ClosureDate");
-					this.OnClosureDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_DepartmentCategory", Storage="_DepartmentCategories", ThisKey="CategoryID", OtherKey="CategoryID")]
-		public EntitySet<DepartmentCategory> DepartmentCategories
-		{
-			get
-			{
-				return this._DepartmentCategories;
-			}
-			set
-			{
-				this._DepartmentCategories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Idea", Storage="_Ideas", ThisKey="CategoryID", OtherKey="CategoryID")]
-		public EntitySet<Idea> Ideas
-		{
-			get
-			{
-				return this._Ideas;
-			}
-			set
-			{
-				this._Ideas.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_DepartmentCategories(DepartmentCategory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = this;
-		}
-		
-		private void detach_DepartmentCategories(DepartmentCategory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = null;
-		}
-		
-		private void attach_Ideas(Idea entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = this;
-		}
-		
-		private void detach_Ideas(Idea entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = null;
 		}
 	}
 	
@@ -2773,6 +1799,1118 @@ namespace EnterpriseCourseworkWebForm
 		{
 			this.SendPropertyChanging();
 			entity.Idea = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoginSession")]
+	public partial class LoginSession : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _LoginSessionID;
+		
+		private int _RegisteredStaffID;
+		
+		private string _Date;
+		
+		private string _Browser;
+		
+		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLoginSessionIDChanging(int value);
+    partial void OnLoginSessionIDChanged();
+    partial void OnRegisteredStaffIDChanging(int value);
+    partial void OnRegisteredStaffIDChanged();
+    partial void OnDateChanging(string value);
+    partial void OnDateChanged();
+    partial void OnBrowserChanging(string value);
+    partial void OnBrowserChanged();
+    #endregion
+		
+		public LoginSession()
+		{
+			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginSessionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int LoginSessionID
+		{
+			get
+			{
+				return this._LoginSessionID;
+			}
+			set
+			{
+				if ((this._LoginSessionID != value))
+				{
+					this.OnLoginSessionIDChanging(value);
+					this.SendPropertyChanging();
+					this._LoginSessionID = value;
+					this.SendPropertyChanged("LoginSessionID");
+					this.OnLoginSessionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
+		{
+			get
+			{
+				return this._RegisteredStaffID;
+			}
+			set
+			{
+				if ((this._RegisteredStaffID != value))
+				{
+					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRegisteredStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredStaffID = value;
+					this.SendPropertyChanged("RegisteredStaffID");
+					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Browser", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Browser
+		{
+			get
+			{
+				return this._Browser;
+			}
+			set
+			{
+				if ((this._Browser != value))
+				{
+					this.OnBrowserChanging(value);
+					this.SendPropertyChanging();
+					this._Browser = value;
+					this.SendPropertyChanged("Browser");
+					this.OnBrowserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_LoginSession", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		public RegisteredStaff RegisteredStaff
+		{
+			get
+			{
+				return this._RegisteredStaff.Entity;
+			}
+			set
+			{
+				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RegisteredStaff.Entity = null;
+						previousValue.LoginSessions.Remove(this);
+					}
+					this._RegisteredStaff.Entity = value;
+					if ((value != null))
+					{
+						value.LoginSessions.Add(this);
+						this._RegisteredStaffID = value.RegisteredStaffID;
+					}
+					else
+					{
+						this._RegisteredStaffID = default(int);
+					}
+					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rating")]
+	public partial class Rating : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RatingID;
+		
+		private int _IdeaID;
+		
+		private int _RegisteredStaffID;
+		
+		private bool _Vote;
+		
+		private EntityRef<Idea> _Idea;
+		
+		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRatingIDChanging(int value);
+    partial void OnRatingIDChanged();
+    partial void OnIdeaIDChanging(int value);
+    partial void OnIdeaIDChanged();
+    partial void OnRegisteredStaffIDChanging(int value);
+    partial void OnRegisteredStaffIDChanged();
+    partial void OnVoteChanging(bool value);
+    partial void OnVoteChanged();
+    #endregion
+		
+		public Rating()
+		{
+			this._Idea = default(EntityRef<Idea>);
+			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RatingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RatingID
+		{
+			get
+			{
+				return this._RatingID;
+			}
+			set
+			{
+				if ((this._RatingID != value))
+				{
+					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRatingIDChanging(value);
+					this.SendPropertyChanging();
+					this._RatingID = value;
+					this.SendPropertyChanged("RatingID");
+					this.OnRatingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL")]
+		public int IdeaID
+		{
+			get
+			{
+				return this._IdeaID;
+			}
+			set
+			{
+				if ((this._IdeaID != value))
+				{
+					if (this._Idea.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdeaIDChanging(value);
+					this.SendPropertyChanging();
+					this._IdeaID = value;
+					this.SendPropertyChanged("IdeaID");
+					this.OnIdeaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
+		{
+			get
+			{
+				return this._RegisteredStaffID;
+			}
+			set
+			{
+				if ((this._RegisteredStaffID != value))
+				{
+					this.OnRegisteredStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredStaffID = value;
+					this.SendPropertyChanged("RegisteredStaffID");
+					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Vote", DbType="Bit NOT NULL")]
+		public bool Vote
+		{
+			get
+			{
+				return this._Vote;
+			}
+			set
+			{
+				if ((this._Vote != value))
+				{
+					this.OnVoteChanging(value);
+					this.SendPropertyChanging();
+					this._Vote = value;
+					this.SendPropertyChanged("Vote");
+					this.OnVoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
+		public Idea Idea
+		{
+			get
+			{
+				return this._Idea.Entity;
+			}
+			set
+			{
+				Idea previousValue = this._Idea.Entity;
+				if (((previousValue != value) 
+							|| (this._Idea.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Idea.Entity = null;
+						previousValue.Ratings.Remove(this);
+					}
+					this._Idea.Entity = value;
+					if ((value != null))
+					{
+						value.Ratings.Add(this);
+						this._IdeaID = value.IdeaID;
+					}
+					else
+					{
+						this._IdeaID = default(int);
+					}
+					this.SendPropertyChanged("Idea");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_RegisteredStaff", ThisKey="RatingID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		public RegisteredStaff RegisteredStaff
+		{
+			get
+			{
+				return this._RegisteredStaff.Entity;
+			}
+			set
+			{
+				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RegisteredStaff.Entity = null;
+						previousValue.Rating = null;
+					}
+					this._RegisteredStaff.Entity = value;
+					if ((value != null))
+					{
+						value.Rating = this;
+						this._RatingID = value.RegisteredStaffID;
+					}
+					else
+					{
+						this._RatingID = default(int);
+					}
+					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RegisteredStaff")]
+	public partial class RegisteredStaff : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RegisteredStaffID;
+		
+		private string _RUsername;
+		
+		private string _RPassword;
+		
+		private int _AllStaffID;
+		
+		private bool _IsActive;
+		
+		private bool _IsEnabled;
+		
+		private EntitySet<Comment> _Comments;
+		
+		private EntitySet<Idea> _Ideas;
+		
+		private EntitySet<LoginSession> _LoginSessions;
+		
+		private EntityRef<Rating> _Rating;
+		
+		private EntitySet<Report> _Reports;
+		
+		private EntityRef<AllStaff> _AllStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRegisteredStaffIDChanging(int value);
+    partial void OnRegisteredStaffIDChanged();
+    partial void OnRUsernameChanging(string value);
+    partial void OnRUsernameChanged();
+    partial void OnRPasswordChanging(string value);
+    partial void OnRPasswordChanged();
+    partial void OnAllStaffIDChanging(int value);
+    partial void OnAllStaffIDChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    partial void OnIsEnabledChanging(bool value);
+    partial void OnIsEnabledChanged();
+    #endregion
+		
+		public RegisteredStaff()
+		{
+			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
+			this._LoginSessions = new EntitySet<LoginSession>(new Action<LoginSession>(this.attach_LoginSessions), new Action<LoginSession>(this.detach_LoginSessions));
+			this._Rating = default(EntityRef<Rating>);
+			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
+			this._AllStaff = default(EntityRef<AllStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int RegisteredStaffID
+		{
+			get
+			{
+				return this._RegisteredStaffID;
+			}
+			set
+			{
+				if ((this._RegisteredStaffID != value))
+				{
+					this.OnRegisteredStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredStaffID = value;
+					this.SendPropertyChanged("RegisteredStaffID");
+					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RUsername", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string RUsername
+		{
+			get
+			{
+				return this._RUsername;
+			}
+			set
+			{
+				if ((this._RUsername != value))
+				{
+					this.OnRUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._RUsername = value;
+					this.SendPropertyChanged("RUsername");
+					this.OnRUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RPassword", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string RPassword
+		{
+			get
+			{
+				return this._RPassword;
+			}
+			set
+			{
+				if ((this._RPassword != value))
+				{
+					this.OnRPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._RPassword = value;
+					this.SendPropertyChanged("RPassword");
+					this.OnRPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AllStaffID", DbType="Int NOT NULL")]
+		public int AllStaffID
+		{
+			get
+			{
+				return this._AllStaffID;
+			}
+			set
+			{
+				if ((this._AllStaffID != value))
+				{
+					if (this._AllStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAllStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._AllStaffID = value;
+					this.SendPropertyChanged("AllStaffID");
+					this.OnAllStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEnabled", DbType="Bit NOT NULL")]
+		public bool IsEnabled
+		{
+			get
+			{
+				return this._IsEnabled;
+			}
+			set
+			{
+				if ((this._IsEnabled != value))
+				{
+					this.OnIsEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._IsEnabled = value;
+					this.SendPropertyChanged("IsEnabled");
+					this.OnIsEnabledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Comment", Storage="_Comments", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
+		public EntitySet<Comment> Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				this._Comments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_Ideas", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
+		public EntitySet<Idea> Ideas
+		{
+			get
+			{
+				return this._Ideas;
+			}
+			set
+			{
+				this._Ideas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_LoginSession", Storage="_LoginSessions", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
+		public EntitySet<LoginSession> LoginSessions
+		{
+			get
+			{
+				return this._LoginSessions;
+			}
+			set
+			{
+				this._LoginSessions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_Rating", ThisKey="RegisteredStaffID", OtherKey="RatingID", IsUnique=true, IsForeignKey=false)]
+		public Rating Rating
+		{
+			get
+			{
+				return this._Rating.Entity;
+			}
+			set
+			{
+				Rating previousValue = this._Rating.Entity;
+				if (((previousValue != value) 
+							|| (this._Rating.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Rating.Entity = null;
+						previousValue.RegisteredStaff = null;
+					}
+					this._Rating.Entity = value;
+					if ((value != null))
+					{
+						value.RegisteredStaff = this;
+					}
+					this.SendPropertyChanged("Rating");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Report", Storage="_Reports", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
+		public EntitySet<Report> Reports
+		{
+			get
+			{
+				return this._Reports;
+			}
+			set
+			{
+				this._Reports.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AllStaff_RegisteredStaff", Storage="_AllStaff", ThisKey="AllStaffID", OtherKey="AllStaffID", IsForeignKey=true)]
+		public AllStaff AllStaff
+		{
+			get
+			{
+				return this._AllStaff.Entity;
+			}
+			set
+			{
+				AllStaff previousValue = this._AllStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._AllStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AllStaff.Entity = null;
+						previousValue.RegisteredStaffs.Remove(this);
+					}
+					this._AllStaff.Entity = value;
+					if ((value != null))
+					{
+						value.RegisteredStaffs.Add(this);
+						this._AllStaffID = value.AllStaffID;
+					}
+					else
+					{
+						this._AllStaffID = default(int);
+					}
+					this.SendPropertyChanged("AllStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = this;
+		}
+		
+		private void detach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = null;
+		}
+		
+		private void attach_Ideas(Idea entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = this;
+		}
+		
+		private void detach_Ideas(Idea entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = null;
+		}
+		
+		private void attach_LoginSessions(LoginSession entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = this;
+		}
+		
+		private void detach_LoginSessions(LoginSession entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = null;
+		}
+		
+		private void attach_Reports(Report entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = this;
+		}
+		
+		private void detach_Reports(Report entity)
+		{
+			this.SendPropertyChanging();
+			entity.RegisteredStaff = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report")]
+	public partial class Report : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ReportID;
+		
+		private int _RegisteredStaffID;
+		
+		private int _IdeaID;
+		
+		private string _Description;
+		
+		private string _Status;
+		
+		private EntityRef<Idea> _Idea;
+		
+		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReportIDChanging(int value);
+    partial void OnReportIDChanged();
+    partial void OnRegisteredStaffIDChanging(int value);
+    partial void OnRegisteredStaffIDChanged();
+    partial void OnIdeaIDChanging(int value);
+    partial void OnIdeaIDChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    #endregion
+		
+		public Report()
+		{
+			this._Idea = default(EntityRef<Idea>);
+			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReportID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ReportID
+		{
+			get
+			{
+				return this._ReportID;
+			}
+			set
+			{
+				if ((this._ReportID != value))
+				{
+					this.OnReportIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReportID = value;
+					this.SendPropertyChanged("ReportID");
+					this.OnReportIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
+		{
+			get
+			{
+				return this._RegisteredStaffID;
+			}
+			set
+			{
+				if ((this._RegisteredStaffID != value))
+				{
+					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRegisteredStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredStaffID = value;
+					this.SendPropertyChanged("RegisteredStaffID");
+					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL")]
+		public int IdeaID
+		{
+			get
+			{
+				return this._IdeaID;
+			}
+			set
+			{
+				if ((this._IdeaID != value))
+				{
+					if (this._Idea.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdeaIDChanging(value);
+					this.SendPropertyChanging();
+					this._IdeaID = value;
+					this.SendPropertyChanged("IdeaID");
+					this.OnIdeaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Report", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
+		public Idea Idea
+		{
+			get
+			{
+				return this._Idea.Entity;
+			}
+			set
+			{
+				Idea previousValue = this._Idea.Entity;
+				if (((previousValue != value) 
+							|| (this._Idea.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Idea.Entity = null;
+						previousValue.Reports.Remove(this);
+					}
+					this._Idea.Entity = value;
+					if ((value != null))
+					{
+						value.Reports.Add(this);
+						this._IdeaID = value.IdeaID;
+					}
+					else
+					{
+						this._IdeaID = default(int);
+					}
+					this.SendPropertyChanged("Idea");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Report", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		public RegisteredStaff RegisteredStaff
+		{
+			get
+			{
+				return this._RegisteredStaff.Entity;
+			}
+			set
+			{
+				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RegisteredStaff.Entity = null;
+						previousValue.Reports.Remove(this);
+					}
+					this._RegisteredStaff.Entity = value;
+					if ((value != null))
+					{
+						value.Reports.Add(this);
+						this._RegisteredStaffID = value.RegisteredStaffID;
+					}
+					else
+					{
+						this._RegisteredStaffID = default(int);
+					}
+					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoleID;
+		
+		private string _RoleName;
+		
+		private EntitySet<AllStaff> _AllStaffs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    #endregion
+		
+		public Role()
+		{
+			this._AllStaffs = new EntitySet<AllStaff>(new Action<AllStaff>(this.attach_AllStaffs), new Action<AllStaff>(this.detach_AllStaffs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="VarChar(50)")]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_AllStaff", Storage="_AllStaffs", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<AllStaff> AllStaffs
+		{
+			get
+			{
+				return this._AllStaffs;
+			}
+			set
+			{
+				this._AllStaffs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AllStaffs(AllStaff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = this;
+		}
+		
+		private void detach_AllStaffs(AllStaff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = null;
 		}
 	}
 }
