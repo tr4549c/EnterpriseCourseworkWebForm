@@ -451,7 +451,7 @@ h3 {
              <asp:DropDownList ID="DropDownList2" runat="server" Height="38px" class="dropdown2">
              </asp:DropDownList>
              <br /><br /><br />
-             <asp:Button ID="Button2" class="button11" runat="server" Text="Submit an Idea" />
+             <asp:Button ID="Button2" class="button11" runat="server" Text="Submit an Idea" OnClick="Button2_Click" />
             <br /><br />
 
 

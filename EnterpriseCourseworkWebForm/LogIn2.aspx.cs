@@ -30,15 +30,14 @@ namespace EnterpriseCourseworkWebForm
                 Database.InsertLogin(staffID);
 
 
-                if (Database.GetAccountEnabled(staffID))
-                {
-                    
-                    Response.Redirect("TestWebForm.aspx");
-                }
-                else
-                {
+                //if (Database.GetAccountEnabled(staffID))
+               // {
+                    Response.Redirect("Post SignInIdeaPage.aspx");
+               // }
+                //else
+               // {
                     //Display error (Account not enabled)  (difference between enabled and active?)
-                }
+                //}
             }
             else
             {

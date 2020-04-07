@@ -15,18 +15,9 @@ namespace EnterpriseCourseworkWebForm
         {
             
         }
-        //static private DataClassesUniversityDataContext Connection()
-       // {
-         //   return new DataClassesUniversityDataContext();
-       // }
+    
         protected void Button2_Click(object sender, EventArgs e)
         {
-            //int categoryID = 2; //Passed from previous page?
-            //string title = "Title"; //No entry box --> is this even needed?
-
-            //I HAVE NOT TESTED ANY OF THIS. (not fully implemented)
-
-            
             string[] validFileTypes = { ".pdf", ".doc", ".docx", ".png", ".jpj", ".jpeg", };      //TEMP Whatever files are meant to be
             bool allFilesValid = true;
            
@@ -49,29 +40,35 @@ namespace EnterpriseCourseworkWebForm
 
             if (allFilesValid)
             {
-                //insert into database
-               // int ideaId= Database.InsertIdea(DropDownList2.SelectedIndex, TextBox1.Text, TextBoxIdeaInput.Text, (int)Session["RStaffID"], checkbox1.Checked, false);
-               
-                    DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
-
-                   var newIdea = new Idea
+                if (Database.IsEnabled((int)Session["RStaffID"]))
+                {
+                    if (Database.IsOpen(Convert.ToInt32(DropDownList2.Text)) == true)
                     {
-                        CategoryID = DropDownList2.SelectedIndex,
-                       
-                        Description = TextBoxIdeaInput.Text,
-                        RegisteredStaffID = 2,
-                        IsAnnonymous = false,
-                        IsHidden =false
-                    };
-                try
-                {
-                    context.Ideas.InsertOnSubmit(newIdea);
-                    context.SubmitChanges();
+                        //insert into database
+                        if (CheckBox2.Checked)
+                        {
+                            if (Database.InsertIdea(Convert.ToInt32(DropDownList2.Text), TextBox1.Text, TextBoxIdeaInput.Text, (int)Session["RStaffID"], checkbox1.Checked, false))
+                            {
+                                MessageBox.Show("ok");
+                            }
+                            else
+                            {
+                                Label1.Text = "Failed to submit idea";
+                            }
+                        }
+                        else
+                        {
+                            Label1.Text = "Please accept T&C.";
+                        }
+                    }
+                    else
+                    {
+                        Label1.Text = "Category is closed";
+                    }
                 }
-                catch (Exception a)
+                else
                 {
-                    Console.WriteLine(a);
-      
+                    Label1.Text = "You are not allowed to post ideas";
                 }
                 //foreach (HttpPostedFile file in FileUpload1.PostedFiles)
                 //{

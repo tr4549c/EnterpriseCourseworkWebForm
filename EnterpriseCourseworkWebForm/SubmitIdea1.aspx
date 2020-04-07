@@ -392,9 +392,17 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <br /><br />
                         <br />
                         <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
+                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%> <br />
+                             <asp:CheckBox ID="CheckBox2" CssClass="CheckBoxIdea"  runat="server" AutoPostBack="True" TextAlign="Right" Text="I accept " /><a class="CheckBoxIdea" href="TermsAndCond.aspx">Terms and conditions.</a>
+
 
                         <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" OnClick="Button2_Click" />
+                            <asp:Label ID="Label1" runat="server" Text="" CssClass="h2"></asp:Label>
+                            <br />
+                           
+                            <br />
+                            <br />
+
 
                         </div>
                         

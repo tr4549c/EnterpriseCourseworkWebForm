@@ -74,6 +74,12 @@ namespace EnterpriseCourseworkWebForm
                 return (int) GetDefaultReturn(typeof(int));
             }
         }
+
+        static public bool IsEnabled(int id)
+        {
+            var db = Connection();
+            return (Convert.ToBoolean((from r in db.RegisteredStaffs where r.RegisteredStaffID == id select r.IsEnabled.ToString()).FirstOrDefault()));
+        }
         #endregion
 
         #region Register
@@ -350,6 +356,21 @@ namespace EnterpriseCourseworkWebForm
                 return (bool)GetDefaultReturn(typeof(bool));
             }
         }
+
+        static public bool IsOpen(int id)
+        {
+            var db = Connection();
+            string date = (from e in db.Categories where e.CategoryID == id select e.ClosureDate.ToString()).FirstOrDefault();
+            if(DateTime.Compare(Convert.ToDateTime(date), DateTime.Today) > 0 )
+                {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region DepartmentCategory
@@ -390,7 +411,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public int InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
+        static public bool InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
             try
             {
@@ -408,12 +429,14 @@ namespace EnterpriseCourseworkWebForm
 
                 db.Ideas.InsertOnSubmit(newIdea);
                 db.SubmitChanges();
-                return newIdea.IdeaID;
+                //return newIdea.IdeaID;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return (int)GetDefaultReturn(typeof(int));
+                return false;
+               //return (int)GetDefaultReturn(typeof(int));
             }
         }
 
