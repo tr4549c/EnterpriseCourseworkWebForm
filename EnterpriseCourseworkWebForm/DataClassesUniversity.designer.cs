@@ -2620,6 +2620,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _CategoryName;
 		
+		private string _ClosureDate;
+		
 		private EntitySet<DepartmentCategory> _DepartmentCategories;
 		
 		private EntitySet<Idea> _Ideas;
@@ -2632,6 +2634,8 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCategoryIDChanged();
     partial void OnCategoryNameChanging(string value);
     partial void OnCategoryNameChanged();
+    partial void OnClosureDateChanging(string value);
+    partial void OnClosureDateChanged();
     #endregion
 		
 		public Category()
@@ -2677,6 +2681,26 @@ namespace EnterpriseCourseworkWebForm
 					this._CategoryName = value;
 					this.SendPropertyChanged("CategoryName");
 					this.OnCategoryNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClosureDate", DbType="VarChar(50)")]
+		public string ClosureDate
+		{
+			get
+			{
+				return this._ClosureDate;
+			}
+			set
+			{
+				if ((this._ClosureDate != value))
+				{
+					this.OnClosureDateChanging(value);
+					this.SendPropertyChanging();
+					this._ClosureDate = value;
+					this.SendPropertyChanged("ClosureDate");
+					this.OnClosureDateChanged();
 				}
 			}
 		}

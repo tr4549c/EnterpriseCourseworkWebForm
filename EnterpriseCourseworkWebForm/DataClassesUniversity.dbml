@@ -120,6 +120,7 @@
     <Type Name="Category">
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CategoryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ClosureDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Category_DepartmentCategory" Member="DepartmentCategories" ThisKey="CategoryID" OtherKey="CategoryID" Type="DepartmentCategory" />
       <Association Name="Category_Idea" Member="Ideas" ThisKey="CategoryID" OtherKey="CategoryID" Type="Idea" />
     </Type>

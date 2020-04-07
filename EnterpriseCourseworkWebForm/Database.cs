@@ -328,14 +328,16 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
-        static public bool InsertCategory(string name)
+        static public bool InsertCategory(string name, string closure)
         {
             try
             {
                 var db = Connection();
                 var category = new Category
                 {
-                    CategoryName = name
+                    CategoryName = name,
+                    ClosureDate = closure
+                    
                 };
                 db.Categories.InsertOnSubmit(category);
                 db.SubmitChanges();

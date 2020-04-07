@@ -398,6 +398,8 @@
                                 <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" ReadOnly="True" SortExpression="CategoryID" />
                                 <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" SortExpression="CategoryName" />
                                 
+                                <asp:BoundField DataField="ClosureDate" HeaderText="ClosureDate" SortExpression="ClosureDate" />
+                                
                                 <asp:ButtonField CommandName="Delete" Text="Delete" />
                                 
                                 <asp:ButtonField CommandName="Edit" ShowHeader="True" Text="Edit" />
@@ -411,9 +413,13 @@
                         <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="EnterpriseCourseworkWebForm.DataClassesUniversityDataContext" EntityTypeName="" TableName="Categories" EnableDelete="True" EnableInsert="True" EnableUpdate="True">
                         </asp:LinqDataSource>
                         <br /><br /><br />
-                        <asp:TextBox id="TextBoxCategory" CssClass="TextArea" runat="server"></asp:TextBox><br />
-                      <asp:Button id="Button1" CssClass="btnSubmitIdea" runat="server" Text="Add Category" OnClick="Button1_Click" />
-                        
+                         <span class="h2">Category Name:</span>  
+                        <asp:TextBox id="TextBoxCategory" CssClass="TextArea" runat="server"></asp:TextBox><br /><br />
+                        <span class="h2">Closure Date:</span>  
+                        <asp:TextBox ID ="TextBoxClosure" CssClass="TextArea" runat="server"></asp:TextBox><br /><br />
+                      <asp:Button id="Button1" CssClass="btnSubmitIdea" runat="server" Text="Add Category" OnClick="Button1_Click" /><br />
+
+                        <asp:Label ID="Label1" runat="server" Text="" CssClass="h2"></asp:Label>
                     </asp:Panel>
                 </div>
             </div>
