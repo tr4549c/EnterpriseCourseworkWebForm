@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageCategories_QAManager.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ManageCategories_QAManager" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MaintainSystemData_Admin.aspx.cs" Inherits="EnterpriseCourseworkWebForm.MaintainSystemData_Admin" %>
 
 <!DOCTYPE html>
 
@@ -6,8 +6,7 @@
 <head runat="server">
     <title></title>
 
-
- <style>
+    <style>
         body {
             margin: 0;
         }
@@ -352,12 +351,13 @@
         width: 80%;
         margin-left: 10%;
     }
+
+        
     </style>
 
 </head>
 <body>
     <form id="form1" runat="server">
-
         <ul class="topnav">
             <li><a href="#home">Home</a></li>
             <li><a href="#news">News</a></li>
@@ -379,61 +379,42 @@
                 <div class="div2">
                     <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server">
 
-                        <h2 style="color: #060360; font-family: Antonio; float: left; padding-left: 2.5%">Categories</h2>
+                        <h2 style="color: #060360; font-family: Antonio; float: left; padding-left: 2.5%; width: 289px;">Maintain System Data</h2>
                         <br />
                         <br />
                         <br />
                         <br />
                         <br />
 
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Style="padding-left: 2.5%" Text=" Add/Edit/Delete Category "></asp:Label>
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Style="padding-left: 2.5%" Text=" Edit Staff Details "></asp:Label>
 
                         <br />
                         <br />
                         <br />
 
 
-                        <asp:GridView ID="grd" runat="server" class="datagridview" DataSourceID="LinqDataSource1" AutoGenerateColumns="False" DataKeyNames="CategoryID" OnSelectedIndexChanged="grd_SelectedIndexChanged" OnRowCommand="grd_RowCommand" >
+                        <asp:GridView ID="GridView1" runat="server" class="datagridview" AutoGenerateColumns="False" DataSourceID="LinqDataSource1" DataKeyNames="RegisteredStaffID" AllowPaging="True">
                             <Columns>
-                                <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" ReadOnly="True" SortExpression="CategoryID" />
-                                <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" SortExpression="CategoryName" />
-                                <a href="LogIn2.aspx.cs">LogIn2.aspx.cs</a>
+                                 <asp:BoundField DataField="RegisteredStaffID" HeaderText="RegisteredStaffID" ReadOnly="True" SortExpression="RegisteredStaffID"  />
+                                <asp:BoundField DataField="RUsername" HeaderText="RUsername" SortExpression="RUsername"  />
                                 
-                                <asp:BoundField DataField="ClosureDate" HeaderText="ClosureDate" SortExpression="ClosureDate" />
-                                
-                                <asp:ButtonField CommandName="Delete" Text="Delete" />
-                                
-                                <asp:ButtonField CommandName="Edit" ShowHeader="True" Text="Edit" />
-                                <asp:ButtonField CommandName="Update" Text="Save" />
-                                
+                                <asp:BoundField DataField="RPassword" HeaderText="RPassword" SortExpression="RPassword" />
+   
+                                 <asp:CommandField ShowEditButton="True" />
+
                             </Columns>
                         </asp:GridView>
                         
                       
-                        
-                        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="EnterpriseCourseworkWebForm.DataClassesUniversityDataContext" EntityTypeName="" TableName="Categories" EnableDelete="True" EnableInsert="True" EnableUpdate="True">
+                    
+                        <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="EnterpriseCourseworkWebForm.DataClassesUniversityDataContext" EntityTypeName="" TableName="RegisteredStaffs" EnableUpdate="True">
                         </asp:LinqDataSource>
-                        <br /><br /><br />
-                         <span class="h2">Category Name:</span>  
-                        <asp:TextBox id="TextBoxCategory" CssClass="TextArea" runat="server"></asp:TextBox><br /><br />
-                        <span class="h2">Closure Date:</span>  
-                        <asp:TextBox ID ="TextBoxClosure" CssClass="TextArea" runat="server"></asp:TextBox><br /><br />
-                      <asp:Button id="Button1" CssClass="btnSubmitIdea" runat="server" Text="Add Category" OnClick="Button1_Click" /><br />
-
-                        <asp:Label ID="Label1" runat="server" Text="" CssClass="h2"></asp:Label>
+                        
                     </asp:Panel>
                 </div>
             </div>
 
         </div>
-
-
-
-
-
-
-
-
     </form>
 </body>
 </html>

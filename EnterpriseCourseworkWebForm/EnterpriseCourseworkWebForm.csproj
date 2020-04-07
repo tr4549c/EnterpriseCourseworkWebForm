@@ -167,6 +167,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Images\grePic.jpg" />
     <Content Include="Images\searchbuttonWhite.jpg" />
+    <Content Include="MaintainSystemData_Admin.aspx" />
     <Content Include="ManageCategories_QAManager.aspx" />
     <Content Include="ManageStaff_Admin.aspx" />
     <Content Include="ReportPage.aspx" />
@@ -236,6 +237,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainSystemData_Admin.aspx.cs">
+      <DependentUpon>MaintainSystemData_Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintainSystemData_Admin.aspx.designer.cs">
+      <DependentUpon>MaintainSystemData_Admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageCategories_QAManager.aspx.cs">
       <DependentUpon>ManageCategories_QAManager.aspx</DependentUpon>
