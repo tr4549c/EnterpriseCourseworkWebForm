@@ -45,9 +45,6 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertDocument(Document instance);
     partial void UpdateDocument(Document instance);
     partial void DeleteDocument(Document instance);
-    partial void InsertIdea(Idea instance);
-    partial void UpdateIdea(Idea instance);
-    partial void DeleteIdea(Idea instance);
     partial void InsertLoginSession(LoginSession instance);
     partial void UpdateLoginSession(LoginSession instance);
     partial void DeleteLoginSession(LoginSession instance);
@@ -66,6 +63,9 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
+    partial void InsertIdea(Idea instance);
+    partial void UpdateIdea(Idea instance);
+    partial void DeleteIdea(Idea instance);
     #endregion
 		
 		public DataClassesUniversityDataContext() : 
@@ -138,14 +138,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		public System.Data.Linq.Table<Idea> Ideas
-		{
-			get
-			{
-				return this.GetTable<Idea>();
-			}
-		}
-		
 		public System.Data.Linq.Table<LoginSession> LoginSessions
 		{
 			get
@@ -191,6 +183,14 @@ namespace EnterpriseCourseworkWebForm
 			get
 			{
 				return this.GetTable<Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Idea> Ideas
+		{
+			get
+			{
+				return this.GetTable<Idea>();
 			}
 		}
 	}
@@ -527,9 +527,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private bool _IsAnnonymous;
 		
-		private EntityRef<Idea> _Idea;
-		
 		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+		private EntityRef<Idea> _Idea;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -549,8 +549,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		public Comment()
 		{
-			this._Idea = default(EntityRef<Idea>);
 			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			this._Idea = default(EntityRef<Idea>);
 			OnCreated();
 		}
 		
@@ -662,40 +662,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Comment", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
-		public Idea Idea
-		{
-			get
-			{
-				return this._Idea.Entity;
-			}
-			set
-			{
-				Idea previousValue = this._Idea.Entity;
-				if (((previousValue != value) 
-							|| (this._Idea.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Idea.Entity = null;
-						previousValue.Comments.Remove(this);
-					}
-					this._Idea.Entity = value;
-					if ((value != null))
-					{
-						value.Comments.Add(this);
-						this._IdeaID = value.IdeaID;
-					}
-					else
-					{
-						this._IdeaID = default(int);
-					}
-					this.SendPropertyChanged("Idea");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Comment", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
 		public RegisteredStaff RegisteredStaff
 		{
@@ -726,6 +692,40 @@ namespace EnterpriseCourseworkWebForm
 						this._RegisteredStaffID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Comment", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
+		public Idea Idea
+		{
+			get
+			{
+				return this._Idea.Entity;
+			}
+			set
+			{
+				Idea previousValue = this._Idea.Entity;
+				if (((previousValue != value) 
+							|| (this._Idea.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Idea.Entity = null;
+						previousValue.Comments.Remove(this);
+					}
+					this._Idea.Entity = value;
+					if ((value != null))
+					{
+						value.Comments.Add(this);
+						this._IdeaID = value.IdeaID;
+					}
+					else
+					{
+						this._IdeaID = default(int);
+					}
+					this.SendPropertyChanged("Idea");
 				}
 			}
 		}
@@ -1236,406 +1236,6 @@ namespace EnterpriseCourseworkWebForm
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Idea")]
-	public partial class Idea : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdeaID;
-		
-		private int _CategoryID;
-		
-		private string _Title;
-		
-		private string _Description;
-		
-		private int _RegisteredStaffID;
-		
-		private bool _IsAnnonymous;
-		
-		private bool _IsHidden;
-		
-		private EntitySet<Comment> _Comments;
-		
-		private EntitySet<Document> _Documents;
-		
-		private EntitySet<Rating> _Ratings;
-		
-		private EntitySet<Report> _Reports;
-		
-		private EntityRef<RegisteredStaff> _RegisteredStaff;
-		
-		private EntityRef<Category> _Category;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdeaIDChanging(int value);
-    partial void OnIdeaIDChanged();
-    partial void OnCategoryIDChanging(int value);
-    partial void OnCategoryIDChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnRegisteredStaffIDChanging(int value);
-    partial void OnRegisteredStaffIDChanged();
-    partial void OnIsAnnonymousChanging(bool value);
-    partial void OnIsAnnonymousChanged();
-    partial void OnIsHiddenChanging(bool value);
-    partial void OnIsHiddenChanged();
-    #endregion
-		
-		public Idea()
-		{
-			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
-			this._Ratings = new EntitySet<Rating>(new Action<Rating>(this.attach_Ratings), new Action<Rating>(this.detach_Ratings));
-			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
-			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
-			this._Category = default(EntityRef<Category>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int IdeaID
-		{
-			get
-			{
-				return this._IdeaID;
-			}
-			set
-			{
-				if ((this._IdeaID != value))
-				{
-					this.OnIdeaIDChanging(value);
-					this.SendPropertyChanging();
-					this._IdeaID = value;
-					this.SendPropertyChanged("IdeaID");
-					this.OnIdeaIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
-		public int CategoryID
-		{
-			get
-			{
-				return this._CategoryID;
-			}
-			set
-			{
-				if ((this._CategoryID != value))
-				{
-					if (this._Category.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
-		public int RegisteredStaffID
-		{
-			get
-			{
-				return this._RegisteredStaffID;
-			}
-			set
-			{
-				if ((this._RegisteredStaffID != value))
-				{
-					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRegisteredStaffIDChanging(value);
-					this.SendPropertyChanging();
-					this._RegisteredStaffID = value;
-					this.SendPropertyChanged("RegisteredStaffID");
-					this.OnRegisteredStaffIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit NOT NULL")]
-		public bool IsAnnonymous
-		{
-			get
-			{
-				return this._IsAnnonymous;
-			}
-			set
-			{
-				if ((this._IsAnnonymous != value))
-				{
-					this.OnIsAnnonymousChanging(value);
-					this.SendPropertyChanging();
-					this._IsAnnonymous = value;
-					this.SendPropertyChanged("IsAnnonymous");
-					this.OnIsAnnonymousChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsHidden", DbType="Bit NOT NULL")]
-		public bool IsHidden
-		{
-			get
-			{
-				return this._IsHidden;
-			}
-			set
-			{
-				if ((this._IsHidden != value))
-				{
-					this.OnIsHiddenChanging(value);
-					this.SendPropertyChanging();
-					this._IsHidden = value;
-					this.SendPropertyChanged("IsHidden");
-					this.OnIsHiddenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Comment", Storage="_Comments", ThisKey="IdeaID", OtherKey="IdeaID")]
-		public EntitySet<Comment> Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				this._Comments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Documents", ThisKey="IdeaID", OtherKey="IdeaID")]
-		public EntitySet<Document> Documents
-		{
-			get
-			{
-				return this._Documents;
-			}
-			set
-			{
-				this._Documents.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Ratings", ThisKey="IdeaID", OtherKey="IdeaID")]
-		public EntitySet<Rating> Ratings
-		{
-			get
-			{
-				return this._Ratings;
-			}
-			set
-			{
-				this._Ratings.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Report", Storage="_Reports", ThisKey="IdeaID", OtherKey="IdeaID")]
-		public EntitySet<Report> Reports
-		{
-			get
-			{
-				return this._Reports;
-			}
-			set
-			{
-				this._Reports.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
-		public RegisteredStaff RegisteredStaff
-		{
-			get
-			{
-				return this._RegisteredStaff.Entity;
-			}
-			set
-			{
-				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
-				if (((previousValue != value) 
-							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._RegisteredStaff.Entity = null;
-						previousValue.Ideas.Remove(this);
-					}
-					this._RegisteredStaff.Entity = value;
-					if ((value != null))
-					{
-						value.Ideas.Add(this);
-						this._RegisteredStaffID = value.RegisteredStaffID;
-					}
-					else
-					{
-						this._RegisteredStaffID = default(int);
-					}
-					this.SendPropertyChanged("RegisteredStaff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Idea", Storage="_Category", ThisKey="CategoryID", OtherKey="CategoryID", IsForeignKey=true)]
-		public Category Category
-		{
-			get
-			{
-				return this._Category.Entity;
-			}
-			set
-			{
-				Category previousValue = this._Category.Entity;
-				if (((previousValue != value) 
-							|| (this._Category.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Category.Entity = null;
-						previousValue.Ideas.Remove(this);
-					}
-					this._Category.Entity = value;
-					if ((value != null))
-					{
-						value.Ideas.Add(this);
-						this._CategoryID = value.CategoryID;
-					}
-					else
-					{
-						this._CategoryID = default(int);
-					}
-					this.SendPropertyChanged("Category");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = this;
-		}
-		
-		private void detach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = null;
-		}
-		
-		private void attach_Documents(Document entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = this;
-		}
-		
-		private void detach_Documents(Document entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = null;
-		}
-		
-		private void attach_Ratings(Rating entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = this;
-		}
-		
-		private void detach_Ratings(Rating entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = null;
-		}
-		
-		private void attach_Reports(Report entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = this;
-		}
-		
-		private void detach_Reports(Report entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoginSession")]
 	public partial class LoginSession : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1784,9 +1384,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private bool _Vote;
 		
-		private EntityRef<Idea> _Idea;
-		
 		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+		private EntityRef<Idea> _Idea;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1804,8 +1404,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		public Rating()
 		{
-			this._Idea = default(EntityRef<Idea>);
 			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			this._Idea = default(EntityRef<Idea>);
 			OnCreated();
 		}
 		
@@ -1897,40 +1497,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
-		public Idea Idea
-		{
-			get
-			{
-				return this._Idea.Entity;
-			}
-			set
-			{
-				Idea previousValue = this._Idea.Entity;
-				if (((previousValue != value) 
-							|| (this._Idea.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Idea.Entity = null;
-						previousValue.Ratings.Remove(this);
-					}
-					this._Idea.Entity = value;
-					if ((value != null))
-					{
-						value.Ratings.Add(this);
-						this._IdeaID = value.IdeaID;
-					}
-					else
-					{
-						this._IdeaID = default(int);
-					}
-					this.SendPropertyChanged("Idea");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_RegisteredStaff", ThisKey="RatingID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
 		public RegisteredStaff RegisteredStaff
 		{
@@ -1961,6 +1527,40 @@ namespace EnterpriseCourseworkWebForm
 						this._RatingID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
+		public Idea Idea
+		{
+			get
+			{
+				return this._Idea.Entity;
+			}
+			set
+			{
+				Idea previousValue = this._Idea.Entity;
+				if (((previousValue != value) 
+							|| (this._Idea.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Idea.Entity = null;
+						previousValue.Ratings.Remove(this);
+					}
+					this._Idea.Entity = value;
+					if ((value != null))
+					{
+						value.Ratings.Add(this);
+						this._IdeaID = value.IdeaID;
+					}
+					else
+					{
+						this._IdeaID = default(int);
+					}
+					this.SendPropertyChanged("Idea");
 				}
 			}
 		}
@@ -2006,9 +1606,9 @@ namespace EnterpriseCourseworkWebForm
 		
 		private EntitySet<Comment> _Comments;
 		
-		private EntitySet<Idea> _Ideas;
-		
 		private EntityRef<Rating> _Rating;
+		
+		private EntitySet<Idea> _Ideas;
 		
 		private EntityRef<AllStaff> _AllStaff;
 		
@@ -2033,8 +1633,8 @@ namespace EnterpriseCourseworkWebForm
 		public RegisteredStaff()
 		{
 			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
 			this._Rating = default(EntityRef<Rating>);
+			this._Ideas = new EntitySet<Idea>(new Action<Idea>(this.attach_Ideas), new Action<Idea>(this.detach_Ideas));
 			this._AllStaff = default(EntityRef<AllStaff>);
 			OnCreated();
 		}
@@ -2176,19 +1776,6 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_Ideas", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
-		public EntitySet<Idea> Ideas
-		{
-			get
-			{
-				return this._Ideas;
-			}
-			set
-			{
-				this._Ideas.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Rating", Storage="_Rating", ThisKey="RegisteredStaffID", OtherKey="RatingID", IsUnique=true, IsForeignKey=false)]
 		public Rating Rating
 		{
@@ -2215,6 +1802,19 @@ namespace EnterpriseCourseworkWebForm
 					}
 					this.SendPropertyChanged("Rating");
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_Ideas", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID")]
+		public EntitySet<Idea> Ideas
+		{
+			get
+			{
+				return this._Ideas;
+			}
+			set
+			{
+				this._Ideas.Assign(value);
 			}
 		}
 		
@@ -2773,6 +2373,406 @@ namespace EnterpriseCourseworkWebForm
 		{
 			this.SendPropertyChanging();
 			entity.Category = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Idea")]
+	public partial class Idea : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdeaID;
+		
+		private int _CategoryID;
+		
+		private string _Title;
+		
+		private string _Description;
+		
+		private System.Nullable<int> _RegisteredStaffID;
+		
+		private bool _IsAnnonymous;
+		
+		private bool _IsHidden;
+		
+		private EntitySet<Comment> _Comments;
+		
+		private EntitySet<Document> _Documents;
+		
+		private EntitySet<Rating> _Ratings;
+		
+		private EntitySet<Report> _Reports;
+		
+		private EntityRef<Category> _Category;
+		
+		private EntityRef<RegisteredStaff> _RegisteredStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdeaIDChanging(int value);
+    partial void OnIdeaIDChanged();
+    partial void OnCategoryIDChanging(int value);
+    partial void OnCategoryIDChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
+    partial void OnRegisteredStaffIDChanged();
+    partial void OnIsAnnonymousChanging(bool value);
+    partial void OnIsAnnonymousChanged();
+    partial void OnIsHiddenChanging(bool value);
+    partial void OnIsHiddenChanged();
+    #endregion
+		
+		public Idea()
+		{
+			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
+			this._Ratings = new EntitySet<Rating>(new Action<Rating>(this.attach_Ratings), new Action<Rating>(this.detach_Ratings));
+			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
+			this._Category = default(EntityRef<Category>);
+			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdeaID
+		{
+			get
+			{
+				return this._IdeaID;
+			}
+			set
+			{
+				if ((this._IdeaID != value))
+				{
+					this.OnIdeaIDChanging(value);
+					this.SendPropertyChanging();
+					this._IdeaID = value;
+					this.SendPropertyChanged("IdeaID");
+					this.OnIdeaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					if (this._Category.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryID = value;
+					this.SendPropertyChanged("CategoryID");
+					this.OnCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
+		public System.Nullable<int> RegisteredStaffID
+		{
+			get
+			{
+				return this._RegisteredStaffID;
+			}
+			set
+			{
+				if ((this._RegisteredStaffID != value))
+				{
+					if (this._RegisteredStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRegisteredStaffIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredStaffID = value;
+					this.SendPropertyChanged("RegisteredStaffID");
+					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnnonymous", DbType="Bit NOT NULL")]
+		public bool IsAnnonymous
+		{
+			get
+			{
+				return this._IsAnnonymous;
+			}
+			set
+			{
+				if ((this._IsAnnonymous != value))
+				{
+					this.OnIsAnnonymousChanging(value);
+					this.SendPropertyChanging();
+					this._IsAnnonymous = value;
+					this.SendPropertyChanged("IsAnnonymous");
+					this.OnIsAnnonymousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsHidden", DbType="Bit NOT NULL")]
+		public bool IsHidden
+		{
+			get
+			{
+				return this._IsHidden;
+			}
+			set
+			{
+				if ((this._IsHidden != value))
+				{
+					this.OnIsHiddenChanging(value);
+					this.SendPropertyChanging();
+					this._IsHidden = value;
+					this.SendPropertyChanged("IsHidden");
+					this.OnIsHiddenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Comment", Storage="_Comments", ThisKey="IdeaID", OtherKey="IdeaID")]
+		public EntitySet<Comment> Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				this._Comments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Documents", ThisKey="IdeaID", OtherKey="IdeaID")]
+		public EntitySet<Document> Documents
+		{
+			get
+			{
+				return this._Documents;
+			}
+			set
+			{
+				this._Documents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Ratings", ThisKey="IdeaID", OtherKey="IdeaID")]
+		public EntitySet<Rating> Ratings
+		{
+			get
+			{
+				return this._Ratings;
+			}
+			set
+			{
+				this._Ratings.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Report", Storage="_Reports", ThisKey="IdeaID", OtherKey="IdeaID")]
+		public EntitySet<Report> Reports
+		{
+			get
+			{
+				return this._Reports;
+			}
+			set
+			{
+				this._Reports.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Idea", Storage="_Category", ThisKey="CategoryID", OtherKey="CategoryID", IsForeignKey=true)]
+		public Category Category
+		{
+			get
+			{
+				return this._Category.Entity;
+			}
+			set
+			{
+				Category previousValue = this._Category.Entity;
+				if (((previousValue != value) 
+							|| (this._Category.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Category.Entity = null;
+						previousValue.Ideas.Remove(this);
+					}
+					this._Category.Entity = value;
+					if ((value != null))
+					{
+						value.Ideas.Add(this);
+						this._CategoryID = value.CategoryID;
+					}
+					else
+					{
+						this._CategoryID = default(int);
+					}
+					this.SendPropertyChanged("Category");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RegisteredStaff_Idea", Storage="_RegisteredStaff", ThisKey="RegisteredStaffID", OtherKey="RegisteredStaffID", IsForeignKey=true)]
+		public RegisteredStaff RegisteredStaff
+		{
+			get
+			{
+				return this._RegisteredStaff.Entity;
+			}
+			set
+			{
+				RegisteredStaff previousValue = this._RegisteredStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._RegisteredStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._RegisteredStaff.Entity = null;
+						previousValue.Ideas.Remove(this);
+					}
+					this._RegisteredStaff.Entity = value;
+					if ((value != null))
+					{
+						value.Ideas.Add(this);
+						this._RegisteredStaffID = value.RegisteredStaffID;
+					}
+					else
+					{
+						this._RegisteredStaffID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("RegisteredStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = this;
+		}
+		
+		private void detach_Comments(Comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = null;
+		}
+		
+		private void attach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = this;
+		}
+		
+		private void detach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = null;
+		}
+		
+		private void attach_Ratings(Rating entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = this;
+		}
+		
+		private void detach_Ratings(Rating entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = null;
+		}
+		
+		private void attach_Reports(Report entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = this;
+		}
+		
+		private void detach_Reports(Report entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = null;
 		}
 	}
 }

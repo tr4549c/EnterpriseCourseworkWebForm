@@ -21,8 +21,8 @@
       <Column Name="IdeaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Idea_Comment" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
       <Association Name="RegisteredStaff_Comment" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+      <Association Name="Idea_Comment" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Department" Member="Departments">
@@ -50,23 +50,6 @@
       <Association Name="Idea_Document" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Idea" Member="Ideas">
-    <Type Name="Idea">
-      <Column Name="IdeaID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="IsHidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Idea_Comment" Member="Comments" ThisKey="IdeaID" OtherKey="IdeaID" Type="Comment" />
-      <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
-      <Association Name="Idea_Rating" Member="Ratings" ThisKey="IdeaID" OtherKey="IdeaID" Type="Rating" />
-      <Association Name="Idea_Report" Member="Reports" ThisKey="IdeaID" OtherKey="IdeaID" Type="Report" />
-      <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
-      <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.LoginSession" Member="LoginSessions">
     <Type Name="LoginSession">
       <Column Name="LoginSessionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -81,8 +64,8 @@
       <Column Name="IdeaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Vote" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Idea_Rating" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
       <Association Name="RegisteredStaff_Rating" Member="RegisteredStaff" ThisKey="RatingID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
+      <Association Name="Idea_Rating" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.RegisteredStaff" Member="RegisteredStaffs">
@@ -94,8 +77,8 @@
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="RegisteredStaff_Comment" Member="Comments" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Comment" />
-      <Association Name="RegisteredStaff_Idea" Member="Ideas" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Idea" />
       <Association Name="RegisteredStaff_Rating" Member="Rating" ThisKey="RegisteredStaffID" OtherKey="RatingID" Type="Rating" Cardinality="One" />
+      <Association Name="RegisteredStaff_Idea" Member="Ideas" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="Idea" />
       <Association Name="AllStaff_RegisteredStaff" Member="AllStaff" ThisKey="AllStaffID" OtherKey="AllStaffID" Type="AllStaff" IsForeignKey="true" />
     </Type>
   </Table>
@@ -123,6 +106,23 @@
       <Column Name="ClosureDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Category_DepartmentCategory" Member="DepartmentCategories" ThisKey="CategoryID" OtherKey="CategoryID" Type="DepartmentCategory" />
       <Association Name="Category_Idea" Member="Ideas" ThisKey="CategoryID" OtherKey="CategoryID" Type="Idea" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Idea" Member="Ideas">
+    <Type Name="Idea">
+      <Column Name="IdeaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RegisteredStaffID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsHidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Idea_Comment" Member="Comments" ThisKey="IdeaID" OtherKey="IdeaID" Type="Comment" />
+      <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
+      <Association Name="Idea_Rating" Member="Ratings" ThisKey="IdeaID" OtherKey="IdeaID" Type="Rating" />
+      <Association Name="Idea_Report" Member="Reports" ThisKey="IdeaID" OtherKey="IdeaID" Type="Report" />
+      <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
+      <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
