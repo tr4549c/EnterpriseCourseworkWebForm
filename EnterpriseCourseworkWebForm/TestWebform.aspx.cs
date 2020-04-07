@@ -81,5 +81,82 @@ namespace EnterpriseCourseworkWebForm
             }
 
          }
+
+        protected void LinkButtonMore_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+        }
+
+        protected void ImageButtonThumbsUp_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void ImageButtonThumbsDwn_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton4_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
+
+        protected void LinkButton6_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn2.aspx");
+
+        }
     }
 }
