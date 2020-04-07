@@ -368,9 +368,9 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                       <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
                         <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
                          8<br />
-                         <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="CategoryID" DataValueField="CategoryID">
+                         <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="CategoryName" DataValueField="CategoryName">
                          </asp:DropDownList>
-                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:as6501hConnectionString %>" SelectCommand="SELECT [CategoryID] FROM [Category]"></asp:SqlDataSource>
+                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:as6501hConnectionString %>" SelectCommand="SELECT [CategoryName] FROM [Category]"></asp:SqlDataSource>
                          <br />
                         
                         <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
@@ -392,8 +392,8 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <br /><br />
                         <br />
                         <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%> <br />
-                             <asp:CheckBox ID="CheckBox2" CssClass="CheckBoxIdea"  runat="server" AutoPostBack="True" TextAlign="Right" Text="I accept " /><a class="CheckBoxIdea" href="TermsAndCond.aspx">Terms and conditions.</a>
+                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxIdea" runat="server" Text="Submit Anonymously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%> <br />
+                             <asp:CheckBox ID="CheckBox2" CssClass="CheckBoxIdea"  runat="server" TextAlign="Right" Text="I accept " /><a class="CheckBoxIdea" href="TermsAndCond.aspx">Terms and conditions.</a>
 
 
                         <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" OnClick="Button2_Click" />

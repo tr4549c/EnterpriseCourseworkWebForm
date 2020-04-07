@@ -33,11 +33,11 @@ namespace EnterpriseCourseworkWebForm
 
         static private object GetDefaultReturn(Type type)
         {
-            if (type.GetType() == typeof(bool))
+            if (type.Equals(typeof(bool)))
             {
                 return false;
             }
-            else if (type.GetType() == typeof(int))
+            else if (type.Equals(typeof(int)))
             {
                 return 0;
             }
@@ -77,8 +77,16 @@ namespace EnterpriseCourseworkWebForm
 
         static public bool IsEnabled(int id)
         {
-            var db = Connection();
-            return (Convert.ToBoolean((from r in db.RegisteredStaffs where r.RegisteredStaffID == id select r.IsEnabled.ToString()).FirstOrDefault()));
+            try
+            {
+                var db = Connection();
+                return (Convert.ToBoolean((from r in db.RegisteredStaffs where r.RegisteredStaffID == id select r.IsEnabled.ToString()).FirstOrDefault()));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
+            }
         }
         #endregion
 
@@ -359,15 +367,23 @@ namespace EnterpriseCourseworkWebForm
 
         static public bool IsOpen(int id)
         {
-            var db = Connection();
-            string date = (from e in db.Categories where e.CategoryID == id select e.ClosureDate.ToString()).FirstOrDefault();
-            if(DateTime.Compare(Convert.ToDateTime(date), DateTime.Today) > 0 )
-                {
-                return true;
-            }
-            else
+            try
             {
-                return false;
+                var db = Connection();
+                string date = (from e in db.Categories where e.CategoryID == id select e.ClosureDate.ToString()).FirstOrDefault();
+                if (DateTime.Compare(Convert.ToDateTime(date), DateTime.Today) > 0 || date == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
             }
         }
 
@@ -411,7 +427,7 @@ namespace EnterpriseCourseworkWebForm
         /// <param name="description"></param>
         /// <param name="staffID"></param>
         /// <param name="IsAnnonymous"></param>
-        static public bool InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
+        static public int InsertIdea(int categoryID, string title, string description, int staffID, bool IsAnnonymous, bool IsHidden)
         {
             try
             {
@@ -430,13 +446,12 @@ namespace EnterpriseCourseworkWebForm
                 db.Ideas.InsertOnSubmit(newIdea);
                 db.SubmitChanges();
                 //return newIdea.IdeaID;
-                return true;
+                return newIdea.IdeaID;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
-               //return (int)GetDefaultReturn(typeof(int));
+                return (int)GetDefaultReturn(typeof(int));
             }
         }
 
