@@ -367,11 +367,20 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                           
                       <%--  <h2 style="color: #060360; float:left; font-family:Antonio; padding-left:3%; width: 657px;">Idea- Submitting</h2>--%>
                         <asp:Label ID="LabelIdeaSubmitting" runat="server" class="IdeaTextLableH2" style="" Text ="Idea- Submitting"></asp:Label>
-                         8<br /><br />
+                         8<br />
+                         <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="SqlDataSource1" DataTextField="CategoryID" DataValueField="CategoryID">
+                         </asp:DropDownList>
+                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:as6501hConnectionString %>" SelectCommand="SELECT [CategoryID] FROM [Category]"></asp:SqlDataSource>
+                         <br />
                         
                         <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text =" Submit an Idea"></asp:Label>
                                
-                         <br /><br />
+                         <br />
+                               
+                         <br />
+                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                         <br />
+                         <br />
                          <%--<asp:TextBox ID="TextBoxIdeaInput" runat="server" BackColor="White" CssClass="SubmitIdeaTextBox" Font-Italic="True" Font-Names="Work Sans" ForeColor="#060360" TextMode="MultiLine"></asp:TextBox>--%>
                          <asp:TextBox ID="TextBoxIdeaInput" CssClass="TextArea" textmode="MultiLine" Rows="10" runat="server"></asp:TextBox> 
                         <br />

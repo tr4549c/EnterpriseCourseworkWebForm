@@ -4,27 +4,32 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace EnterpriseCourseworkWebForm
 {
+   
     public partial class SubmitIdea1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             
         }
-
+        //static private DataClassesUniversityDataContext Connection()
+       // {
+         //   return new DataClassesUniversityDataContext();
+       // }
         protected void Button2_Click(object sender, EventArgs e)
         {
-            int categoryID = 2; //Passed from previous page?
-            string title = "Title"; //No entry box --> is this even needed?
+            //int categoryID = 2; //Passed from previous page?
+            //string title = "Title"; //No entry box --> is this even needed?
 
             //I HAVE NOT TESTED ANY OF THIS. (not fully implemented)
 
-
+            
             string[] validFileTypes = { ".pdf", ".doc", ".docx", ".png", ".jpj", ".jpeg", };      //TEMP Whatever files are meant to be
             bool allFilesValid = true;
-
+           
             //check file size and extensions
             foreach (HttpPostedFile file in FileUpload1.PostedFiles)
             {
@@ -36,7 +41,7 @@ namespace EnterpriseCourseworkWebForm
                     }
                 }
 
-                if (!fileValid)
+                if (fileValid)
                 {
                     allFilesValid = false;
                 }
@@ -45,25 +50,40 @@ namespace EnterpriseCourseworkWebForm
             if (allFilesValid)
             {
                 //insert into database
-                int ideaID = Database.InsertIdea(categoryID, title, TextBoxIdeaInput.Text, (int)Session["RStaffID"], checkbox1.Checked, false);
+               // int ideaId= Database.InsertIdea(DropDownList2.SelectedIndex, TextBox1.Text, TextBoxIdeaInput.Text, (int)Session["RStaffID"], checkbox1.Checked, false);
+               
+                    DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
 
-                if (ideaID != 0)
-                {
-                    foreach (HttpPostedFile file in FileUpload1.PostedFiles)
+                   var newIdea = new Idea
                     {
-                        //upload all docs
-                        Database.InsertDoc(ideaID, file.FileName);   //TEMP need the file to actually be uploaded somewhere
-                    }
-                }
-                else
+                        CategoryID = DropDownList2.SelectedIndex,
+                       
+                        Description = TextBoxIdeaInput.Text,
+                        RegisteredStaffID = 2,
+                        IsAnnonymous = false,
+                        IsHidden =false
+                    };
+                try
                 {
-                    //error message --> uploading idea to database failed
+                    context.Ideas.InsertOnSubmit(newIdea);
+                    context.SubmitChanges();
                 }
+                catch (Exception a)
+                {
+                    Console.WriteLine(a);
+      
+                }
+                //foreach (HttpPostedFile file in FileUpload1.PostedFiles)
+                //{
+                //upload all docs
+                //     Database.InsertDoc(5, file.FileName);   //TEMP need the file to actually be uploaded somewhere
+                //            }
+                MessageBox.Show("yep");
             }
             else
             {
-                //error message --> either invalid file type or filesize (+ what is allowed)
-            }
+                MessageBox.Show("either invalid file type or filesize (+ what is allowed)");            }
+            
         }
     }
 }
