@@ -23,6 +23,8 @@ namespace EnterpriseCourseworkWebForm
                 UpdateTagsList("");
                 FillIdeas();
             }
+            Label14.Text = Database.GetLastLogin(LogIn2.staffID);
+
         }
 
 

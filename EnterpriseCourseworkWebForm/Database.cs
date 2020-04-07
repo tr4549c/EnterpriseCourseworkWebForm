@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 
+
 namespace EnterpriseCourseworkWebForm
 {
     //Useful LinQ : https://www.tutorialspoint.com/linq/linq_sql.htm
@@ -328,14 +329,16 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
-        static public bool InsertCategory(string name)
+        static public bool InsertCategory(string name, string closure)
         {
             try
             {
                 var db = Connection();
                 var category = new Category
                 {
-                    CategoryName = name
+                    CategoryName = name,
+                    ClosureDate = closure
+                    
                 };
                 db.Categories.InsertOnSubmit(category);
                 db.SubmitChanges();
@@ -793,6 +796,71 @@ namespace EnterpriseCourseworkWebForm
                 return (List<Report>)GetDefaultReturn(typeof(List<Report>));
             }
         }
+        #endregion
+
+        #region LoginSession
+
+
+
+        public static string GetBrowserDetails()
+
+        {
+
+            string browserDetails = string.Empty;
+
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+
+            browserDetails = browser.Browser;
+
+            return browserDetails;
+
+        }
+        static public void InsertLogin(int rStaffID)
+        {
+            
+            try
+            {
+                var db = Connection();
+                LoginSession login = new LoginSession
+                {
+                    RegisteredStaffID = rStaffID,
+                    Date = DateTime.Today.ToShortDateString(),
+                    Browser = GetBrowserDetails().ToString()
+                };
+                db.LoginSessions.InsertOnSubmit(login);
+                db.SubmitChanges();
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+              
+            }
+        }
+
+        static public string GetLastLogin(int rStaffID)
+        {
+
+
+            var db = Connection();
+            List<string> query = (from r in db.LoginSessions
+                         where r.RegisteredStaffID == rStaffID
+                         select r.Date.ToString()).ToList();
+
+            if (query.Count > 0)
+            {
+                return "The last date you logged in was " + query.Last().ToString();
+                
+            }
+            else
+            {
+                return "Welcome! This is the first time you logged in.";
+            }
+           
+        
+        }
+
+
         #endregion
     }
 }
