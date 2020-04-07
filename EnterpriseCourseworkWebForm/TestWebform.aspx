@@ -375,7 +375,7 @@ h3 {
                          <asp:Label ID="Label5" CssClass="ThumbsDwnLable" runat="server" Text="Label"></asp:Label>--%>
                <div> 
                </div>
-                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server" ReadOnly="True"></asp:TextBox>
 &nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
                          <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
 
@@ -391,7 +391,7 @@ h3 {
                      
                      <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
                           
-                                <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server" ReadOnly="True"></asp:TextBox>
                               &nbsp;<asp:ImageButton ID="ImageButton1" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
                          <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
 
@@ -407,7 +407,7 @@ h3 {
                      <asp:Panel ID="Panel3" CssClass="IdeaContainer" runat="server" >
                         
 
-                         <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server" ReadOnly="True"></asp:TextBox>
                               &nbsp;<asp:ImageButton ID="ImageButton3" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
                          <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
 
