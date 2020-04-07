@@ -417,6 +417,7 @@ h3 {
   <button type="submit"><i class="fa fa-search"></i></button> OLD code--%>
 
         <%--<input CssClass="search-container" type="text" placeholder="Search" name="search" />--%>
+        <asp:Label ID="Label14" CssClass="h2" runat="server" Text=""></asp:Label><br />
         <asp:TextBox ID="searchContainer" CssClass="search-container" placeholder="Search..." runat="server"></asp:TextBox>
         <%--<asp:Button ID="Button1" CssClass="search-button" runat="server" Text="Button" />--%>
         <asp:ImageButton ID="ImageButtonSrch" CssClass="search-button" runat="server" ImageUrl="~/Images/searchbutton.jpg" />
