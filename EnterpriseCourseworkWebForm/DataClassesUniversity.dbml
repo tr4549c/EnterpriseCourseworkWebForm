@@ -51,14 +51,6 @@
       <Association Name="Department_DepartmentCategory" Member="Department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="Department" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Document" Member="Documents">
-    <Type Name="Document">
-      <Column Name="DocumentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DocPath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Idea_Document" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Idea" Member="Ideas">
     <Type Name="Idea">
       <Column Name="IdeaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -69,9 +61,9 @@
       <Column Name="IsAnnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsHidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Idea_Comment" Member="Comments" ThisKey="IdeaID" OtherKey="IdeaID" Type="Comment" />
-      <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
       <Association Name="Idea_Rating" Member="Ratings" ThisKey="IdeaID" OtherKey="IdeaID" Type="Rating" />
       <Association Name="Idea_Report" Member="Reports" ThisKey="IdeaID" OtherKey="IdeaID" Type="Report" />
+      <Association Name="Idea_Document" Member="Documents" ThisKey="IdeaID" OtherKey="IdeaID" Type="Document" />
       <Association Name="Category_Idea" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
       <Association Name="RegisteredStaff_Idea" Member="RegisteredStaff" ThisKey="RegisteredStaffID" OtherKey="RegisteredStaffID" Type="RegisteredStaff" IsForeignKey="true" />
     </Type>
@@ -127,6 +119,14 @@
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="RoleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Role_AllStaff" Member="AllStaffs" ThisKey="RoleID" OtherKey="RoleID" Type="AllStaff" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Document" Member="Documents">
+    <Type Name="Document">
+      <Column Name="DocumentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdeaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocPath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Idea_Document" Member="Idea" ThisKey="IdeaID" OtherKey="IdeaID" Type="Idea" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

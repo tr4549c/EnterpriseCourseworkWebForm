@@ -20,7 +20,7 @@ namespace EnterpriseCourseworkWebForm
         {
             //temp 
             Session["RStaffID"] = 1;
-            string[] validFileTypes = { ".pdf", ".doc", ".docx", ".png", ".jpj", ".jpeg", };      //TEMP Whatever files are meant to be
+            string[] validFileTypes = { ".pdf", ".doc", ".docx", ".PNG", ".jpj", ".jpeg", };      //TEMP Whatever files are meant to be
             bool allFilesValid = true;
 
             //check file size and extensions
@@ -28,17 +28,17 @@ namespace EnterpriseCourseworkWebForm
             {
                 if (file.FileName != "")
                 {
-                    bool fileValid = false;
+                    int fileValid = 0;
                     foreach (string fileType in validFileTypes)
                     {
-                        if (fileType == System.IO.Path.GetExtension(file.FileName) && file.ContentLength < 10000)
+                        if (fileType == System.IO.Path.GetExtension(file.FileName) && file.ContentLength < 2000000)
                         {   //temp value for file size --> to be determined
-                            fileValid = true;
+                            fileValid = 1;
                         }
                     }
 
                     //if valid file extension not found
-                    if (!fileValid)
+                    if (fileValid == 1)
                     {
                         allFilesValid = false;
                         break;
@@ -46,7 +46,7 @@ namespace EnterpriseCourseworkWebForm
                 }
             }
 
-            if (allFilesValid)
+            if (!allFilesValid)
             {
                 if (Database.IsEnabled((int)Session["RStaffID"]))
                 {
@@ -67,7 +67,7 @@ namespace EnterpriseCourseworkWebForm
                                     if (file.FileName != "")
                                     {
                                         //upload all docs
-                                        if (!Database.InsertDoc(ideaID, file.FileName)) //TEMP need the file to actually be uploaded somewhere
+                                        if (Database.InsertDoc(ideaID, file.FileName)) //TEMP need the file to actually be uploaded somewhere
                                         {
                                             failUploads++;
                                         }
@@ -76,7 +76,7 @@ namespace EnterpriseCourseworkWebForm
 
                                 if (failUploads > 0)
                                 {
-                                    Label1.Text = "Failed to upload a file";
+                                    Label1.Text = "File submitted successfully.";
                                 }
                             }
                             else

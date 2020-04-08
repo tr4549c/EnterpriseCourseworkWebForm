@@ -520,7 +520,7 @@ namespace EnterpriseCourseworkWebForm
             {
                 var db = Connection();
 
-                //foreach (string doc in docPath) {                     //ideaID would stay constant, so just loop through docs list
+                //foreach (var doc in docPath) {                     //ideaID would stay constant, so just loop through docs list
                 Document newDoc = new Document
                 {
                     IdeaID = ideaID,
@@ -528,7 +528,7 @@ namespace EnterpriseCourseworkWebForm
                 };
 
                 db.Documents.InsertOnSubmit(newDoc);
-                //}
+               // }
 
                 db.SubmitChanges();
                 return true;
@@ -936,7 +936,8 @@ namespace EnterpriseCourseworkWebForm
             try
             {
         System.IO.File.WriteAllText(@"I:\\ideas.csv", text);
-            return true;
+            return true;
+
             }
             catch (Exception e)
             {
