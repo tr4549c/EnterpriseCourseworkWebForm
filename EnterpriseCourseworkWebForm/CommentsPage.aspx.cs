@@ -14,11 +14,13 @@ namespace EnterpriseCourseworkWebForm
             //TEMP --> post ideaID from previous page and selected page if page reloaded (number at bottom clicked) 
             int ideaID = 1;
 
-            string[][] comments = Database.SelectAllCommentsByMostRecent(ideaID);
+            int currentPage = 1;
+            const int pageSize = 5;
+            int commentCount = 0;
+
+            string[][] comments = Database.SelectAllCommentsByMostRecent(ideaID, currentPage, pageSize);
             List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };  //can be generated dynamically if we remove unneeded textboxes (shouldn't really matter tbh)
             List<Label> lbl = new List<Label> { Label7, Label5, Label1, Label2, Label3 }; //interesting label order...
-            int currentPage = 0;
-            int commentCount = (currentPage - 1) * 5;
 
             for (int i = 0; i < 5; i++)
             {
@@ -26,7 +28,7 @@ namespace EnterpriseCourseworkWebForm
                 lbl[i].Visible = true;
             }
 
-            while (commentCount < currentPage * 5)
+            while (commentCount < pageSize)
             {
                 if (commentCount < comments.Length)
                 {

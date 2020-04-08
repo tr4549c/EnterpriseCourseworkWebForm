@@ -613,7 +613,7 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
-        static public string[][] SelectAllCommentsByMostRecent(int ideaID) {
+        static public string[][] SelectAllCommentsByMostRecent(int ideaID, int page, int pageSize) {
             try
             {
                 var db = Connection();
@@ -622,7 +622,7 @@ namespace EnterpriseCourseworkWebForm
                         join s in db.AllStaffs on r.AllStaffID equals s.AllStaffID
                         where c.IdeaID == ideaID
                         orderby c.CommentID descending
-                        select new string[] { c.CommentID.ToString(), c.Comment1, c.IsAnnonymous.ToString(), s.Name }).ToArray();
+                        select new string[] { c.CommentID.ToString(), c.Comment1, c.IsAnnonymous.ToString(), s.Name }).Skip((page - 1) * pageSize).Take(pageSize).ToArray();
             }
             catch (Exception e)
             {
