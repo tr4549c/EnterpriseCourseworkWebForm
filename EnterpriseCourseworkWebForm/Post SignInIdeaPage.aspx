@@ -553,13 +553,14 @@ h3 {
                      <%--<p><b><a href="more" class="more">More..</a></b></p>--%>
                      <%--<b></b><asp:LinkButton ID="LinkButtonMore" class="more" runat="server">More..</asp:LinkButton></b>--%>
                      <div class="pagination">
+
+
   <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
+                         <asp:LinkButton id="page1"  NavigateUrl="#" Text="1" runat="server" OnClick="page1_Click"/>
+                      <asp:LinkButton id="page2"  NavigateUrl="#" Text="2" runat="server" OnClick="page2_Click"/>
+                    <asp:LinkButton id="page3"  NavigateUrl="#" Text="3" runat="server" OnClick="page3_Click"/>
+               
+  
   <a href="#">&raquo;</a>
 </div>
 
