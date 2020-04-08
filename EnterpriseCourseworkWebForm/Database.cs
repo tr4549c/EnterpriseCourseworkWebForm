@@ -539,6 +539,9 @@ namespace EnterpriseCourseworkWebForm
                 return (bool)GetDefaultReturn(typeof(bool));
             }
         }
+       
+
+       
 
         /// <summary>
         /// returns list of documents associated with selected idea
@@ -558,6 +561,8 @@ namespace EnterpriseCourseworkWebForm
                 return (string[])GetDefaultReturn(typeof(string[]));
             }
         }
+
+
         #endregion
 
         #region Comments

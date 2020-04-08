@@ -448,6 +448,7 @@
     <Folder Include="BizLogic\" />
     <Folder Include="Controllers\" />
     <Folder Include="DatabaseLayer\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
