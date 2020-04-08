@@ -22,7 +22,7 @@ namespace EnterpriseCourseworkWebForm
         {
             //temp 
             Session["RStaffID"] = 1;
-            string[] validFileTypes = { ".pdf", ".doc", ".docx", ".PNG", ".jpj", ".jpeg", };      //TEMP Whatever files are meant to be
+            string[] validFileTypes = { ".pdf", ".doc", ".docx", ".png", ".PNG", ".jpg", ".jpeg", };      //TEMP Whatever files are meant to be
             bool allFilesValid = true;
 
             //check file size and extensions
@@ -30,17 +30,19 @@ namespace EnterpriseCourseworkWebForm
             {
                 if (file.FileName != "")
                 {
-                    int fileValid = 0;
+                    bool fileValid = false;
                     foreach (string fileType in validFileTypes)
                     {
-                        if (fileType == System.IO.Path.GetExtension(file.FileName) && file.ContentLength < 2000000)
+                        if (fileType == Path.GetExtension(file.FileName) && file.ContentLength < 2000000)
                         {   //temp value for file size --> to be determined
-                            fileValid = 1;
+                            fileValid = true;
                         }
                     }
 
+                    string a = Path.GetExtension(file.FileName);
+
                     //if valid file extension not found
-                    if (fileValid == 1)
+                    if (!fileValid)
                     {
                         allFilesValid = false;
                         break;
@@ -48,7 +50,7 @@ namespace EnterpriseCourseworkWebForm
                 }
             }
 
-            if (!allFilesValid)
+            if (allFilesValid)
             {
                 if (Database.IsEnabled((int)Session["RStaffID"]))
                 {
@@ -68,12 +70,14 @@ namespace EnterpriseCourseworkWebForm
                                 {
                                     if (file.FileName != "")
                                     {
+                                        string filename = SaveFile(FileUpload1.PostedFile); //need the saved filename in server, not from user input
+
                                         //upload all docs
-                                        if (Database.InsertDoc(ideaID, file.FileName)) //TEMP need the file to actually be uploaded somewhere
+                                        if (!Database.InsertDoc(ideaID, filename)) //TEMP need the file to actually be uploaded somewhere
                                         {
                                             failUploads++;
                                         }
-                                        SaveFile(FileUpload1.PostedFile);
+                                        
 
                                         //string filePath = Server.MapPath("~/Source/Repos/tr4549c/EnterpriseCourseworkWebForm/EnterpriseCourseworkWebForm.sln/Uploads/");
                                         //FileUpload1.SaveAs(Path.Combine(filePath, file.FileName));
@@ -82,9 +86,13 @@ namespace EnterpriseCourseworkWebForm
                                     }
                                 }
 
-                                if (failUploads > 0)
+                                if (failUploads == 0)
                                 {
                                     Label1.Text = "File submitted successfully.";
+                                }
+                                else
+                                {
+                                    Label1.Text = "File Upload failed.";
                                 }
                             }
                             else
@@ -114,13 +122,17 @@ namespace EnterpriseCourseworkWebForm
                 MessageBox.Show("either invalid file type or filesize (+ what is allowed)");
             }
         }
-        void SaveFile(HttpPostedFile file)
+        private string SaveFile(HttpPostedFile file)
         {
             // Specify the path to save the uploaded file to.
-            string savePath = "~/Source/Repos/tr4549c/EnterpriseCourseworkWebForm/EnterpriseCourseworkWebForm.sln/Uploads/";
+            //string savePath = "~\\source\\repos\\tr4549c\\EnterpriseCourseworkWebForm\\EnterpriseCourseworkWebForm\\Uploads\\";
+            //string savePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Uploads\\";
+            
 
             // Get the name of the file to upload.
-            string fileName = FileUpload1.FileName;
+            string[] splitFileName = FileUpload1.FileName.Split(char.Parse("/"));
+            string fileName = splitFileName[splitFileName.Length - 1];
+            string savePath = Server.MapPath("~\\Uploads\\");
 
             // Create the path and file name to check for duplicates.
             string pathToCheck = savePath + fileName;
@@ -130,10 +142,10 @@ namespace EnterpriseCourseworkWebForm
 
             // Check to see if a file already exists with the
             // same name as the file to upload.        
-            if (System.IO.File.Exists(pathToCheck))
+            if (File.Exists(pathToCheck))
             {
                 int counter = 2;
-                while (System.IO.File.Exists(pathToCheck))
+                while (File.Exists(pathToCheck))
                 {
                     // if a file with this name already exists,
                     // prefix the filename with a number.
@@ -159,8 +171,10 @@ namespace EnterpriseCourseworkWebForm
 
             // Call the SaveAs method to save the uploaded
             // file to the specified directory.
-            FileUpload1.SaveAs(Path.Combine(savePath, file.FileName));
+            FileUpload1.SaveAs(savePath);
 
+            //if successful
+            return savePath;
         }
     }
 }
