@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.IO;
+using System.Data;
 
 
 namespace EnterpriseCourseworkWebForm
@@ -900,5 +902,55 @@ namespace EnterpriseCourseworkWebForm
 
 
         #endregion
+
+
+        #region ExportFiles
+
+        static public string text;
+        static public string line;
+        static public bool ExportCSV()           
+        {
+            line = "";
+            line += ("IdeaID");
+            line += ", ";
+            line += ("RegisteredStaf");
+            line += ", ";
+            line += ("Title");
+            line += ", ";
+            line += ("Description");
+            text += line;
+            var db = Connection();
+            var query = from i in db.Ideas select i;
+            foreach(var q in query)
+            {
+                line = "";
+                line += (q.IdeaID.ToString());
+                line += ", ";
+                line += (q.RegisteredStaffID.ToString());
+                line += ", ";
+                line += (q.Title.ToString());
+                line += ", ";
+                line += (q.Description.ToString());               
+                text += "\n" + line;
+            }
+            try
+            {
+        System.IO.File.WriteAllText(@"I:\\ideas.csv", text);
+            return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+
+        }
+     
+        
+
+
+        #endregion
+
+
     }
 }
