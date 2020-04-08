@@ -25,8 +25,13 @@ namespace EnterpriseCourseworkWebForm
             }
             Label14.Text = Database.GetLastLogin(LogIn2.staffID);
 
-        }
 
+
+
+
+
+        }
+        public static int page;
 
         private void UpdateTagsList(string search)
         {
@@ -39,6 +44,7 @@ namespace EnterpriseCourseworkWebForm
 
         private void FillIdeas()
         {
+            
             string[][] ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, 5);
 
             List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };
@@ -75,6 +81,29 @@ namespace EnterpriseCourseworkWebForm
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("SubmitIdea1.aspx");
+        }
+
+        protected void hyperlink1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void page1_Click(object sender, EventArgs e)
+        {
+            page = 1;
+            FillIdeas(); //needs to be updated
+        }
+
+        protected void page2_Click(object sender, EventArgs e)
+        {
+            page = 2;
+            FillIdeas();
+        }
+
+        protected void page3_Click(object sender, EventArgs e)
+        {
+            page = 3;
+            FillIdeas();
         }
     }
 }
