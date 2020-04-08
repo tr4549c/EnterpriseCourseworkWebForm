@@ -311,20 +311,22 @@
         }
 
         .btnSubmitIdea {
-            background-color: #060360;
+            border-style: none;
+         border-color: inherit;
+         border-width: medium;
+         background-color: #060360;
             color: white;
             float: left;
             padding: 16px 20px;
-            border: none;
             cursor: pointer;
-            width: 20%;
             opacity: 0.9;
             text-align: center;
             font-family: 'Work Sans';
             font-weight: bold;
             margin-right: 3%;
             margin-bottom: 5%;
-        }
+         margin-top: 0px;
+     }
 
         .CheckBoxIdea {
             font-family: 'Work Sans';
@@ -389,12 +391,24 @@
                         <br />
                         <br />
                         <br />
-
+                        
+                        <asp:Label ID="Label2" runat="server" Text="Most Liked Idea: " CssClass="h2"></asp:Label>   
+                        <br />
+                         <asp:Label ID="Label5" runat="server" Text="Most popular category:  " CssClass="h2"></asp:Label> 
+                         <br />
+                        <asp:Label ID="Label3" runat="server" CssClass="h2" Text=""></asp:Label>
+                         <br />
+                        <asp:Label ID="Label4" runat="server" Text="" CssClass="h2"></asp:Label> 
+                      
+                        
+                        <br /><br />
 
                 
-                      <asp:Button id="Button1" CssClass="btnSubmitIdea" runat="server" Text="Download all ideas" OnClick="Button1_Click" /><br />
+                        <br />
+                        <asp:Button ID="Button1" runat="server" CssClass="btnSubmitIdea" Height="50px" OnClick="Button1_Click" Text="Download all ideas into CSV" Width="363px" /><br /><br /><br />
 
                         <asp:Label ID="Label1" runat="server" Text="" CssClass="h2"></asp:Label>
+                        <br />
                     </asp:Panel>
                 </div>
             </div>

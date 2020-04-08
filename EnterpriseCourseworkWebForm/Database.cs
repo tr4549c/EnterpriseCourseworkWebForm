@@ -505,6 +505,7 @@ namespace EnterpriseCourseworkWebForm
                 return (string[][])GetDefaultReturn(typeof(string[][]));
             }
         }
+
         #endregion
 
         #region Document
@@ -903,7 +904,6 @@ namespace EnterpriseCourseworkWebForm
 
         #endregion
 
-
         #region ExportFiles
 
         static public string text;
@@ -945,11 +945,68 @@ namespace EnterpriseCourseworkWebForm
             }
 
         }
-     
-        
+
+
 
 
         #endregion
+
+
+        #region Statistics
+        
+        static public int MostActiveUser()
+        {
+            List<int> list = new List<int>();
+            var db = Connection();
+            var query = from i in db.Ideas select i;
+            foreach(var q in query)
+            {
+                list.Add((int)q.RegisteredStaffID);
+            }
+
+            var most = (from i in list
+
+                        group i by i into grp
+
+                        orderby grp.Count() descending
+
+                        select grp.Key).First();
+            return most;
+
+        }
+
+
+        static public int MostActiveUserComment()
+        {
+            List<int> list = new List<int>();
+            var db = Connection();
+            var query = from i in db.Comments select i;
+            foreach (var q in query)
+            {
+                list.Add((int)q.RegisteredStaffID);
+            }
+
+            try
+            {
+                var most = (from i in list
+
+                            group i by i into grp
+
+                            orderby grp.Count() descending
+
+                            select grp.Key).First();
+
+
+                return most;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
+        #endregion
+
 
 
     }
