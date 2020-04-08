@@ -173,18 +173,10 @@ namespace EnterpriseCourseworkWebForm
             // file to the specified directory.
             FileUpload1.SaveAs(savePath);
 
-            //remove user path from full path (will need to be added on host machine - when doc is needed to be found)
-
-            splitFileName = savePath.Split(char.Parse("\\"));
-            savePath = "";
-
-            for (int i = 3; i < splitFileName.Length; i++)
-            {
-                savePath += "\\" + splitFileName[i];
-            }
+            //just save the file name instead of whole path
 
             //if successful
-            return savePath;
+            return fileName;
         }
     }
 }
