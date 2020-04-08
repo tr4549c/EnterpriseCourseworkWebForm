@@ -149,7 +149,7 @@ namespace EnterpriseCourseworkWebForm
                 {
                     // if a file with this name already exists,
                     // prefix the filename with a number.
-                    tempfileName = counter.ToString() + fileName;
+                    tempfileName = counter + fileName;
                     pathToCheck = savePath + tempfileName;
                     counter++;
                 }
@@ -172,6 +172,16 @@ namespace EnterpriseCourseworkWebForm
             // Call the SaveAs method to save the uploaded
             // file to the specified directory.
             FileUpload1.SaveAs(savePath);
+
+            //remove user path from full path (will need to be added on host machine - when doc is needed to be found)
+
+            splitFileName = savePath.Split(char.Parse("\\"));
+            savePath = "";
+
+            for (int i = 3; i < splitFileName.Length; i++)
+            {
+                savePath += "\\" + splitFileName[i];
+            }
 
             //if successful
             return savePath;
