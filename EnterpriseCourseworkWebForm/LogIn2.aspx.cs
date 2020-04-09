@@ -18,7 +18,7 @@ namespace EnterpriseCourseworkWebForm
         protected void loginB_Click(object sender, EventArgs e)
         {
    
-            //example login username: dignissim  password: DVD49JKR0JO
+            //example login username: dignissim  password: DVD49JKR0J
              staffID = Database.LoginRegisteredStaff(TextBox1.Text, TextBox2.Text);
 
             //if (query.Any())

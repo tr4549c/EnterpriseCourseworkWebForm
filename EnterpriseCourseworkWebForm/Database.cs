@@ -497,7 +497,7 @@ namespace EnterpriseCourseworkWebForm
             try
             {
                 var db = Connection();
-                return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] { i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
+                return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] {i.IdeaID.ToString(), i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
             }
             catch (Exception e)
             {

@@ -471,8 +471,8 @@ h3 {
                <div> 
                </div>
                          <asp:TextBox ID="TextBox1" CssClass="TextArea" runat="server"></asp:TextBox>
-&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" />
-                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" />
+&nbsp;<asp:ImageButton ID="ImageButtonThumbsUp" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5% ;margin-top:2.5%" ImageUrl="~/Images/thumbs up.png" OnClick="ImageButtonThumbsUp_Click" />
+                         <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButtonThumbsDwn_Click" />
 
                           <div class="bottomDivIdeaLeft"> 
                               <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
@@ -487,8 +487,8 @@ h3 {
                      <asp:Panel ID="Panel2" CssClass="IdeaContainer"  runat="server" >
                           
                                 <asp:TextBox ID="TextBox2" CssClass="TextArea" runat="server"></asp:TextBox>
-                                &nbsp;<asp:ImageButton ID="ImageButton1" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
-                                <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                                &nbsp;<asp:ImageButton ID="ImageButton1" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" OnClick="ImageButton1_Click" />
+                                <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton2_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
                                <asp:LinkButton ID="LinkButton1" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
@@ -503,8 +503,8 @@ h3 {
                         
 
                          <asp:TextBox ID="TextBox3" CssClass="TextArea" runat="server"></asp:TextBox>
-                                &nbsp;<asp:ImageButton ID="ImageButton3" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
-                                <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                                &nbsp;<asp:ImageButton ID="ImageButton3" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" OnClick="ImageButton3_Click" />
+                                <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton4_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
                                <asp:LinkButton ID="LinkButton3" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
@@ -518,8 +518,8 @@ h3 {
                          <asp:Panel ID="Panel4" CssClass="IdeaContainer"  runat="server" >
                           
                                 <asp:TextBox ID="TextBox4" CssClass="TextArea" runat="server"></asp:TextBox>
-                                &nbsp;<asp:ImageButton ID="ImageButton5" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
-                                <asp:ImageButton ID="ImageButton6" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                                &nbsp;<asp:ImageButton ID="ImageButton5" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" OnClick="ImageButton5_Click" />
+                                <asp:ImageButton ID="ImageButton6" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton6_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
                                <asp:LinkButton ID="LinkButton7" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
@@ -534,8 +534,8 @@ h3 {
                          <asp:Panel ID="Panel5" CssClass="IdeaContainer"  runat="server" >
                           
                                 <asp:TextBox ID="TextBox5" CssClass="TextArea" runat="server"></asp:TextBox>
-                                &nbsp;<asp:ImageButton ID="ImageButton7" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" />
-                                <asp:ImageButton ID="ImageButton8" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" />
+                                &nbsp;<asp:ImageButton ID="ImageButton7" CssClass="ThumbsBtn" runat="server" Style=" vertical-align:top; padding-right:0.5%; padding-left:0.5%" ImageUrl="~/Images/thumbs up.png" OnClick="ImageButton7_Click" />
+                                <asp:ImageButton ID="ImageButton8" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton8_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
                                <asp:LinkButton ID="LinkButton9" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>

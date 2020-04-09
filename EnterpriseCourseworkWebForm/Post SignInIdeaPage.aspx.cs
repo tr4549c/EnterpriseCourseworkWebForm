@@ -19,16 +19,11 @@ namespace EnterpriseCourseworkWebForm
                 {
                     DropDownList1.Items.Add(dep);
                 }
-
-                UpdateTagsList("");
-                FillIdeas();
             }
+
+            UpdateTagsList("");
+            FillIdeas();
             Label14.Text = Database.GetLastLogin(LogIn2.staffID);
-
-
-
-
-
 
         }
         public static int page;
@@ -42,10 +37,12 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
+        private string[][] ideas;
+
         private void FillIdeas()
         {
             
-            string[][] ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, 5);
+            ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, 5);
 
             List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };
 
@@ -62,10 +59,9 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
-        private string GenerateText(string[] idea) {
-
-
-            return idea[1];
+        private string GenerateText(string[] idea)
+        {
+            return idea[2];
         }
 
         protected void searchContainer2_TextChanged(object sender, EventArgs e)
@@ -104,6 +100,61 @@ namespace EnterpriseCourseworkWebForm
         {
             page = 3;
             FillIdeas();
+        }
+
+        private void SendVote(int ideaID, int staffID, bool vote)
+        {
+            Database.UpdateRating(ideaID, staffID, vote);
+        }
+
+        protected void ImageButtonThumbsUp_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[0][0]), (int)Session["RStaffID"], true);
+        }
+
+        protected void ImageButtonThumbsDwn_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[0][0]), (int)Session["RStaffID"], false);
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[1][0]), (int)Session["RStaffID"], true);
+        }
+
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[1][0]), (int)Session["RStaffID"], false);
+        }
+
+        protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[2][0]), (int)Session["RStaffID"], true);
+        }
+
+        protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[2][0]), (int)Session["RStaffID"], false);
+        }
+
+        protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[3][0]), (int)Session["RStaffID"], true);
+        }
+
+        protected void ImageButton6_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[3][0]), (int)Session["RStaffID"], false);
+        }
+
+        protected void ImageButton7_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[4][0]), (int)Session["RStaffID"], true);
+        }
+
+        protected void ImageButton8_Click(object sender, ImageClickEventArgs e)
+        {
+            SendVote(int.Parse(ideas[4][0]), (int)Session["RStaffID"], false);
         }
     }
 }
