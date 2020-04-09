@@ -407,6 +407,10 @@ h3 {
       <section>
             <img src="Images/u18.png" />
             <asp:Button ID="Button3" runat="server" Text="Manage Categories" Visible="False" />
+            <asp:Button ID="Button4" runat="server" Text="View Statistics" Visible="False" />
+            <asp:Button ID="Button5" runat="server" Text="Resolve Reports" Visible="False" />
+            <asp:Button ID="Button6" runat="server" Text="Manage Users" Visible="False" />
+            <asp:Button ID="Button7" runat="server" Text="Manage Staff Details" Visible="False" />
         </section>
 </div>
 

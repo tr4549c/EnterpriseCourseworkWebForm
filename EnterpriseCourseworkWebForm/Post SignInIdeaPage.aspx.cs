@@ -20,17 +20,20 @@ namespace EnterpriseCourseworkWebForm
                     DropDownList1.Items.Add(dep);
                 }
             }
-            
-           /* if((int)Session["RStaffID"] == 102)//for manager
-            {
-                Button3.Visible = true;
+
+            if((int)Session["RStaffID"] == 102)//for manager
+             {
+                 Button3.Visible = true; //manage cat
+                Button4.Visible = true;//view stats
+                Button5.Visible = true;//resolve reports
+                Button6.Visible = true;//enable users
             }
             if ((int)Session["RStaffID"] == 101) //for admin
-            {
-                
-            }*/
+             {
+                Button7.Visible = true;//view stats
+            }
 
-
+            //Session["page"] = 1;
             UpdateTagsList("");
             FillIdeas();
             Label14.Text = Database.GetLastLogin(LogIn2.staffID);
@@ -54,22 +57,28 @@ namespace EnterpriseCourseworkWebForm
 
         private void FillIdeas()
         {
+            int page = Convert.ToInt32(Session["page"]);
+
+           
+                ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, (5*page));
+
+                List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };
+
+                for (int i = 0; i < txt.Count; i++)
+                {
+                    if (i <= ideas.Length - 1)
+                    {
+                        txt[i].Text = GenerateText(ideas[i]);
+                    }
+                    else
+                    {
+                        txt[i].Text = "";
+                    }
+                }
+
             
-            ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, 5);
-
-            List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };
-
-            for (int i = 0; i < txt.Count; i++)
-            {
-                if (i <= ideas.Length - 1)
-                {
-                    txt[i].Text = GenerateText(ideas[i]);
-                }
-                else
-                {
-                    txt[i].Text = "";
-                }
-            }
+    
+           
         }
 
 
@@ -129,23 +138,7 @@ namespace EnterpriseCourseworkWebForm
 
         }
 
-        protected void page1_Click(object sender, EventArgs e)
-        {
-            page = 1;
-            FillIdeas(); //needs to be updated
-        }
-
-        protected void page2_Click(object sender, EventArgs e)
-        {
-            page = 2;
-            FillIdeas();
-        }
-
-        protected void page3_Click(object sender, EventArgs e)
-        {
-            page = 3;
-            FillIdeas();
-        }
+       
 
         private void SendVote(int ideaID, int staffID, bool vote)
         {
@@ -254,12 +247,20 @@ namespace EnterpriseCourseworkWebForm
 
         protected void one_Click(object sender, EventArgs e)
         {
-
+            Session["page"] = 1;
+            FillIdeas();
+            FillUsername();
+            FillThumbsDown();
+            FillThumbsUp();
         }
 
         protected void two_Click(object sender, EventArgs e)
         {
-
+            Session["page"] = 2;
+            FillIdeas();
+            FillUsername();
+            FillThumbsDown();
+            FillThumbsUp();
         }
     }
 }

@@ -31,8 +31,10 @@ namespace EnterpriseCourseworkWebForm
 
 
                 //if (Database.GetAccountEnabled(staffID))
-               // {
-                    Response.Redirect("Post SignInIdeaPage.aspx");
+                // {
+                Session["page"] = 1;
+                Response.Redirect("Post SignInIdeaPage.aspx");
+                    
                // }
                 //else
                // {
