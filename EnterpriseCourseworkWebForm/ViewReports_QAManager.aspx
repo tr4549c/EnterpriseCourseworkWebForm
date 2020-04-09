@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewReports_Admin.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ViewReports_Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewReports_QAManager.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ViewReports_Admin" %>
 
 <!DOCTYPE html>
 

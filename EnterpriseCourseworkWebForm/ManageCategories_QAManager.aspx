@@ -397,8 +397,7 @@
                             <Columns>
                                 <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" ReadOnly="True" SortExpression="CategoryID" />
                                 <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" SortExpression="CategoryName" />
-                                <a href="LogIn2.aspx.cs">LogIn2.aspx.cs</a>
-                                
+                               
                                 <asp:BoundField DataField="ClosureDate" HeaderText="ClosureDate" SortExpression="ClosureDate" />
                                 
                                 <asp:ButtonField CommandName="Delete" Text="Delete" />

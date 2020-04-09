@@ -12,7 +12,7 @@ namespace EnterpriseCourseworkWebForm
         protected void Page_Load(object sender, EventArgs e)
         {
             //TEMP --> post ideaID from previous page and selected page if page reloaded (number at bottom clicked) 
-            int ideaID = 1;
+            int ideaID = Convert.ToInt32(Session["ideaID"]);
 
             int currentPage = 1;
             const int pageSize = 5;
@@ -55,8 +55,8 @@ namespace EnterpriseCourseworkWebForm
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            int ideaID = 1;
-            int staffID = 1;
+            int ideaID = Convert.ToInt32(Session["ideaID"]);
+            int staffID = Convert.ToInt32(Session["RStaffID"]);
 
             if (TextBoxIdeaInput.Text != "")
             {

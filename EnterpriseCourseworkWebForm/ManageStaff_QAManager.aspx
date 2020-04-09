@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageStaff_Admin.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ManageStaff_Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageStaff_QAManager.aspx.cs" Inherits="EnterpriseCourseworkWebForm.ManageStaff_Admin" %>
 
 <!DOCTYPE html>
 
