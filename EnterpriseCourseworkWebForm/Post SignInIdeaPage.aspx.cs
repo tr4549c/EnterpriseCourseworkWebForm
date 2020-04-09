@@ -20,13 +20,26 @@ namespace EnterpriseCourseworkWebForm
                     DropDownList1.Items.Add(dep);
                 }
             }
+            
+           /* if((int)Session["RStaffID"] == 102)//for manager
+            {
+                Button3.Visible = true;
+            }
+            if ((int)Session["RStaffID"] == 101) //for admin
+            {
+                
+            }*/
+
 
             UpdateTagsList("");
             FillIdeas();
             Label14.Text = Database.GetLastLogin(LogIn2.staffID);
-
+            FillThumbsDown();
+            FillThumbsUp();
+            FillUsername();
         }
         public static int page;
+
 
         private void UpdateTagsList(string search)
         {
@@ -56,6 +69,38 @@ namespace EnterpriseCourseworkWebForm
                 {
                     txt[i].Text = "";
                 }
+            }
+        }
+
+
+        private void FillUsername()
+        {
+            List<Label> lbl = new List<Label> { Label15, Label16, Label17, Label18, Label19 };
+            for(int i = 0; i< 5; i++)
+            {
+                lbl[i].Text = ideas[i][5];
+            }
+
+        }
+
+        private void FillThumbsUp()
+        {
+            //5131012
+            List<Label> lbl = new List<Label> { Label5, Label1, Label3, Label10, Label12 };
+            for(int i=0; i<5; i++)
+            {
+               lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], true).ToString();
+            }
+        }
+
+
+        private void FillThumbsDown()
+        {
+            //5131012
+            List<Label> lbl = new List<Label> { Label6, Label2, Label4, Label11, Label13 };
+            for (int i = 0; i < 5; i++)
+            {
+                lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], false).ToString();
             }
         }
 
@@ -110,51 +155,111 @@ namespace EnterpriseCourseworkWebForm
         protected void ImageButtonThumbsUp_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[0][0]), (int)Session["RStaffID"], true);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButtonThumbsDwn_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[0][0]), (int)Session["RStaffID"], false);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[1][0]), (int)Session["RStaffID"], true);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[1][0]), (int)Session["RStaffID"], false);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[2][0]), (int)Session["RStaffID"], true);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[2][0]), (int)Session["RStaffID"], false);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[3][0]), (int)Session["RStaffID"], true);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton6_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[3][0]), (int)Session["RStaffID"], false);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton7_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[4][0]), (int)Session["RStaffID"], true);
+            FillThumbsUp();
+            FillThumbsDown();
         }
 
         protected void ImageButton8_Click(object sender, ImageClickEventArgs e)
         {
             SendVote(int.Parse(ideas[4][0]), (int)Session["RStaffID"], false);
+            FillThumbsUp();
+            FillThumbsDown();
+        }
+
+        protected void LinkButton3_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[2][0];
+            Response.Redirect("CommentsPage.aspx");
+        }
+
+        protected void LinkButton7_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[3][0];
+            Response.Redirect("CommentsPage.aspx");
+        }
+
+        protected void LinkButton9_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[4][0];
+            Response.Redirect("CommentsPage.aspx");
+        }
+
+        protected void LinkButton4_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[0][0];
+            Response.Redirect("CommentsPage.aspx");
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[1][0];
+            Response.Redirect("CommentsPage.aspx");
+        }
+
+        protected void one_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void two_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

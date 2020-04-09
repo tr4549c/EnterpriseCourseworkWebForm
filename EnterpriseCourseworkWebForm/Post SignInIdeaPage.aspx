@@ -406,6 +406,7 @@ h3 {
   <%--<h4>Resize the browser window to see the effect.</h4>--%>
       <section>
             <img src="Images/u18.png" />
+            <asp:Button ID="Button3" runat="server" Text="Manage Categories" Visible="False" />
         </section>
 </div>
 
@@ -475,10 +476,10 @@ h3 {
                          <asp:ImageButton ID="ImageButtonThumbsDwn" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top ;margin-top:2.5%" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButtonThumbsDwn_Click" />
 
                           <div class="bottomDivIdeaLeft"> 
-                              <%--<asp:Label ID="Label4" runat="server" Style="padding-right:15%" Text="Label"></asp:Label>--%>
-                              <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
-                              <asp:HyperLink ID="HyperLink2" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
-                              <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label15" runat="server" Width="25%" Text="User"></asp:Label> 
+                              <asp:LinkButton ID="LinkButton4" runat="server" Style="padding-right:20%" OnClick="LinkButton4_Click">Comments...</asp:LinkButton>
+                             
+                              <asp:LinkButton ID="LinkButton2" runat="server" Style="padding-right:31.5%">Report</asp:LinkButton>
                               <asp:Label ID="Label5" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label6" runat="server" Text="No"></asp:Label>
                          </div>
@@ -491,9 +492,10 @@ h3 {
                                 <asp:ImageButton ID="ImageButton2" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton2_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
-                               <asp:LinkButton ID="LinkButton1" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
-                              <asp:HyperLink ID="HyperLink1" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
-                              <asp:LinkButton ID="LinkButton5" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              
+                              <asp:Label ID="Label16" runat="server" Width="25%" Text="User"></asp:Label>
+                               <asp:LinkButton ID="LinkButton1" runat="server" Style="padding-right:20%" OnClick="LinkButton1_Click">Comments...</asp:LinkButton>
+                              <asp:LinkButton ID="LinkButton5" runat="server" Style="padding-right:31.5%">Report</asp:LinkButton>
                               <asp:Label ID="Label1" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label2" runat="server" Text="No"></asp:Label>
                          </div>
@@ -507,9 +509,10 @@ h3 {
                                 <asp:ImageButton ID="ImageButton4" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton4_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
-                               <asp:LinkButton ID="LinkButton3" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
-                              <asp:HyperLink ID="HyperLink3" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
-                              <asp:LinkButton ID="LinkButton6" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label17" runat="server" Width="25%" Text="User"></asp:Label>
+                               <asp:LinkButton ID="LinkButton3" runat="server" Style="padding-right:20%" OnClick="LinkButton3_Click">Comments...</asp:LinkButton>
+                             
+                              <asp:LinkButton ID="LinkButton6" runat="server" Style="padding-right:31.5%">Report</asp:LinkButton>
                               <asp:Label ID="Label3" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label4" runat="server" Text="No"></asp:Label>
                          </div>
@@ -522,9 +525,10 @@ h3 {
                                 <asp:ImageButton ID="ImageButton6" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton6_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
-                               <asp:LinkButton ID="LinkButton7" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
-                              <asp:HyperLink ID="HyperLink4" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
-                              <asp:LinkButton ID="LinkButton8" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label18" runat="server" Width="25%" Text="User"></asp:Label>
+                               <asp:LinkButton ID="LinkButton7" runat="server" Style="padding-right:20%" OnClick="LinkButton7_Click">Comments...</asp:LinkButton>
+                              
+                              <asp:LinkButton ID="LinkButton8" runat="server" Style="padding-right:31.5%">Report</asp:LinkButton>
                               <asp:Label ID="Label10" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label11" runat="server" Text="No"></asp:Label>
                          </div>
@@ -538,9 +542,10 @@ h3 {
                                 <asp:ImageButton ID="ImageButton8" CssClass="ThumbsBtn" runat="server"  Style=" vertical-align:top" ImageUrl="~/Images/thumbs down.png" OnClick="ImageButton8_Click" />
                      
                           <div class="bottomDivIdeaLeft"> 
-                               <asp:LinkButton ID="LinkButton9" runat="server" Style="padding-right:20%">Comments...</asp:LinkButton>
-                              <asp:HyperLink ID="HyperLink5" runat="server" Style="padding-right:20%">Tag,Tag,Tag,Tag..</asp:HyperLink>
-                              <asp:LinkButton ID="LinkButton10" runat="server" Style="padding-right:15%">File.1.5kb</asp:LinkButton>
+                              <asp:Label ID="Label19" runat="server" Width="25%" Text="User"></asp:Label>
+                               <asp:LinkButton ID="LinkButton9" runat="server" Style="padding-right:20%" OnClick="LinkButton9_Click">Comments...</asp:LinkButton>
+                             
+                              <asp:LinkButton ID="LinkButton10" runat="server" Style="padding-right:31.5%">Report</asp:LinkButton>
                               <asp:Label ID="Label12" runat="server" Style="padding-right:3%" Text="No"></asp:Label>
                                <asp:Label ID="Label13" runat="server" Text="No"></asp:Label>
                          </div>
@@ -556,9 +561,8 @@ h3 {
 
 
   <a href="#">&laquo;</a>
-                         <asp:LinkButton id="page1"  NavigateUrl="#" Text="1" runat="server" OnClick="page1_Click"/>
-                      <asp:LinkButton id="page2"  NavigateUrl="#" Text="2" runat="server" OnClick="page2_Click"/>
-                    <asp:LinkButton id="page3"  NavigateUrl="#" Text="3" runat="server" OnClick="page3_Click"/>
+               <asp:LinkButton ID="one" CssClass="more" runat="server" Text="1" OnClick="one_Click" />
+                         <asp:LinkButton ID="two" CssClass="more" runat="server" Text="2" OnClick="two_Click" />
                
   
   <a href="#">&raquo;</a>

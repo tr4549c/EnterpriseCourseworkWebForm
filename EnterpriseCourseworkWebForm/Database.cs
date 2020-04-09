@@ -63,6 +63,20 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
+        internal static int GetRatingByIdeaID(string ideaID, bool voteStatus)
+        {
+            try
+            {
+                var db = Connection();
+                return (from r in db.Ratings where r.IdeaID == Convert.ToInt32(ideaID) && r.Vote == voteStatus select r).Count();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 0;
+            }
+        }
+
         static public int LoginRegisteredStaff(string username, string password)
         {
             try
@@ -497,7 +511,11 @@ namespace EnterpriseCourseworkWebForm
             try
             {
                 var db = Connection();
-                return (from i in db.Ideas orderby i.IdeaID descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] {i.IdeaID.ToString(), i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
+                return (from i in db.Ideas
+                        join r in db.RegisteredStaffs on i.RegisteredStaffID equals r.RegisteredStaffID
+                        join s in db.AllStaffs on r.AllStaffID equals s.AllStaffID              
+                        orderby i.IdeaID 
+                        descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] {i.IdeaID.ToString(), i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString(), s.Name.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
             }
             catch (Exception e)
             {
@@ -505,6 +523,9 @@ namespace EnterpriseCourseworkWebForm
                 return (string[][])GetDefaultReturn(typeof(string[][]));
             }
         }
+
+        
+
 
         #endregion
 
@@ -707,13 +728,13 @@ namespace EnterpriseCourseworkWebForm
                     Rating findRating = db.Ratings.FirstOrDefault(r => r.IdeaID.Equals(ideaID) && r.RegisteredStaffID.Equals(staffID));
 
                     //Get current value of rating
-                    bool currentValue = RatingValue(ideaID, staffID);
+                    //bool currentValue = RatingValue(ideaID, staffID);
 
 
-                    if (currentValue == voteValue)
+                    if (findRating.Vote == voteValue)
                     {
                         //if user has clicked same vote twice, delete the rating
-                        db.Ratings.DeleteOnSubmit(findRating);
+                        //vote is the same, do nothing
                     }
                     else
                     {
