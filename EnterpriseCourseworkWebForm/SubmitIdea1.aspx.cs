@@ -64,8 +64,7 @@ namespace EnterpriseCourseworkWebForm
 
                             if (ideaID > 0)
                             {
-                                MessageBox.Show("ok");
-
+                                
                                 foreach (HttpPostedFile file in FileUpload1.PostedFiles)
                                 {
                                     if (file.FileName != "")
@@ -73,19 +72,13 @@ namespace EnterpriseCourseworkWebForm
                                         string filename = SaveFile(FileUpload1.PostedFile); //need the saved filename in server, not from user input
 
                                         //upload all docs
-                                        if (!Database.InsertDoc(ideaID, filename)) //TEMP need the file to actually be uploaded somewhere
+                                        if (!Database.InsertDoc(ideaID, filename)) 
                                         {
                                             failUploads++;
                                         }
                                         
-
-                                        //string filePath = Server.MapPath("~/Source/Repos/tr4549c/EnterpriseCourseworkWebForm/EnterpriseCourseworkWebForm.sln/Uploads/");
-                                        //FileUpload1.SaveAs(Path.Combine(filePath, file.FileName));
-                                        //string UploadPath = ConfigurationManager.AppSettings[file.FileName].ToString();
-
                                     }
                                 }
-
                                 if (failUploads == 0)
                                 {
                                     Label1.Text = "File submitted successfully.";
@@ -114,32 +107,22 @@ namespace EnterpriseCourseworkWebForm
                 {
                     Label1.Text = "You are not allowed to post ideas";
                 }
-
-                MessageBox.Show("yep");
             }
             else
             {
-                MessageBox.Show("either invalid file type or filesize (+ what is allowed)");
+                Label1.Text = "The idea was not successfully submitted.";
             }
         }
         private string SaveFile(HttpPostedFile file)
         {
-            // Specify the path to save the uploaded file to.
-            //string savePath = "~\\source\\repos\\tr4549c\\EnterpriseCourseworkWebForm\\EnterpriseCourseworkWebForm\\Uploads\\";
-            //string savePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Uploads\\";
-            
-
             // Get the name of the file to upload.
             string[] splitFileName = FileUpload1.FileName.Split(char.Parse("/"));
             string fileName = splitFileName[splitFileName.Length - 1];
             string savePath = Server.MapPath("~\\Uploads\\");
-
             // Create the path and file name to check for duplicates.
             string pathToCheck = savePath + fileName;
-
             // Create a temporary file name to use for checking duplicates.
             string tempfileName = "";
-
             // Check to see if a file already exists with the
             // same name as the file to upload.        
             if (File.Exists(pathToCheck))
@@ -153,9 +136,7 @@ namespace EnterpriseCourseworkWebForm
                     pathToCheck = savePath + tempfileName;
                     counter++;
                 }
-
                 fileName = tempfileName;
-
                 // Notify the user that the file name was changed.
                 Label1.Text = "A file with the same name already exists." +
                     "<br />Your file was saved as " + fileName;
@@ -165,16 +146,12 @@ namespace EnterpriseCourseworkWebForm
                 // Notify the user that the file was saved successfully.
                 Label1.Text = "Your file was uploaded successfully.";
             }
-
             // Append the name of the file to upload to the path.
             savePath += fileName;
-
             // Call the SaveAs method to save the uploaded
             // file to the specified directory.
             FileUpload1.SaveAs(savePath);
-
             //just save the file name instead of whole path
-
             //if successful
             return fileName;
         }
