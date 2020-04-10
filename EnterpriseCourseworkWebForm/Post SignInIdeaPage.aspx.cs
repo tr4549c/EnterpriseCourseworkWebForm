@@ -268,5 +268,60 @@ namespace EnterpriseCourseworkWebForm
             FillThumbsDown();
             FillThumbsUp();
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManageCategories_QAManager.aspx");
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Statistics_QAmanager.aspx");
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewReports_QAManager.aspx");
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[0][0];
+            Response.Redirect("ReportPage.aspx");
+        }
+
+        protected void LinkButton5_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[1][0];
+            Response.Redirect("ReportPage.aspx");
+        }
+
+        protected void LinkButton6_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[2][0];
+            Response.Redirect("ReportPage.aspx");
+        }
+
+        protected void LinkButton8_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[3][0];
+            Response.Redirect("ReportPage.aspx");
+        }
+
+        protected void LinkButton10_Click(object sender, EventArgs e)
+        {
+            Session["ideaID"] = ideas[4][0];
+            Response.Redirect("ReportPage.aspx");
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManageStaff_QAManager.aspx");
+        }
+
+        protected void Button7_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MaintaiSystemData_Admin.aspx");
+        }
     }
 }

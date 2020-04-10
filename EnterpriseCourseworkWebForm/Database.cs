@@ -1032,6 +1032,71 @@ namespace EnterpriseCourseworkWebForm
             }
 
         }
+
+
+
+        static public int MostLikedIdea()
+        {
+            List<int> list = new List<int>();
+            var db = Connection();
+            var query = from i in db.Ratings where i.Vote == true select i;
+            foreach (var q in query)
+            {
+                list.Add((int)q.IdeaID);
+            }
+
+            try
+            {
+                var most = (from i in list
+
+                            group i by i into grp
+
+                            orderby grp.Count() descending
+
+                            select grp.Key).First();
+
+
+                return most;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
+
+
+
+        static public int MostPopularCategory()
+        {
+            List<int> list = new List<int>();
+            var db = Connection();
+            var query = from i in db.Ideas  select i;
+            foreach (var q in query)
+            {
+                list.Add((int)q.CategoryID);
+            }
+
+            try
+            {
+                var most = (from i in list
+
+                            group i by i into grp
+
+                            orderby grp.Count() descending
+
+                            select grp.Key).First();
+
+
+                return most;
+            }
+            catch
+            {
+                return 0;
+            }
+
+        }
+
         #endregion
 
 

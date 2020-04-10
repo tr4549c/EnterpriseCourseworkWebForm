@@ -21,11 +21,11 @@ namespace EnterpriseCourseworkWebForm
         protected void Button2_Click(object sender, EventArgs e)
         {
             //temp
-            int ideaID = 2;
+            
             Session["RStaffID"] = 1;
 
 
-            Database.InsertReport((int) Session["RStaffID"], ideaID, TextBoxReportInput.Text, "Pending");
+            Database.InsertReport((int) Session["RStaffID"], (int)Session["ideaID"], TextBoxReportInput.Text, "Pending");
             Response.Redirect("WebForm2.aspx");
         }
     }

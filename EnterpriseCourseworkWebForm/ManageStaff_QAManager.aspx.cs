@@ -28,7 +28,7 @@ namespace EnterpriseCourseworkWebForm
             }
 
             Database.UpdateAccountEnabled(Convert.ToInt32(e.CommandArgument) + 1, isEnabled);
-            Response.Redirect("ManageStaff_Admin.aspx");
+            Response.Redirect("ManageStaff_QAManager.aspx");
             
         }
 

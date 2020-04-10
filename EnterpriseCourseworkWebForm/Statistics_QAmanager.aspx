@@ -386,15 +386,15 @@
                         <br />
                         <br />
 
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Style="padding-left: 2.5%" Text=" ... "></asp:Label>
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" Style="padding-left: 2.5%" Text=""></asp:Label>
 
                         <br />
                         <br />
                         <br />
                         
-                        <asp:Label ID="Label2" runat="server" Text="Most Liked Idea: " CssClass="h2"></asp:Label>   
+                        <asp:Label ID="Label2" runat="server" Text="" CssClass="h2"></asp:Label>   
                         <br />
-                         <asp:Label ID="Label5" runat="server" Text="Most popular category:  " CssClass="h2"></asp:Label> 
+                         <asp:Label ID="Label5" runat="server" Text="" CssClass="h2"></asp:Label> 
                          <br />
                         <asp:Label ID="Label3" runat="server" CssClass="h2" Text=""></asp:Label>
                          <br />

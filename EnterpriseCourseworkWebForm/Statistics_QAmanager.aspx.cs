@@ -16,7 +16,8 @@ namespace EnterpriseCourseworkWebForm
                 //If the url is entered directly, redirect to Login page
                 Response.Redirect("Login2.aspx");
             }
-
+            Label5.Text = "Most popular category: " + Database.MostPopularCategory().ToString();
+            Label2.Text = "Most Liked Ideea: " + Database.MostLikedIdea().ToString();
             Label3.Text = "Most Active User (Ideas): " + Database.MostActiveUser().ToString();
             Label4.Text = "Most Active User(Comments): " + Database.MostActiveUserComment().ToString();
         }

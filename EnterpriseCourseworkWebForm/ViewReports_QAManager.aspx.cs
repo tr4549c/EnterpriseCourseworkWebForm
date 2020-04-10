@@ -48,7 +48,7 @@ namespace EnterpriseCourseworkWebForm
                         q.Status = "Resolved";
                     }
                     context.SubmitChanges();
-                    Response.Redirect("ViewReports_Admin.aspx");
+                    Response.Redirect("ViewReports_QAManager.aspx");
                 }
             }
 
