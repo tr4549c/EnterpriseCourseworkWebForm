@@ -11,6 +11,12 @@ namespace EnterpriseCourseworkWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.UrlReferrer == null)
+            {
+                //If the url is entered directly, redirect to Login page
+                Response.Redirect("Login2.aspx");
+            }
+
             //TEMP --> post ideaID from previous page and selected page if page reloaded (number at bottom clicked) 
             int ideaID = Convert.ToInt32(Session["ideaID"]);
 

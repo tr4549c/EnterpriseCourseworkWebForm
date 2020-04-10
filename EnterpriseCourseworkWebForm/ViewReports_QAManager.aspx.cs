@@ -11,7 +11,13 @@ namespace EnterpriseCourseworkWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            foreach(GridViewRow row in grdPivot.Rows)
+            if (Request.UrlReferrer == null)
+            {
+                //If the url is entered directly, redirect to Login page
+                Response.Redirect("Login2.aspx");
+            }
+
+            foreach (GridViewRow row in grdPivot.Rows)
             {
                 if (row.Cells[5].Text == "Resolved")
                 {

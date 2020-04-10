@@ -11,6 +11,12 @@ namespace EnterpriseCourseworkWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.UrlReferrer == null)
+            {
+                //If the url is entered directly, redirect to Login page
+                Response.Redirect("Login2.aspx");
+            }
+
             if (!IsPostBack)
             {
                 DropDownList1.Items.Clear();

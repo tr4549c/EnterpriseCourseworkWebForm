@@ -11,7 +11,11 @@ namespace EnterpriseCourseworkWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Request.UrlReferrer == null)
+            {
+                //If the url is entered directly, redirect to Login page
+                Response.Redirect("Login2.aspx");
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)

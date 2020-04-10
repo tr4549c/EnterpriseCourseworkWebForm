@@ -11,6 +11,12 @@ namespace EnterpriseCourseworkWebForm
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.UrlReferrer == null)
+            {
+                //If the url is entered directly, redirect to Login page
+                Response.Redirect("Login2.aspx");
+            }
+
             Label3.Text = "Most Active User (Ideas): " + Database.MostActiveUser().ToString();
             Label4.Text = "Most Active User(Comments): " + Database.MostActiveUserComment().ToString();
         }
