@@ -321,7 +321,7 @@ namespace EnterpriseCourseworkWebForm
 
         protected void Button7_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MaintaiSystemData_Admin.aspx");
+            Response.Redirect("MaintainSystemData_Admin.aspx");
         }
     }
 }

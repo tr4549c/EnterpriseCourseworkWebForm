@@ -82,12 +82,32 @@ namespace EnterpriseCourseworkWebForm
             try
             {
                 var db = Connection();
-                return (from staff in db.RegisteredStaffs where staff.RUsername == username && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
+                return (from staff in db.RegisteredStaffs where staff.RUsername == username.ToLower() && staff.RPassword == password select staff.RegisteredStaffID).FirstOrDefault();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 return (int) GetDefaultReturn(typeof(int));
+            }
+        }
+
+        static public bool UpdateRegisteredStaff(int rSftaffID, string username, string password)
+        {
+            try
+            {
+                var db = Connection();
+                RegisteredStaff rs = db.RegisteredStaffs.FirstOrDefault(r => r.RegisteredStaffID.Equals(rSftaffID));
+
+                rs.RUsername = username.ToLower();
+                rs.RPassword = password;
+
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return (bool)GetDefaultReturn(typeof(bool));
             }
         }
 

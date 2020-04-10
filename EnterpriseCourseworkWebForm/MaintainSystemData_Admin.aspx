@@ -393,7 +393,7 @@
                         <br />
 
 
-                        <asp:GridView ID="GridView1" runat="server" class="datagridview" AutoGenerateColumns="False" DataSourceID="LinqDataSource1" DataKeyNames="RegisteredStaffID" AllowPaging="True">
+                        <asp:GridView ID="GridView1" runat="server" class="datagridview" AutoGenerateColumns="False" DataSourceID="LinqDataSource1" DataKeyNames="RegisteredStaffID" AllowPaging="True" OnRowUpdated="GridView1_RowUpdated" OnRowUpdating="GridView1_RowUpdating">
                             <Columns>
                                  <asp:BoundField DataField="RegisteredStaffID" HeaderText="RegisteredStaffID" ReadOnly="True" SortExpression="RegisteredStaffID"  />
                                 <asp:BoundField DataField="RUsername" HeaderText="RUsername" SortExpression="RUsername"  />
