@@ -326,6 +326,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClassesUniversity.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Encryption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

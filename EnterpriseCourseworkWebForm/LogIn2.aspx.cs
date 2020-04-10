@@ -19,9 +19,7 @@ namespace EnterpriseCourseworkWebForm
         {
    
             //example login username: dignissim  password: DVD49JKR0J
-             staffID = Database.LoginRegisteredStaff(TextBox1.Text, TextBox2.Text);
-
-            //if (query.Any())
+             staffID = Database.LoginRegisteredStaff(TextBox1.Text, Encryption.Encrypt(TextBox2.Text));
 
             if (staffID > 0)
             {
@@ -29,17 +27,9 @@ namespace EnterpriseCourseworkWebForm
                 Session["RStaffID"] = staffID;
                 Database.InsertLogin(staffID);
 
-
-                //if (Database.GetAccountEnabled(staffID))
-                // {
                 Session["page"] = 1;
                 Response.Redirect("Post SignInIdeaPage.aspx");
                     
-               // }
-                //else
-               // {
-                    //Display error (Account not enabled)  (difference between enabled and active?)
-                //}
             }
             else
             {
