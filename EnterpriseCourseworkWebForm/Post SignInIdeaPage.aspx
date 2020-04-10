@@ -564,7 +564,7 @@ h3 {
                      <div class="pagination">
 
 
-  <a href="#">&laquo;nkButton ID="one" CssClass="more" runat="server" Text="1" OnClick="one_Click" />
+  <a href="#">&laquo;<asp:LinkButton ID="one" CssClass="more" runat="server" Text="1" OnClick="one_Click" />
                          <asp:LinkButton ID="two" CssClass="more" runat="server" Text="2" OnClick="two_Click" />
                
   

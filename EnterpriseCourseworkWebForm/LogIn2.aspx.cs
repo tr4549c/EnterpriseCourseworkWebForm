@@ -19,7 +19,8 @@ namespace EnterpriseCourseworkWebForm
         {
    
             //example login username: dignissim  password: DVD49JKR0J
-             staffID = Database.LoginRegisteredStaff(TextBox1.Text, Encryption.Encrypt(TextBox2.Text));
+            // staffID = Database.LoginRegisteredStaff(TextBox1.Text, Encryption.Encrypt(TextBox2.Text));
+            staffID = Database.LoginRegisteredStaff(TextBox1.Text, (TextBox2.Text));
 
             if (staffID > 0)
             {
