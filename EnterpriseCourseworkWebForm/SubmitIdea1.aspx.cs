@@ -24,8 +24,6 @@ namespace EnterpriseCourseworkWebForm
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            //temp 
-            Session["RStaffID"] = 1;
             string[] validFileTypes = { ".pdf", ".doc", ".docx", ".png", ".PNG", ".jpg", ".jpeg", };      //TEMP Whatever files are meant to be
             bool allFilesValid = true;
 
@@ -91,6 +89,12 @@ namespace EnterpriseCourseworkWebForm
                                 {
                                     Label1.Text = "File Upload failed.";
                                 }
+
+                                //reset page
+                                TextBox1.Text = "";
+                                TextBoxIdeaInput.Text = "";
+                                checkbox1.Checked = false;
+                                CheckBox2.Checked = false;
                             }
                             else
                             {

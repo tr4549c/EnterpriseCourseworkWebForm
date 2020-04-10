@@ -66,7 +66,14 @@ namespace EnterpriseCourseworkWebForm
 
             if (TextBoxIdeaInput.Text != "")
             {
-                Database.InsertComment(TextBoxIdeaInput.Text, ideaID, staffID, checkbox2.Checked);
+                if (Database.InsertComment(TextBoxIdeaInput.Text, ideaID, staffID, checkbox2.Checked))
+                {
+                    Response.Redirect("CommentsPage.aspx");
+                }
+                else
+                {
+                    //error sending to database
+                }
             }
             else
             {

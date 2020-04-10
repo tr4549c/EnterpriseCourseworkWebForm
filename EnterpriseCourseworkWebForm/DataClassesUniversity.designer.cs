@@ -45,6 +45,9 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertDepartmentCategory(DepartmentCategory instance);
     partial void UpdateDepartmentCategory(DepartmentCategory instance);
     partial void DeleteDepartmentCategory(DepartmentCategory instance);
+    partial void InsertDocument(Document instance);
+    partial void UpdateDocument(Document instance);
+    partial void DeleteDocument(Document instance);
     partial void InsertIdea(Idea instance);
     partial void UpdateIdea(Idea instance);
     partial void DeleteIdea(Idea instance);
@@ -63,9 +66,6 @@ namespace EnterpriseCourseworkWebForm
     partial void InsertRole(Role instance);
     partial void UpdateRole(Role instance);
     partial void DeleteRole(Role instance);
-    partial void InsertDocument(Document instance);
-    partial void UpdateDocument(Document instance);
-    partial void DeleteDocument(Document instance);
     #endregion
 		
 		public DataClassesUniversityDataContext() : 
@@ -138,6 +138,14 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		public System.Data.Linq.Table<Document> Documents
+		{
+			get
+			{
+				return this.GetTable<Document>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Idea> Ideas
 		{
 			get
@@ -183,14 +191,6 @@ namespace EnterpriseCourseworkWebForm
 			get
 			{
 				return this.GetTable<Role>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Document> Documents
-		{
-			get
-			{
-				return this.GetTable<Document>();
 			}
 		}
 	}
@@ -720,7 +720,7 @@ namespace EnterpriseCourseworkWebForm
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CommentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int CommentID
 		{
 			get
@@ -1251,6 +1251,157 @@ namespace EnterpriseCourseworkWebForm
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Document")]
+	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DocumentID;
+		
+		private System.Nullable<int> _IdeaID;
+		
+		private string _DocPath;
+		
+		private EntityRef<Idea> _Idea;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDocumentIDChanging(int value);
+    partial void OnDocumentIDChanged();
+    partial void OnIdeaIDChanging(System.Nullable<int> value);
+    partial void OnIdeaIDChanged();
+    partial void OnDocPathChanging(string value);
+    partial void OnDocPathChanged();
+    #endregion
+		
+		public Document()
+		{
+			this._Idea = default(EntityRef<Idea>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DocumentID
+		{
+			get
+			{
+				return this._DocumentID;
+			}
+			set
+			{
+				if ((this._DocumentID != value))
+				{
+					this.OnDocumentIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentID = value;
+					this.SendPropertyChanged("DocumentID");
+					this.OnDocumentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int")]
+		public System.Nullable<int> IdeaID
+		{
+			get
+			{
+				return this._IdeaID;
+			}
+			set
+			{
+				if ((this._IdeaID != value))
+				{
+					if (this._Idea.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdeaIDChanging(value);
+					this.SendPropertyChanging();
+					this._IdeaID = value;
+					this.SendPropertyChanged("IdeaID");
+					this.OnIdeaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocPath", DbType="VarChar(MAX)")]
+		public string DocPath
+		{
+			get
+			{
+				return this._DocPath;
+			}
+			set
+			{
+				if ((this._DocPath != value))
+				{
+					this.OnDocPathChanging(value);
+					this.SendPropertyChanging();
+					this._DocPath = value;
+					this.SendPropertyChanged("DocPath");
+					this.OnDocPathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
+		public Idea Idea
+		{
+			get
+			{
+				return this._Idea.Entity;
+			}
+			set
+			{
+				Idea previousValue = this._Idea.Entity;
+				if (((previousValue != value) 
+							|| (this._Idea.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Idea.Entity = null;
+						previousValue.Documents.Remove(this);
+					}
+					this._Idea.Entity = value;
+					if ((value != null))
+					{
+						value.Documents.Add(this);
+						this._IdeaID = value.IdeaID;
+					}
+					else
+					{
+						this._IdeaID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Idea");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Idea")]
 	public partial class Idea : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1265,7 +1416,7 @@ namespace EnterpriseCourseworkWebForm
 		
 		private string _Description;
 		
-		private System.Nullable<int> _RegisteredStaffID;
+		private int _RegisteredStaffID;
 		
 		private bool _IsAnnonymous;
 		
@@ -1273,11 +1424,11 @@ namespace EnterpriseCourseworkWebForm
 		
 		private EntitySet<Comment> _Comments;
 		
+		private EntitySet<Document> _Documents;
+		
 		private EntitySet<Rating> _Ratings;
 		
 		private EntitySet<Report> _Reports;
-		
-		private EntitySet<Document> _Documents;
 		
 		private EntityRef<Category> _Category;
 		
@@ -1295,7 +1446,7 @@ namespace EnterpriseCourseworkWebForm
     partial void OnTitleChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnRegisteredStaffIDChanging(System.Nullable<int> value);
+    partial void OnRegisteredStaffIDChanging(int value);
     partial void OnRegisteredStaffIDChanged();
     partial void OnIsAnnonymousChanging(bool value);
     partial void OnIsAnnonymousChanged();
@@ -1306,9 +1457,9 @@ namespace EnterpriseCourseworkWebForm
 		public Idea()
 		{
 			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
 			this._Ratings = new EntitySet<Rating>(new Action<Rating>(this.attach_Ratings), new Action<Rating>(this.detach_Ratings));
 			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
-			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
 			this._Category = default(EntityRef<Category>);
 			this._RegisteredStaff = default(EntityRef<RegisteredStaff>);
 			OnCreated();
@@ -1358,7 +1509,7 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Title
 		{
 			get
@@ -1398,8 +1549,8 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int")]
-		public System.Nullable<int> RegisteredStaffID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredStaffID", DbType="Int NOT NULL")]
+		public int RegisteredStaffID
 		{
 			get
 			{
@@ -1475,6 +1626,19 @@ namespace EnterpriseCourseworkWebForm
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Documents", ThisKey="IdeaID", OtherKey="IdeaID")]
+		public EntitySet<Document> Documents
+		{
+			get
+			{
+				return this._Documents;
+			}
+			set
+			{
+				this._Documents.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Rating", Storage="_Ratings", ThisKey="IdeaID", OtherKey="IdeaID")]
 		public EntitySet<Rating> Ratings
 		{
@@ -1498,19 +1662,6 @@ namespace EnterpriseCourseworkWebForm
 			set
 			{
 				this._Reports.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Documents", ThisKey="IdeaID", OtherKey="IdeaID")]
-		public EntitySet<Document> Documents
-		{
-			get
-			{
-				return this._Documents;
-			}
-			set
-			{
-				this._Documents.Assign(value);
 			}
 		}
 		
@@ -1575,7 +1726,7 @@ namespace EnterpriseCourseworkWebForm
 					}
 					else
 					{
-						this._RegisteredStaffID = default(Nullable<int>);
+						this._RegisteredStaffID = default(int);
 					}
 					this.SendPropertyChanged("RegisteredStaff");
 				}
@@ -1614,6 +1765,18 @@ namespace EnterpriseCourseworkWebForm
 			entity.Idea = null;
 		}
 		
+		private void attach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = this;
+		}
+		
+		private void detach_Documents(Document entity)
+		{
+			this.SendPropertyChanging();
+			entity.Idea = null;
+		}
+		
 		private void attach_Ratings(Rating entity)
 		{
 			this.SendPropertyChanging();
@@ -1633,18 +1796,6 @@ namespace EnterpriseCourseworkWebForm
 		}
 		
 		private void detach_Reports(Report entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = null;
-		}
-		
-		private void attach_Documents(Document entity)
-		{
-			this.SendPropertyChanging();
-			entity.Idea = this;
-		}
-		
-		private void detach_Documents(Document entity)
 		{
 			this.SendPropertyChanging();
 			entity.Idea = null;
@@ -2050,6 +2201,8 @@ namespace EnterpriseCourseworkWebForm
 		
 		private int _RegisteredStaffID;
 		
+		private System.Nullable<int> _DepartmentID;
+		
 		private string _RUsername;
 		
 		private string _RPassword;
@@ -2078,6 +2231,8 @@ namespace EnterpriseCourseworkWebForm
     partial void OnCreated();
     partial void OnRegisteredStaffIDChanging(int value);
     partial void OnRegisteredStaffIDChanged();
+    partial void OnDepartmentIDChanging(System.Nullable<int> value);
+    partial void OnDepartmentIDChanged();
     partial void OnRUsernameChanging(string value);
     partial void OnRUsernameChanged();
     partial void OnRPasswordChanging(string value);
@@ -2117,6 +2272,26 @@ namespace EnterpriseCourseworkWebForm
 					this._RegisteredStaffID = value;
 					this.SendPropertyChanged("RegisteredStaffID");
 					this.OnRegisteredStaffIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int")]
+		public System.Nullable<int> DepartmentID
+		{
+			get
+			{
+				return this._DepartmentID;
+			}
+			set
+			{
+				if ((this._DepartmentID != value))
+				{
+					this.OnDepartmentIDChanging(value);
+					this.SendPropertyChanging();
+					this._DepartmentID = value;
+					this.SendPropertyChanged("DepartmentID");
+					this.OnDepartmentIDChanged();
 				}
 			}
 		}
@@ -2760,157 +2935,6 @@ namespace EnterpriseCourseworkWebForm
 		{
 			this.SendPropertyChanging();
 			entity.Role = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Document")]
-	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DocumentID;
-		
-		private System.Nullable<int> _IdeaID;
-		
-		private string _DocPath;
-		
-		private EntityRef<Idea> _Idea;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDocumentIDChanging(int value);
-    partial void OnDocumentIDChanged();
-    partial void OnIdeaIDChanging(System.Nullable<int> value);
-    partial void OnIdeaIDChanged();
-    partial void OnDocPathChanging(string value);
-    partial void OnDocPathChanged();
-    #endregion
-		
-		public Document()
-		{
-			this._Idea = default(EntityRef<Idea>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DocumentID
-		{
-			get
-			{
-				return this._DocumentID;
-			}
-			set
-			{
-				if ((this._DocumentID != value))
-				{
-					this.OnDocumentIDChanging(value);
-					this.SendPropertyChanging();
-					this._DocumentID = value;
-					this.SendPropertyChanged("DocumentID");
-					this.OnDocumentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdeaID", DbType="Int")]
-		public System.Nullable<int> IdeaID
-		{
-			get
-			{
-				return this._IdeaID;
-			}
-			set
-			{
-				if ((this._IdeaID != value))
-				{
-					if (this._Idea.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdeaIDChanging(value);
-					this.SendPropertyChanging();
-					this._IdeaID = value;
-					this.SendPropertyChanged("IdeaID");
-					this.OnIdeaIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocPath", DbType="VarChar(MAX)")]
-		public string DocPath
-		{
-			get
-			{
-				return this._DocPath;
-			}
-			set
-			{
-				if ((this._DocPath != value))
-				{
-					this.OnDocPathChanging(value);
-					this.SendPropertyChanging();
-					this._DocPath = value;
-					this.SendPropertyChanged("DocPath");
-					this.OnDocPathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Idea_Document", Storage="_Idea", ThisKey="IdeaID", OtherKey="IdeaID", IsForeignKey=true)]
-		public Idea Idea
-		{
-			get
-			{
-				return this._Idea.Entity;
-			}
-			set
-			{
-				Idea previousValue = this._Idea.Entity;
-				if (((previousValue != value) 
-							|| (this._Idea.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Idea.Entity = null;
-						previousValue.Documents.Remove(this);
-					}
-					this._Idea.Entity = value;
-					if ((value != null))
-					{
-						value.Documents.Add(this);
-						this._IdeaID = value.IdeaID;
-					}
-					else
-					{
-						this._IdeaID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Idea");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

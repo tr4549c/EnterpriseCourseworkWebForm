@@ -421,8 +421,8 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
                         <br /><br />
                         <br />
                         <div class="row">
-                        <asp:CheckBox id="checkbox1" CssClass="CheckBoxComment" runat="server" AutoPostBack="True" Text="Submit Anonimously" TextAlign="Right"/> <%-- OnCheckedChanged="Check_Clicked--%>
-                        <asp:CheckBox id="checkbox2" CssClass="CheckBoxTermsConCom" runat="server" AutoPostBack="True" Text="Submit Anonymously" TextAlign="Right"/>
+                            <%-- OnCheckedChanged="Check_Clicked--%>
+                        <asp:CheckBox id="checkbox2" CssClass="CheckBoxTermsConCom" runat="server" AutoPostBack="True" Text="Submit Anonymously" TextAlign="Right"/> 
                         <asp:Button ID="Button2"  CssClass="btnSubmitIdea" runat="server" Text="Submit" OnClick="Button2_Click" />
 
                         </div>
