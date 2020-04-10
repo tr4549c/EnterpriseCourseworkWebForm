@@ -22,11 +22,11 @@ namespace EnterpriseCourseworkWebForm
         {
             //temp
             
-            Session["RStaffID"] = 1;
+           
 
 
-            Database.InsertReport((int) Session["RStaffID"], (int)Session["ideaID"], TextBoxReportInput.Text, "Pending");
-            Response.Redirect("WebForm2.aspx");
+            Database.InsertReport(Convert.ToInt32(Session["RStaffID"]), Convert.ToInt32(Session["ideaID"]), TextBoxReportInput.Text, "Pending");
+            Response.Redirect("Post SignInIdeaPage.aspx");
         }
     }
 }

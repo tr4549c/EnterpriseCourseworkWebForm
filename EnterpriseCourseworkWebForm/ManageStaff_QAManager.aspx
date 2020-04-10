@@ -354,15 +354,13 @@ padding-left:2.5%; font-size:23px; font-weight:900; font-family:Antonio; padding
            <div class="div2">
                     <asp:Panel ID="Panel1" CssClass="IdeaSubmitPanel" runat="server" >           
 
-                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text ="Reports"></asp:Label><br /><br />
+                        <asp:Label ID="Label8" runat="server" class="IdeaTextLable1" style="padding-left:2.5%" Text ="Users"></asp:Label><br /><br />
 
                     <asp:GridView ID="grdPivot" runat="server" class="datagridview" DataSourceID="DataSource" RowHeaderColumn="Change status" OnRowCommand="grdPivot_RowCommand"  OnSelectedIndexChanged="grdPivot_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="RegisteredStaffID" >
                         <Columns>
                             <asp:BoundField DataField="RegisteredStaffID" HeaderText="RegisteredStaffID" ReadOnly="True" SortExpression="RegisteredStaffID" />
                             <asp:BoundField DataField="RUsername" HeaderText="RUsername" SortExpression="RUsername" />
-                            <asp:BoundField DataField="RPassword" HeaderText="RPassword" SortExpression="RPassword" />
                             <asp:BoundField DataField="AllStaffID" HeaderText="AllStaffID" SortExpression="AllStaffID" />
-                            <asp:CheckBoxField DataField="IsActive" HeaderText="IsActive" SortExpression="IsActive" />
                             <asp:CheckBoxField DataField="IsEnabled" HeaderText="IsEnabled" SortExpression="IsEnabled" />
                             <asp:ButtonField CommandName="Disable" Text="Disable" />
                             <asp:ButtonField CommandName="Enable" Text="Enable" />

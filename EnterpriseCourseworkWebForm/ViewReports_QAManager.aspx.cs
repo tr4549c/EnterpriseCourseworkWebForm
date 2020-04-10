@@ -39,7 +39,7 @@ namespace EnterpriseCourseworkWebForm
             {
                 DataClassesUniversityDataContext context = new DataClassesUniversityDataContext();
                 var query = from r in context.Reports
-                            where r.ReportID == Convert.ToInt32(e.CommandArgument) + 2
+                            where r.ReportID == Convert.ToInt32(e.CommandArgument) + 1
                             select r;
                 foreach (var q in query)
                 {
