@@ -39,15 +39,18 @@ namespace EnterpriseCourseworkWebForm
                 Button7.Visible = true;//view stats
             }
 
-            //Session["page"] = 1;
+            oldPage = (int) Session["page"];
+            Session["page"] = 1;
             UpdateTagsList("");
             FillIdeas();
             Label14.Text = Database.GetLastLogin(LogIn2.staffID);
             FillThumbsDown();
             FillThumbsUp();
             FillUsername();
+
+            
         }
-        public static int page;
+        public static int oldPage;
 
 
         private void UpdateTagsList(string search)
@@ -62,38 +65,44 @@ namespace EnterpriseCourseworkWebForm
         private string[][] ideas;
 
         private void FillIdeas()
-        {
-            int page = Convert.ToInt32(Session["page"]);
-
-           
-                ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, (5*page));
+        {          
+                int a = (int)Session["page"];
+            ideas = Database.GetLastIdeas(DropDownList1.SelectedIndex + 1, (int) Session["page"], 5);
 
                 List<TextBox> txt = new List<TextBox> { TextBox1, TextBox2, TextBox3, TextBox4, TextBox5 };
 
-                for (int i = 0; i < txt.Count; i++)
+            for (int i = 0; i < txt.Count; i++)
+            {
+                if (i <= ideas.Length - 1)
                 {
-                    if (i <= ideas.Length - 1)
-                    {
-                        txt[i].Text = GenerateText(ideas[i]);
-                    }
-                    else
-                    {
-                        txt[i].Text = "";
-                    }
+                    txt[i].Text = GenerateText(ideas[i]);
                 }
-
-            
-    
-           
+                else
+                {
+                    txt[i].Text = "";
+                }
+            }         
         }
 
 
         private void FillUsername()
         {
             List<Label> lbl = new List<Label> { Label15, Label16, Label17, Label18, Label19 };
-            for(int i = 0; i< 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                lbl[i].Text = ideas[i][5];
+                if (ideas.Length != i)
+                {
+                    lbl[i].Text = ideas[i][5];
+                }
+                else
+                {
+                    for (int j = i; j < 5; j++)
+                    {
+                        lbl[j].Text = "";
+                    }
+
+                    break;
+                }
             }
 
         }
@@ -102,9 +111,16 @@ namespace EnterpriseCourseworkWebForm
         {
             //5131012
             List<Label> lbl = new List<Label> { Label5, Label1, Label3, Label10, Label12 };
-            for(int i=0; i<5; i++)
+            for (int i = 0; i < 5; i++)
             {
-               lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], true).ToString();
+                if (ideas.Length != i)
+                {
+                    lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], true).ToString();
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -115,7 +131,14 @@ namespace EnterpriseCourseworkWebForm
             List<Label> lbl = new List<Label> { Label6, Label2, Label4, Label11, Label13 };
             for (int i = 0; i < 5; i++)
             {
-                lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], false).ToString();
+                if (ideas.Length != i)
+                {
+                    lbl[i].Text = Database.GetRatingByIdeaID(ideas[i][0], false).ToString();
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -253,7 +276,7 @@ namespace EnterpriseCourseworkWebForm
 
         protected void one_Click(object sender, EventArgs e)
         {
-            Session["page"] = 1;
+            Session["page"] = oldPage - 1;
             FillIdeas();
             FillUsername();
             FillThumbsDown();
@@ -262,7 +285,7 @@ namespace EnterpriseCourseworkWebForm
 
         protected void two_Click(object sender, EventArgs e)
         {
-            Session["page"] = 2;
+            Session["page"] = oldPage + 1;
             FillIdeas();
             FillUsername();
             FillThumbsDown();

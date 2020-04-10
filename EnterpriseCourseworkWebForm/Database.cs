@@ -526,7 +526,7 @@ namespace EnterpriseCourseworkWebForm
             }
         }
 
-        static public string[][] GetLastIdeas(int categoryID, int numberOfIdeas)
+        static public string[][] GetLastIdeas(int categoryID, int page, int numberOfIdeas)
         {
             try
             {
@@ -535,7 +535,7 @@ namespace EnterpriseCourseworkWebForm
                         join r in db.RegisteredStaffs on i.RegisteredStaffID equals r.RegisteredStaffID
                         join s in db.AllStaffs on r.AllStaffID equals s.AllStaffID              
                         orderby i.IdeaID 
-                        descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] {i.IdeaID.ToString(), i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString(), s.Name.ToString() }).Take(numberOfIdeas).AsEnumerable().Reverse().ToArray();
+                        descending where i.CategoryID == categoryID && i.IsHidden == false select new string[] {i.IdeaID.ToString(), i.Title, i.Description, i.RegisteredStaffID.ToString(), i.IsAnnonymous.ToString(), s.Name.ToString() }).Skip((page - 1 )* numberOfIdeas).Take(numberOfIdeas).AsEnumerable().ToArray();
             }
             catch (Exception e)
             {
